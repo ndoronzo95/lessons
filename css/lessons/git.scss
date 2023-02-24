@@ -1,0 +1,101 @@
+.main-grid {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-template-areas:
+    "fs fs"
+    "fs fs";
+
+  >* {
+
+    border: 2px solid whitesmoke;
+    border-radius: 5px;
+  }
+
+  &.after-git-init {
+    grid-template-areas:
+      "fs git"
+      "cd cd ";
+
+    .fs {
+      border-color: lightskyblue;
+
+      >div {
+        color: rgb(221, 213, 140);
+      }
+
+      >div.staged {
+        color: lightgreen;
+      }
+    }
+  }
+
+  &.after-staged {
+    grid-template-areas:
+      "fs git"
+      "fs git"
+      "cd cd ";
+  }
+}
+
+.commands {
+  grid-area: cd;
+  text-align: left;
+  font-size: 1.5rem;
+  padding: 1em;
+}
+
+/* FS */
+
+.fs {
+  grid-area: fs;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+
+  >div {
+    display: inline-flex;
+    flex-direction: column;
+
+    i {
+      margin-bottom: 0.2em;
+
+      &.fa-solid+label {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+
+
+/* GIT */
+
+.git {
+  display: grid;
+  border: 2px solid lightskyblue;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "ws br"
+    "sg br";
+
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 1em;
+
+  .workspace {
+    grid-area: ws;
+    border-bottom: 2px solid whitesmoke;
+  }
+
+  .stage {
+    grid-area: sg;
+  }
+
+  .branch {
+    grid-area: br;
+  }
+}

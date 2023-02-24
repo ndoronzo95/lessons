@@ -1,0 +1,8 @@
+/*!
+* reveal.js 4.4.0
+* https://revealjs.com
+* MIT licensed
+*
+* Copyright (C) 2011-2023 Hakim El Hattab, https://hakim.se
+*/
+.main-grid{display:grid;gap:.5em;grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;grid-template-areas:"fs fs" "fs fs"}.main-grid>*{border:2px solid #f5f5f5;border-radius:5px}.main-grid.after-git-init{grid-template-areas:"fs git" "cd cd "}.main-grid.after-git-init .fs{border-color:#87cefa}.main-grid.after-git-init .fs>div{color:#ddd58c}.main-grid.after-git-init .fs>div.staged{color:#90ee90}.main-grid.after-staged{grid-template-areas:"fs git" "fs git" "cd cd "}.commands{grid-area:cd;text-align:left;font-size:1.5rem;padding:1em}.fs{grid-area:fs;padding:1em;display:grid;grid-template-columns:repeat(4,1fr);gap:1em}.fs>div{display:inline-flex;flex-direction:column}.fs>div i{margin-bottom:.2em}.fs>div i.fa-solid+label{font-size:.8rem}.git{display:grid;border:2px solid #87cefa;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;grid-template-areas:"ws br" "sg br";font-size:.8rem;text-align:left;padding:1em}.git .workspace{grid-area:ws;border-bottom:2px solid #f5f5f5}.git .stage{grid-area:sg}.git .branch{grid-area:br}

@@ -183,7 +183,7 @@ gulp.task('css-themes', () => gulp.src(['./css/theme/source/*.{sass,scss}'])
         .pipe(compileSass())
         .pipe(gulp.dest('./dist/theme')))
 
-gulp.task('css-core', () => gulp.src(['css/reveal.scss'])
+gulp.task('css-core', () => gulp.src(['css/reveal.scss', 'css/lessons/*.{sass,scss}'])
     .pipe(compileSass())
     .pipe(autoprefixer())
     .pipe(minify({compatibility: 'ie9'}))
@@ -311,7 +311,8 @@ gulp.task('serve', () => {
 
     gulp.watch([
         'css/*.scss',
-        'css/print/*.{sass,scss,css}'
+        'css/print/*.{sass,scss,css}',
+        'css/lessons/*.scss'
     ], gulp.series('css-core', 'reload'))
 
     gulp.watch(['test/*.html'], gulp.series('test'))
