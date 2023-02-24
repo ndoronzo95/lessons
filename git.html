@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+    <link rel="stylesheet" href="dist/git.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script
+      src="https://kit.fontawesome.com/492dfbd8db.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* TIMELINE */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section><h1>Versionamento con GIT</h1></section>
+        <section>Versionare il codice</section>
+
+        <!-- START -->
+        <section data-auto-animate>
+          <div class="main-grid">
+            <div class="fs" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT INIT -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <div class="fs" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace">
+                index.html <br />
+                README.md <br />
+                src <br />
+                dist <br />
+                someother.file <br />
+                anything.doc <br />
+                src
+              </div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch"></div>
+            </div>
+            <div class="commands" data-id="commands">git init</div>
+          </div>
+        </section>
+
+        <!-- GIT ADD index.html -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <div class="fs" data-id="fs">
+              <div class="staged">
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace">
+                README.md <br />
+                src <br />
+                dist <br />
+                someother.file <br />
+                anything.doc <br />
+                src
+              </div>
+              <div class="stage" data-id="stage">index.html</div>
+              <div class="branch" data-id="branch"></div>
+            </div>
+            <div class="commands" data-id="commands">
+              git init<br />
+              git add index.html <br />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
