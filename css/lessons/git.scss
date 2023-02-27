@@ -2,41 +2,31 @@
   display: grid;
   gap: 0.5em;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "fs fs"
     "fs fs";
 
   >* {
-
     border: 2px solid whitesmoke;
     border-radius: 5px;
   }
 
   &.after-git-init {
     grid-template-areas:
-      "fs git"
-      "cd cd ";
+      "cd cd"
+      "fs git";
 
     .fs {
       border-color: lightskyblue;
-
-      >div {
-        color: rgb(221, 213, 140);
-      }
-
-      >div.staged {
-        color: lightgreen;
-      }
     }
   }
 
-  &.after-staged {
-    grid-template-areas:
-      "fs git"
-      "fs git"
-      "cd cd ";
-  }
+  // &.after-staged {
+  //   grid-template-areas:
+  //     "cd cd"
+  //     "fs git";
+  // }
 }
 
 .commands {
@@ -54,6 +44,20 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1em;
+  position: relative;
+
+  &.all-untracked>div {
+    color: khaki;
+  }
+
+  &.all-staged>div,
+  >div.staged {
+    color: lightgreen;
+  }
+
+  >div.modified {
+    color: khaki;
+  }
 
   >div {
     display: inline-flex;
@@ -67,6 +71,14 @@
       }
     }
   }
+
+  &::before {
+    content: 'File system';
+    font-size: .6rem;
+    position: absolute;
+    top: .1em;
+    left: .4em;
+  }
 }
 
 
@@ -76,6 +88,7 @@
 .git {
   display: grid;
   border: 2px solid lightskyblue;
+  gap: .5em;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
@@ -85,17 +98,110 @@
   font-size: 0.8rem;
   text-align: left;
   padding: 1em;
+  position: relative;
+
+  >* {
+    border-radius: 5px;
+    border: 2px solid whitesmoke;
+    padding: .5em;
+  }
+
+  &::before {
+    content: 'Git repository';
+    font-size: .6rem;
+    position: absolute;
+    top: .1em;
+    left: .4em;
+  }
 
   .workspace {
     grid-area: ws;
-    border-bottom: 2px solid whitesmoke;
+    border-color: khaki;
+    position: relative;
+
+    &::before {
+      content: 'Workspace changes';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
   }
 
   .stage {
     grid-area: sg;
+    border-color: lightgreen;
+    position: relative;
+
+    &::before {
+      content: 'Staging area';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
   }
 
   .branch {
     grid-area: br;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    .timeline {
+      position: absolute;
+      width: .2em;
+      height: calc(100% - 2em);
+      left: calc(50% - .1em);
+      background-color: whitesmoke;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: calc(50% - 10px);
+        top: -1em;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid whitesmoke;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+    }
+    
+    &::before {
+      content: 'Branch: "master"';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
+
+    .commit {
+      z-index: 1;
+      margin-bottom: 1em;
+      width: 1.3em;
+      height: 1.3em;
+      border-radius: 50%;
+      background-color: lightcoral;
+      position: relative;
+
+      &::after {
+        content: '8743b52063cd8409...';
+        position: absolute;
+        color: lightcoral;
+        font-size: 0.5rem;
+        left: 1.5em;
+        top: -1.5em;
+      }
+
+      &.commit-2 {
+        &::after {
+          content: 'cde30412d230681...';
+
+        }
+      }
+    }
+
+
   }
 }

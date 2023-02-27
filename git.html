@@ -71,7 +71,19 @@
         <!-- GIT INIT -->
         <section data-auto-animate>
           <div class="main-grid after-git-init">
-            <div class="fs" data-id="fs">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="1" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs all-untracked" data-id="fs">
               <div>
                 <i class="fa-solid fa-file"></i>
                 <label>index.html</label>
@@ -105,25 +117,37 @@
             </div>
             <div class="git" data-id="git">
               <div class="workspace" data-id="workspace">
-                index.html <br />
-                README.md <br />
-                src <br />
-                dist <br />
-                someother.file <br />
-                anything.doc <br />
-                src
+                <div data-id="index">index.html</div>
+                <div data-id="readme">README.md</div>
+                <div data-id="src">src</div>
+                <div data-id="dist">dist</div>
+                <div data-id="someother">someother.file</div>
+                <div data-id="anything">anything.doc</div>
               </div>
               <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+              </div>
             </div>
-            <div class="commands" data-id="commands">git init</div>
           </div>
         </section>
 
         <!-- GIT ADD index.html -->
         <section data-auto-animate>
           <div class="main-grid after-git-init">
-            <div class="fs" data-id="fs">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="2" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs all-untracked" data-id="fs">
               <div class="staged">
                 <i class="fa-solid fa-file"></i>
                 <label>index.html</label>
@@ -157,19 +181,383 @@
             </div>
             <div class="git" data-id="git">
               <div class="workspace" data-id="workspace">
-                README.md <br />
-                src <br />
-                dist <br />
-                someother.file <br />
-                anything.doc <br />
-                src
+                <div data-id="readme">README.md</div>
+                <div data-id="src">src</div>
+                <div data-id="dist">dist</div>
+                <div data-id="someother">someother.file</div>
+                <div data-id="anything">anything.doc</div>
               </div>
-              <div class="stage" data-id="stage">index.html</div>
-              <div class="branch" data-id="branch"></div>
+              <div class="stage" data-id="stage">
+                <div data-id="index">index.html</div>
+              </div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+              </div>
             </div>
-            <div class="commands" data-id="commands">
-              git init<br />
-              git add index.html <br />
+          </div>
+        </section>
+
+        <!-- GIT RESET -- index.html -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="3" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs all-untracked" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace">
+                <div data-id="index">index.html</div>
+                <div data-id="readme">README.md</div>
+                <div data-id="src">src</div>
+                <div data-id="dist">dist</div>
+                <div data-id="someother">someother.file</div>
+                <div data-id="anything">anything.doc</div>
+              </div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT ADD . -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="4" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs all-staged" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage">
+                <div data-id="index">index.html</div>
+                <div data-id="readme">README.md</div>
+                <div data-id="src">src</div>
+                <div data-id="dist">dist</div>
+                <div data-id="someother">someother.file</div>
+                <div data-id="anything">anything.doc</div>
+              </div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT COMMIT -m "some message" -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="5" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- QUALCHE MODIFICA A index.html -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="6" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs" data-id="fs">
+              <div class="modified">
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace">
+                <div data-id="index">index.html</div>
+              </div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT ADD . -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="7" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs" data-id="fs">
+              <div class="staged">
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage">
+                <div data-id="index">index.html</div>
+              </div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT COMMIT -m "Aggiunto qualcosa a index.html" -->
+        <section data-auto-animate>
+          <div class="main-grid after-git-init">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-line-numbers="8" data-trim data-id="code">
+                git init
+                git add index.html 
+                git reset -- index.html 
+                git add . 
+                git commit -m "Il mio primo commit"
+                ...qualche modifica a index.html...
+                git add .
+                git commit -m "Aggiunto qualcosa a index.html"
+              </code>
+            </pre>
+            <div class="fs" data-id="fs">
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>index.html</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>README.md</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>dist</label>
+              </div>
+
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>someother.file</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-file"></i>
+                <label>anything.doc</label>
+              </div>
+              <div>
+                <i class="fa-solid fa-folder"></i>
+                <label>src</label>
+              </div>
+              ...
+            </div>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+              </div>
             </div>
           </div>
         </section>
@@ -180,6 +568,7 @@
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
@@ -188,7 +577,7 @@
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
       });
     </script>
   </body>
