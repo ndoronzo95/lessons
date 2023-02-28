@@ -22,11 +22,18 @@
     }
   }
 
-  // &.after-staged {
-  //   grid-template-areas:
-  //     "cd cd"
-  //     "fs git";
-  // }
+  &.only-repo {
+    grid-template-areas:
+      "git git"
+      "git git";
+  }
+
+  &.with-remote {
+    grid-template-areas:
+      "cd cd"
+      "git rmt";
+
+  }
 }
 
 .commands {
@@ -81,12 +88,11 @@
   }
 }
 
-
-
 /* GIT */
 
 .git {
   display: grid;
+  grid-area: git;
   border: 2px solid lightskyblue;
   gap: .5em;
   grid-template-rows: 1fr 1fr;
@@ -141,33 +147,9 @@
       right: .4em;
     }
   }
-
   .branch {
     grid-area: br;
-    position: relative;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
 
-    .timeline {
-      position: absolute;
-      width: .2em;
-      height: calc(100% - 2em);
-      left: calc(50% - .1em);
-      background-color: whitesmoke;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: calc(50% - 10px);
-        top: -1em;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid whitesmoke;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-      }
-    }
-    
     &::before {
       content: 'Branch: "master"';
       font-size: .6rem;
@@ -175,33 +157,153 @@
       top: .1em;
       right: .4em;
     }
+  }
+}
 
-    .commit {
-      z-index: 1;
-      margin-bottom: 1em;
-      width: 1.3em;
-      height: 1.3em;
-      border-radius: 50%;
-      background-color: lightcoral;
-      position: relative;
+.branch {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 
-      &::after {
-        content: '8743b52063cd8409...';
+  .timeline {
+    position: absolute;
+    width: .2rem;
+    height: calc(100% - 2rem);
+    left: calc(50% - .1rem);
+    background-color: whitesmoke;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(50% - 10px);
+      top: -1rem;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid whitesmoke;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+  }
+
+  .commit {
+    z-index: 1;
+    margin-bottom: 1rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    background-color: lightcoral;
+    position: relative;
+
+    &::after {
+      content: '8743b52063cd8409...';
+      position: absolute;
+      color: lightcoral;
+      font-size: 0.5rem;
+      left: 1.5rem;
+      top: -.8rem;
+    }
+
+    &.with-tag {
+
+      border: 2px solid whitesmoke;
+      
+      &::before {
+        content: 'V1.0.0';
         position: absolute;
-        color: lightcoral;
+        color: whitesmoke;
         font-size: 0.5rem;
-        left: 1.5em;
-        top: -1.5em;
-      }
-
-      &.commit-2 {
-        &::after {
-          content: 'cde30412d230681...';
-
-        }
+        right: 1.5rem;
+        top: -.8rem;
       }
     }
 
+    &.commit-2 {
+      &::after {
+        content: 'cde30412d230681...';
 
+      }
+    }
+
+    &.commit-3 {
+      &::after {
+        content: 'f123ab42c2691dd...';
+
+      }
+    }
+
+    &.commit-4 {
+      &::after {
+        content: 'bd3bd2314267a98...';
+
+      }
+    }
+
+    &.commit-5 {
+      &::after {
+        content: 'ea3152368cd58235...';
+
+      }
+    }
+  }
+
+}
+
+.remote {
+  border-style: dashed;
+  &::before {
+    content: 'Remote git repository hosted on Github';
+    font-size: .6rem;
+    position: absolute;
+    bottom: .1em;
+    left: .4em;
+  }
+
+  &::after {
+    content: 'Branch: "master"';
+    font-size: .6rem;
+    position: absolute;
+    top: .1em;
+    right: .4em;
+  }
+}
+
+.branches {
+  display: flex;
+  gap: 1em;
+
+  > * {
+    flex: 1;
+    border: 2px solid whitesmoke;
+    border-radius: 2px;
+  }
+
+  .master {
+    &::after {
+      content: 'Branch: "master"';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
+  }
+
+  .dev {
+    &::after {
+      content: 'Branch: "dev"';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
+  }
+
+  .experimental-functionalities {
+    &::after {
+      content: 'Branch: "experimental-functionalities"';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      right: .4em;
+    }
   }
 }

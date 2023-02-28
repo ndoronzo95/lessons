@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="dist/theme/black.css" />
     <link rel="stylesheet" href="dist/git.css" />
 
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src * data: blob: ; "
+    />
+
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
     <script
@@ -27,8 +32,28 @@
   <body>
     <div class="reveal">
       <div class="slides">
+        <section><h1>GIT</h1></section>
+        <section>
+          <section>
+            <p>git config ...</p>
+            <p>git config -g ...</p>
+          </section>
+          <section>
+            <p>git config ...</p>
+            <p>git config -g ...</p>
+          </section>
+        </section>
+
         <section><h1>Versionamento con GIT</h1></section>
-        <section>Versionare il codice</section>
+        <section>
+          Concetti fondamentali
+          <ul>
+            <li>Repository</li>
+            <li>Workspace</li>
+            <li>Staging area</li>
+            <li>Branch</li>
+          </ul>
+        </section>
 
         <!-- START -->
         <section data-auto-animate>
@@ -560,6 +585,483 @@
               </div>
             </div>
           </div>
+        </section>
+
+        <section>
+          <section>
+            <h1>Recap</h1>
+          </section>
+          <section>
+            <ul>
+              <li>
+                <b>git init</b>
+                <span
+                  >Crea la repository git del progetto e inizia a tracciare i
+                  file</span
+                >
+              </li>
+              <li>
+                <b>git add (FILENAME | .)</b>
+                <span>Aggiunge uno o più cambiamenti alla staging area</span>
+              </li>
+              <li>
+                <b>git reset -- FILENAME</b>
+                <span>Rimuove uno o più cambiamenti dalla staging area</span>
+              </li>
+              <li>
+                <b>git commit -m "MESSAGE"</b>
+                <span
+                  >Salva i cambiamenti che erano in stagin area in un branch
+                  (timeline)</span
+                >
+              </li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>
+                <b>git status</b>
+                <span
+                  >Mostra lo stato della repository: cambiamenti tracciati e in
+                  stage
+                </span>
+              </li>
+              <li>
+                <b>git log</b>
+                <span>Mostra lo storico del branch: tutti i commit</span>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h1>Sincronizzazione con una repository remota</h1>
+        </section>
+
+        <section>
+          <p>Creare una repository remota</p>
+          <a href="https://github.com" target="_blank"
+            ><i class="fa-brands fa-github" style="margin-right: 1em"></i
+          ></a>
+          <a href="https://gitlab.com" target="_blank"
+            ><i class="fa-brands fa-gitlab" style="margin-right: 1em"></i
+          ></a>
+          <a href="https://bitbucket.com" target="_blank"
+            ><i class="fa-brands fa-bitbucket"></i
+          ></a>
+        </section>
+
+        <!-- GIT ONLY LOCAL REPO -->
+        <section data-auto-animate>
+          <div class="main-grid only-repo r-stretch">
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT REMOTE ADD ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="1">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GIT PUSH -u origin master -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="2">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... qualche collega fa altri commit ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="3">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... GIT PULL ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="4">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... qualche altra modifica ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="5">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace">
+                <div data-id="index">index.html</div>
+              </div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... git add . ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="6">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage">
+                <div data-id="index">index.html</div>
+              </div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... git commit -m "" ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="7">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+                <div class="commit commit-4" data-id="commit-4"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ... git push ... -->
+        <section data-auto-animate>
+          <div class="main-grid with-remote r-stretch">
+            <pre class="commands language-diff" data-id="commands">
+              <code data-trim data-id="code" data-line-numbers="8">
+                git remote add origin https://github.com/my-account-name/my-repository.git
+                git push -u origin master
+                ... qualche collega fa altri commit e li porta su master ...
+                git pull
+                ... qualche altra modifica ...
+                git add .
+                git commit -m "qualche altra modifica"
+                git push
+              </code>
+            </pre>
+            <div class="git" data-id="git">
+              <div class="workspace" data-id="workspace"></div>
+              <div class="stage" data-id="stage"></div>
+              <div class="branch" data-id="branch">
+                <div class="timeline" data-id="timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+                <div class="commit commit-4" data-id="commit-4"></div>
+              </div>
+            </div>
+
+            <div class="remote branch" data-id="remote">
+              <div class="timeline" data-id="remote-timeline"></div>
+              <div class="commit" data-id="commit-1"></div>
+              <div class="commit commit-2" data-id="commit-2"></div>
+              <div class="commit commit-3" data-id="commit-3"></div>
+              <div class="commit commit-4" data-id="commit-4"></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h1>Recap</h1>
+          </section>
+          <section>
+            <ul>
+              <li>
+                <b>git remote add REPOSITORY_URL</b>
+                <span
+                  >Collega la tua repository locale con una repository
+                  remota</span
+                >
+              </li>
+              <li>
+                <b>git push</b>
+                <span
+                  >Sincronizza i commit presenti in un branch della tua
+                  repository locale a quello connesso della repository
+                  remota</span
+                >
+              </li>
+              <li>
+                <b>git push -u REMOTE_REPOSITORY_NAME (origin) BRANCH_NAME</b>
+                <span
+                  >Connette un branch in locale con un branch remoto e ne
+                  sincronizza i commit, da locale a remoto</span
+                >
+              </li>
+              <li>
+                <b>git pull</b>
+                <span
+                  >Sincronizza i commit presenti in un branch della tua
+                  repository remota a quello connesso della repository
+                  locale</span
+                >
+              </li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>
+                <b>git remote -v</b>
+                <span
+                  >Mostra a quale repository remota è connessa la tua repository
+                  locale
+                </span>
+              </li>
+              <li>
+                <b>git branch -a</b>
+                <span>Mostra tutti i branch (sia locali che remoti)</span>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <p>git clone REPOSITORY_URL</p>
+            <span>Scarica una repository</span>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Cosa abbiamo omesso</h1>
+          </section>
+          <section>
+            <p>
+              Ogni comando git ha un'infinità di "flag" che modificano il
+              comando
+            </p>
+            <ul>
+              <li>git push -u origin master</li>
+              <li>git branch -a</li>
+              <li>git remote -v</li>
+              <li>e tanti altri ancora...</li>
+            </ul>
+          </section>
+          <section>
+            <p>E' possibile creare più branches</p>
+            <div class="branches r-stretch">
+              <div class="branch master">
+                <div class="timeline"></div>
+                <div class="commit"></div>
+                <div class="commit commit-2"></div>
+              </div>
+
+              <div class="branch dev">
+                <div class="timeline"></div>
+                <div class="commit"></div>
+                <div class="commit commit-2"></div>
+                <div class="commit commit-3"></div>
+                <div class="commit commit-4"></div>
+              </div>
+
+              <div class="branch experimental-functionalities">
+                <div class="timeline"></div>
+                <div class="commit"></div>
+                <div class="commit commit-2"></div>
+                <div class="commit commit-3"></div>
+                <div class="commit commit-5"></div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <p>E' possibile apporre tags a dei commit (git tag)</p>
+            <div class="branch master r-stretch">
+              <div class="timeline"></div>
+              <div class="commit"></div>
+              <div class="commit commit-2"></div>
+              <div class="commit commit-3"></div>
+              <div class="commit commit-4 with-tag"></div>
+              <div class="commit commit-5"></div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <h1>DEMO TIME</h1>
         </section>
       </div>
     </div>
