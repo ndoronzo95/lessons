@@ -80,7 +80,7 @@
   }
 
   &::before {
-    content: 'File system';
+    content: 'Project file system';
     font-size: .6rem;
     position: absolute;
     top: .1em;
@@ -306,4 +306,51 @@
       right: .4em;
     }
   }
+}
+
+.git-global-config {
+  display: grid;
+  gap: .5em;
+  padding: .5em;
+  grid-template-columns: repeat(4, 1fr);
+  align-content: center;
+  border: 2px solid whitesmoke;
+
+  &::after {
+    content: 'Installazione git su macchina';
+    font-size: .6rem;
+    position: absolute;
+    top: .1em;
+    left: .4em;
+  }
+
+  .git-local-config {
+    flex: 1;
+    padding: 2rem;
+    position: relative;
+    &::after {
+      content: 'Repository git in progetto';
+      font-size: .6rem;
+      position: absolute;
+      top: .1em;
+      left: .4em;
+    }
+    border: 2px solid whitesmoke;
+  }
+}
+
+.git-command {
+  color: aqua;
+}
+
+.git-flag {
+  color: red
+}
+
+.git-arg {
+  color: greenyellow;
+}
+
+.git-subcommand {
+  color: aquamarine;
 }

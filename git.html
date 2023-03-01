@@ -35,582 +35,599 @@
         <section><h1>GIT</h1></section>
         <section>
           <section>
-            <p>git config ...</p>
-            <p>git config -g ...</p>
+            <h1>Versionamento con GIT</h1>
           </section>
           <section>
-            <p>git config ...</p>
-            <p>git config -g ...</p>
+            <p>
+              Concetti fondamentali
+            </p>
+            <ul>
+              <li>Repository
+                <ul>
+                  <li>Workspace</li>
+                  <li>Staging area</li>
+                  <li>Branch</li>
+                </ul>
+              </li>
+            </ul>
           </section>
-        </section>
+          <section data-auto-animate>
+            <div class="main-grid">
+              <div class="fs" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
 
-        <section><h1>Versionamento con GIT</h1></section>
-        <section>
-          Concetti fondamentali
-          <ul>
-            <li>Repository</li>
-            <li>Workspace</li>
-            <li>Staging area</li>
-            <li>Branch</li>
-          </ul>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT INIT -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="1" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs all-untracked" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace">
+                  <div data-id="index">index.html</div>
+                  <div data-id="readme">README.md</div>
+                  <div data-id="src">src</div>
+                  <div data-id="dist">dist</div>
+                  <div data-id="someother">someother.file</div>
+                  <div data-id="anything">anything.doc</div>
+                </div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT ADD index.html -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="2" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs all-untracked" data-id="fs">
+                <div class="staged">
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace">
+                  <div data-id="readme">README.md</div>
+                  <div data-id="src">src</div>
+                  <div data-id="dist">dist</div>
+                  <div data-id="someother">someother.file</div>
+                  <div data-id="anything">anything.doc</div>
+                </div>
+                <div class="stage" data-id="stage">
+                  <div data-id="index">index.html</div>
+                </div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT RESET -- index.html -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="3" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs all-untracked" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace">
+                  <div data-id="index">index.html</div>
+                  <div data-id="readme">README.md</div>
+                  <div data-id="src">src</div>
+                  <div data-id="dist">dist</div>
+                  <div data-id="someother">someother.file</div>
+                  <div data-id="anything">anything.doc</div>
+                </div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT ADD . -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="4" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs all-staged" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage">
+                  <div data-id="index">index.html</div>
+                  <div data-id="readme">README.md</div>
+                  <div data-id="src">src</div>
+                  <div data-id="dist">dist</div>
+                  <div data-id="someother">someother.file</div>
+                  <div data-id="anything">anything.doc</div>
+                </div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT COMMIT -m "some message" -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="5" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- QUALCHE MODIFICA A index.html -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="6" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs" data-id="fs">
+                <div class="modified">
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace">
+                  <div data-id="index">index.html</div>
+                </div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT ADD . -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="7" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs" data-id="fs">
+                <div class="staged">
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage">
+                  <div data-id="index">index.html</div>
+                </div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT COMMIT -m "Aggiunto qualcosa a index.html" -->
+          <section data-auto-animate>
+            <div class="main-grid after-git-init">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-line-numbers="8" data-trim data-id="code">
+                  git init
+                  git add index.html 
+                  git reset -- index.html 
+                  git add . 
+                  git commit -m "Il mio primo commit"
+                  ...qualche modifica a index.html...
+                  git add .
+                  git commit -m "Aggiunto qualcosa a index.html"
+                </code>
+              </pre>
+              <div class="fs" data-id="fs">
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>index.html</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>README.md</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>dist</label>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>someother.file</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-file"></i>
+                  <label>anything.doc</label>
+                </div>
+                <div>
+                  <i class="fa-solid fa-folder"></i>
+                  <label>src</label>
+                </div>
+                ...
+              </div>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
 
         <!-- START -->
-        <section data-auto-animate>
-          <div class="main-grid">
-            <div class="fs" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT INIT -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="1" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs all-untracked" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace">
-                <div data-id="index">index.html</div>
-                <div data-id="readme">README.md</div>
-                <div data-id="src">src</div>
-                <div data-id="dist">dist</div>
-                <div data-id="someother">someother.file</div>
-                <div data-id="anything">anything.doc</div>
-              </div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT ADD index.html -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="2" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs all-untracked" data-id="fs">
-              <div class="staged">
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace">
-                <div data-id="readme">README.md</div>
-                <div data-id="src">src</div>
-                <div data-id="dist">dist</div>
-                <div data-id="someother">someother.file</div>
-                <div data-id="anything">anything.doc</div>
-              </div>
-              <div class="stage" data-id="stage">
-                <div data-id="index">index.html</div>
-              </div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT RESET -- index.html -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="3" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs all-untracked" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace">
-                <div data-id="index">index.html</div>
-                <div data-id="readme">README.md</div>
-                <div data-id="src">src</div>
-                <div data-id="dist">dist</div>
-                <div data-id="someother">someother.file</div>
-                <div data-id="anything">anything.doc</div>
-              </div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT ADD . -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="4" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs all-staged" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage">
-                <div data-id="index">index.html</div>
-                <div data-id="readme">README.md</div>
-                <div data-id="src">src</div>
-                <div data-id="dist">dist</div>
-                <div data-id="someother">someother.file</div>
-                <div data-id="anything">anything.doc</div>
-              </div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT COMMIT -m "some message" -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="5" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- QUALCHE MODIFICA A index.html -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="6" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs" data-id="fs">
-              <div class="modified">
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace">
-                <div data-id="index">index.html</div>
-              </div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT ADD . -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="7" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs" data-id="fs">
-              <div class="staged">
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage">
-                <div data-id="index">index.html</div>
-              </div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT COMMIT -m "Aggiunto qualcosa a index.html" -->
-        <section data-auto-animate>
-          <div class="main-grid after-git-init">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-line-numbers="8" data-trim data-id="code">
-                git init
-                git add index.html 
-                git reset -- index.html 
-                git add . 
-                git commit -m "Il mio primo commit"
-                ...qualche modifica a index.html...
-                git add .
-                git commit -m "Aggiunto qualcosa a index.html"
-              </code>
-            </pre>
-            <div class="fs" data-id="fs">
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>index.html</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>README.md</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>dist</label>
-              </div>
-
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>someother.file</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-file"></i>
-                <label>anything.doc</label>
-              </div>
-              <div>
-                <i class="fa-solid fa-folder"></i>
-                <label>src</label>
-              </div>
-              ...
-            </div>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-                <div class="commit commit-2" data-id="commit-2"></div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section>
           <section>
             <h1>Recap</h1>
           </section>
-          <section>
+          <section class="fragmented">
             <ul>
               <li>
-                <b>git init</b>
-                <span
+                <b class="fragment git-command">git init</b>
+                <span class="fragment"
                   >Crea la repository git del progetto e inizia a tracciare i
                   file</span
                 >
               </li>
               <li>
-                <b>git add (FILENAME | .)</b>
-                <span>Aggiunge uno o più cambiamenti alla staging area</span>
+                <b class="fragment"
+                  ><span class="git-command">git add</span>
+                  <span class="git-arg"
+                    >FILENAME <span style="color: whitesmoke">|</span> .</span
+                  ></b
+                >
+                <span class="fragment"
+                  >Aggiunge uno o più cambiamenti alla staging area</span
+                >
               </li>
               <li>
-                <b>git reset -- FILENAME</b>
-                <span>Rimuove uno o più cambiamenti dalla staging area</span>
+                <b class="fragment"
+                  ><span class="git-command">git reset</span>
+                  <span class="git-subcommand">--</span>
+                  <span class="git-arg">FILENAME</span></b
+                >
+                <span class="fragment"
+                  >Rimuove uno o più cambiamenti dalla staging area</span
+                >
               </li>
               <li>
-                <b>git commit -m "MESSAGE"</b>
-                <span
+                <b class="fragment"
+                  ><span class="git-command">git commit</span>
+                  <span class="git-flag">-m</span>
+                  <span class="git-arg"
+                    >"Testo che descrive brevemente le mie attività"</span
+                  ></b
+                >
+                <span class="fragment"
                   >Salva i cambiamenti che erano in stagin area in un branch
                   (timeline)</span
                 >
@@ -620,363 +637,377 @@
           <section>
             <ul>
               <li>
-                <b>git status</b>
+                <b class="git-command">git status</b>
                 <span
                   >Mostra lo stato della repository: cambiamenti tracciati e in
                   stage
                 </span>
               </li>
               <li>
-                <b>git log</b>
+                <b class="git-command">git log</b>
                 <span>Mostra lo storico del branch: tutti i commit</span>
               </li>
             </ul>
           </section>
+          <section>
+            <h1>DEMO TIME</h1>
+          </section>
         </section>
 
         <section>
-          <h1>Sincronizzazione con una repository remota</h1>
-        </section>
+          <section>
+            <h1>Sincronizzazione con una repository remota</h1>
+          </section>
+          <section>
+            <p>Creare una repository remota</p>
+            <a href="https://github.com" target="_blank"
+              ><i class="fa-brands fa-github" style="margin-right: 1em"></i
+            ></a>
+            <a href="https://gitlab.com" target="_blank"
+              ><i class="fa-brands fa-gitlab" style="margin-right: 1em"></i
+            ></a>
+            <a href="https://bitbucket.com" target="_blank"
+              ><i class="fa-brands fa-bitbucket"></i
+            ></a>
+          </section>
 
-        <section>
-          <p>Creare una repository remota</p>
-          <a href="https://github.com" target="_blank"
-            ><i class="fa-brands fa-github" style="margin-right: 1em"></i
-          ></a>
-          <a href="https://gitlab.com" target="_blank"
-            ><i class="fa-brands fa-gitlab" style="margin-right: 1em"></i
-          ></a>
-          <a href="https://bitbucket.com" target="_blank"
-            ><i class="fa-brands fa-bitbucket"></i
-          ></a>
-        </section>
+          <!-- GIT ONLY LOCAL REPO -->
+          <section data-auto-animate>
+            <div class="main-grid only-repo r-stretch">
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-        <!-- GIT ONLY LOCAL REPO -->
-        <section data-auto-animate>
-          <div class="main-grid only-repo r-stretch">
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
+          <!-- GIT REMOTE ADD ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="1">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                </div>
+              </div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- GIT PUSH -u origin master -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="2">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                </div>
+              </div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
                 <div class="commit" data-id="commit-1"></div>
                 <div class="commit commit-2" data-id="commit-2"></div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- GIT REMOTE ADD ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="1">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-                <div class="commit commit-2" data-id="commit-2"></div>
+          <!-- ... qualche collega fa altri commit ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="3">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                </div>
               </div>
-            </div>
 
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GIT PUSH -u origin master -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="2">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-                <div class="commit commit-2" data-id="commit-2"></div>
-              </div>
-            </div>
-
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ... qualche collega fa altri commit ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="3">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-                <div class="commit commit-2" data-id="commit-2"></div>
-              </div>
-            </div>
-
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ... GIT PULL ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="4">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
                 <div class="commit" data-id="commit-1"></div>
                 <div class="commit commit-2" data-id="commit-2"></div>
                 <div class="commit commit-3" data-id="commit-3"></div>
               </div>
             </div>
+          </section>
 
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ... qualche altra modifica ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="5">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace">
-                <div data-id="index">index.html</div>
+          <!-- ... GIT PULL ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="4">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                  <div class="commit commit-3" data-id="commit-3"></div>
+                </div>
               </div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
                 <div class="commit" data-id="commit-1"></div>
                 <div class="commit commit-2" data-id="commit-2"></div>
                 <div class="commit commit-3" data-id="commit-3"></div>
               </div>
             </div>
+          </section>
 
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ... git add . ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="6">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage">
-                <div data-id="index">index.html</div>
+          <!-- ... qualche altra modifica ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="5">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace">
+                  <div data-id="index">index.html</div>
+                </div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                  <div class="commit commit-3" data-id="commit-3"></div>
+                </div>
               </div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
                 <div class="commit" data-id="commit-1"></div>
                 <div class="commit commit-2" data-id="commit-2"></div>
                 <div class="commit commit-3" data-id="commit-3"></div>
               </div>
             </div>
+          </section>
 
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
+          <!-- ... git add . ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="6">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage">
+                  <div data-id="index">index.html</div>
+                </div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                  <div class="commit commit-3" data-id="commit-3"></div>
+                </div>
+              </div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- ... git commit -m "" ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="7">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
+          <!-- ... git commit -m "" ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="7">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                  <div class="commit commit-3" data-id="commit-3"></div>
+                  <div class="commit commit-4" data-id="commit-4"></div>
+                </div>
+              </div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
+                <div class="commit" data-id="commit-1"></div>
+                <div class="commit commit-2" data-id="commit-2"></div>
+                <div class="commit commit-3" data-id="commit-3"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ... git push ... -->
+          <section data-auto-animate>
+            <div class="main-grid with-remote r-stretch">
+              <pre class="commands language-diff" data-id="commands">
+                <code data-trim data-id="code" data-line-numbers="8">
+                  git remote add origin https://github.com/my-account-name/my-repository.git
+                  git push -u origin master
+                  ... qualche collega fa altri commit e li porta su master ...
+                  git pull
+                  ... qualche altra modifica ...
+                  git add .
+                  git commit -m "qualche altra modifica"
+                  git push
+                </code>
+              </pre>
+              <div class="git" data-id="git">
+                <div class="workspace" data-id="workspace"></div>
+                <div class="stage" data-id="stage"></div>
+                <div class="branch" data-id="branch">
+                  <div class="timeline" data-id="timeline"></div>
+                  <div class="commit" data-id="commit-1"></div>
+                  <div class="commit commit-2" data-id="commit-2"></div>
+                  <div class="commit commit-3" data-id="commit-3"></div>
+                  <div class="commit commit-4" data-id="commit-4"></div>
+                </div>
+              </div>
+
+              <div class="remote branch" data-id="remote">
+                <div class="timeline" data-id="remote-timeline"></div>
                 <div class="commit" data-id="commit-1"></div>
                 <div class="commit commit-2" data-id="commit-2"></div>
                 <div class="commit commit-3" data-id="commit-3"></div>
                 <div class="commit commit-4" data-id="commit-4"></div>
               </div>
             </div>
-
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ... git push ... -->
-        <section data-auto-animate>
-          <div class="main-grid with-remote r-stretch">
-            <pre class="commands language-diff" data-id="commands">
-              <code data-trim data-id="code" data-line-numbers="8">
-                git remote add origin https://github.com/my-account-name/my-repository.git
-                git push -u origin master
-                ... qualche collega fa altri commit e li porta su master ...
-                git pull
-                ... qualche altra modifica ...
-                git add .
-                git commit -m "qualche altra modifica"
-                git push
-              </code>
-            </pre>
-            <div class="git" data-id="git">
-              <div class="workspace" data-id="workspace"></div>
-              <div class="stage" data-id="stage"></div>
-              <div class="branch" data-id="branch">
-                <div class="timeline" data-id="timeline"></div>
-                <div class="commit" data-id="commit-1"></div>
-                <div class="commit commit-2" data-id="commit-2"></div>
-                <div class="commit commit-3" data-id="commit-3"></div>
-                <div class="commit commit-4" data-id="commit-4"></div>
-              </div>
-            </div>
-
-            <div class="remote branch" data-id="remote">
-              <div class="timeline" data-id="remote-timeline"></div>
-              <div class="commit" data-id="commit-1"></div>
-              <div class="commit commit-2" data-id="commit-2"></div>
-              <div class="commit commit-3" data-id="commit-3"></div>
-              <div class="commit commit-4" data-id="commit-4"></div>
-            </div>
-          </div>
+          </section>
         </section>
 
         <section>
           <section>
             <h1>Recap</h1>
           </section>
-          <section>
+          <section class="fragmented">
             <ul>
               <li>
-                <b>git remote add REPOSITORY_URL</b>
-                <span
+                <b class="fragment"
+                  ><span class="git-command">git remote</span>
+                  <span class="git-subcommand">add</span>
+                  <span class="git-arg">REPOSITORY_URL</span></b
+                >
+                <span class="fragment"
                   >Collega la tua repository locale con una repository
                   remota</span
                 >
               </li>
               <li>
-                <b>git push</b>
-                <span
+                <b class="fragment git-command">git push</b>
+                <span class="fragment"
                   >Sincronizza i commit presenti in un branch della tua
                   repository locale a quello connesso della repository
                   remota</span
                 >
               </li>
               <li>
-                <b>git push -u REMOTE_REPOSITORY_NAME (origin) BRANCH_NAME</b>
-                <span
+                <b class="fragment"
+                  ><span class="git-command">git push</span>
+                  <span class="git-flag">-u</span>
+                  <span class="git-arg"
+                    >REMOTE_REPOSITORY_NAME (di solito origin) BRANCH_NAME</span
+                  ></b
+                >
+                <span class="fragment"
                   >Connette un branch in locale con un branch remoto e ne
                   sincronizza i commit, da locale a remoto</span
                 >
               </li>
               <li>
-                <b>git pull</b>
-                <span
+                <b class="fragment git-command">git pull</b>
+                <span class="fragment"
                   >Sincronizza i commit presenti in un branch della tua
                   repository remota a quello connesso della repository
                   locale</span
@@ -987,21 +1018,64 @@
           <section>
             <ul>
               <li>
-                <b>git remote -v</b>
+                <b
+                  ><span class="git-command">git remote</span>
+                  <span class="git-flag">-v</span></b
+                >
                 <span
                   >Mostra a quale repository remota è connessa la tua repository
                   locale
                 </span>
               </li>
               <li>
-                <b>git branch -a</b>
+                <b
+                  ><span class="git-command">git branch</span>
+                  <span class="git-flag">-a</span></b
+                >
                 <span>Mostra tutti i branch (sia locali che remoti)</span>
+              </li>
+              <li>
+                <b
+                  ><span class="git-command">git clone</span>
+                  <span class="git-arg">REPOSITORY_URL</span></b
+                >
+                <span>Scarica una repository</span>
               </li>
             </ul>
           </section>
           <section>
-            <p>git clone REPOSITORY_URL</p>
-            <span>Scarica una repository</span>
+            <h1>DEMO TIME</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Configurazioni</h1>
+          </section>
+          <section>
+            <div class="git-global-config">
+              <div class="git-local-config">Project 1</div>
+              <div class="git-local-config">Project 2</div>
+              <div class="git-local-config">Project 3</div>
+              <div class="git-local-config">Project 4</div>
+              <div class="git-local-config">Project 5</div>
+              <div class="git-local-config">Project 6</div>
+            </div>
+          </section>
+          <section>
+            <p>
+              <span class="git-command">git config</span>
+              <span class="git-flag">-g</span>
+              <span class="git-arg">user.name "Nicola D'Oronzo"</span>
+            </p>
+            <p>
+              <span class="git-command">git config</span>
+              <span class="git-arg">user.name "Mario Rossi"</span>
+            </p>
+            <p>
+              <span class="git-command">git config</span>
+              <span class="git-flag">--list</span>
+            </p>
           </section>
         </section>
 
@@ -1015,14 +1089,24 @@
               comando
             </p>
             <ul>
-              <li>git push -u origin master</li>
-              <li>git branch -a</li>
-              <li>git remote -v</li>
+              <li>
+                <span class="git-command">git push</span
+                ><span class="git-flag">-u</span>
+                <span class="git-arg">origin master</span>
+              </li>
+              <li>
+                <span class="git-command">git branch</span>
+                <span class="git-flag">-a</span>
+              </li>
+              <li>
+                <span class="git-command">git remote</span>
+                <span class="git-flag">-v</span>
+              </li>
               <li>e tanti altri ancora...</li>
             </ul>
           </section>
           <section>
-            <p>E' possibile creare più branches</p>
+            <p>E' possibile creare più branches nello stesso progetto</p>
             <div class="branches r-stretch">
               <div class="branch master">
                 <div class="timeline"></div>
@@ -1048,7 +1132,11 @@
             </div>
           </section>
           <section>
-            <p>E' possibile apporre tags a dei commit (git tag)</p>
+            <p>
+              E' possibile apporre tags a dei commit (<span class="git-command"
+                >git tag</span
+              >)
+            </p>
             <div class="branch master r-stretch">
               <div class="timeline"></div>
               <div class="commit"></div>
@@ -1058,10 +1146,48 @@
               <div class="commit commit-5"></div>
             </div>
           </section>
+          <section class="fragmented">
+            <p>Git non è l'unico sistema di versionamento...</p>
+            <p class="fragment">TFS</p>
+            <p class="fragment">SVN</p>
+            <p class="fragment">Mercurial</p>
+            <p class="fragment">etc...</p>
+            <p class="fragment">....ma Git è il più usato</p>
+          </section>
         </section>
 
         <section>
-          <h1>DEMO TIME</h1>
+          <section>
+            <p>Esercizi</p>
+            <ul>
+              <li>Configurate globalmente in git user.name e user.email</li>
+              <li>Create una repository git locale</li>
+              <li>Aggiungete un file README.md</li>
+              <li>Fate un commit con il nuovo file</li>
+              <li>Fate qualche modifica al file e fate commit</li>
+              <li>Sincronizzate la vostra repository locale con una in remoto su creata su github</li>
+            </ul>
+          </section>
+          <section>
+            <p>Approfondimenti</p>
+            <ul>
+              <li>
+                <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">Linus Torvalds about git</a>
+              </li>
+              <li>
+                <a href="https://youtu.be/92sycL8ij-U">Git overview - Computerphile</a>
+              </li>
+              <li>
+                <a href="https://youtu.be/RzYJvSnzlMk">Teamwork & Git - Computerphile</a>
+              </li>
+              <li>
+                <a href="https://youtu.be/bSA91XTzeuA">Inside the hidden git folder - Computerphile</a>
+              </li>
+              <li>
+                <a href="https://git-scm.com/">Documentation</a>
+              </li>
+            </ul>
+          </section>
         </section>
       </div>
     </div>
