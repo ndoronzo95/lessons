@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>About CSS</title>
+
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/black.css" />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src * data: blob: ; "
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script
+      src="https://kit.fontawesome.com/492dfbd8db.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* TIMELINE */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <div>
+              <i
+                style="font-size: 4rem; color: lightblue"
+                class="fa-brands fa-chrome"
+              ></i>
+              <i
+                style="font-size: 4rem; color: lightblue"
+                class="fa-brands fa-firefox"
+              ></i>
+              <i
+                style="font-size: 4rem; color: lightblue"
+                class="fa-brands fa-internet-explorer"
+              ></i>
+              <i
+                style="font-size: 4rem; color: lightblue"
+                class="fa-brands fa-safari"
+              ></i>
+            </div>
+            <div>
+              <i
+                style="font-size: 4rem; color: lightblue"
+                class="fa-brands fa-node"
+              ></i>
+            </div>
+            <p class="r-fit-text">JS runtimes</p>
+          </section>
+          <section>Cos'è un runtime? Compiletime - Runtime</section>
+        </section>
+        <section>
+          <section><h1>Js nel browser</h1></section>
+          <section>Window</section>
+          <section>More web apis</section>
+        </section>
+        <section>
+          <section>
+            <h1>
+              <span style="color: yellow">D</span>ocument
+              <span style="color: yellow">O</span>bject
+              <span style="color: yellow">M</span>odel
+            </h1>
+          </section>
+          <section>La rappresentazione della tua pagina html in js</section>
+          <section>Document</section>
+          <section>
+            querySelector(All): selezionare elementi. Menzione speciale per i
+            vari getElementBy...
+          </section>
+          <section>HTMLElement (e sottoclassi) overview</section>
+          <section>document.createElement: creare elementi in js</section>
+          <section>append / appendChild: aggiungere elementi</section>
+          <section>remove: rimuovere elementi</section>
+          <section>eventi: reagire alle azioni dell'utente</section>
+          <section>DEMO TIME</section>
+        </section>
+
+        <section>
+          <section><h1>JS nel sistema operativo. Node js</h1></section>
+          <section>Un po' di storia</section>
+          <section>A cosa serve</section>
+          <section>Un web server</section>
+          <section>DEMO TIME</section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Recap</h1>
+          </section>
+          <section>
+            <ul>
+              <li>Runtimes</li>
+              <li>
+                JS nel Browser
+                <ul>
+                  <li>Window</li>
+                  <li>More apis</li>
+                </ul>
+              </li>
+              <li>
+                DOM
+                <ul>
+                  <li>struttura ad albero</li>
+                  <li>Document overview</li>
+                  <li>selezionare elementi</li>
+                  <li>HTMLElement overview</li>
+                  <li>creare un elemento</li>
+                  <li>aggiungere un elemento al DOM</li>
+                  <li>rimuovere un elemento al dom</li>
+                  <li>eventi: reagire alle azioni dell'utente</li>
+                </ul>
+              </li>
+              <li>Node JS</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>Approfondimenti</section>
+          <section>
+            <a href="https://youtu.be/ztspvPYybIY">Node js presentation</a>
+            <a href="https://youtu.be/M3BM9TB-8yA">10 Things I regret about Node</a>
+          </section>
+        </section>
+
+        <section>
+          <section>Esercizi</section>
+          <section>
+            <ul>
+              <li>App - Lista della spesa</li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>
