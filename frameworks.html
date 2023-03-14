@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>About Frameworks</title>
+
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/black.css" />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src * data: blob: ; "
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script
+      src="https://kit.fontawesome.com/492dfbd8db.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* TIMELINE */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <i style="font-size: 2rem" class="fa-brands fa-angular"></i>
+          <i style="font-size: 2rem" class="fa-brands fa-react"></i>
+          <i style="font-size: 2rem" class="fa-brands fa-vue"></i>
+          <i style="font-size: 2rem" class="fa-brands fa-svelte"></i>
+          <i style="font-size: 2rem" class="fa-brands fa-solidity"></i>
+          <p class="r-fit-text">Modern Javascript Frameworks</p>
+        </section>
+        <section>
+          Ce ne sono tanti e ne escono sempre nuovi. Framework
+          dipendenza...imparatene uno bene ma non vi legate troppo ad esso. Non
+          dovete diventare degli angular developer o react developer...dovete
+          diventare bravi programmatori
+        </section>
+        <section>SPA | MPA</section>
+        <section>
+          <section><h1>I vantaggi di un framework</h1></section>
+          <section>Dichiaratività</section>
+          <section>Componenti</section>
+          <section>Ecosistema</section>
+          <section>Compatibilità</section>
+        </section>
+        <section>
+          <section><h1>Gli svantaggi di un framework</h1></section>
+          <section>Coupling totale col progetto</section>
+          <section>Stare dietro alle versioni</section>
+          <section>Peso e performance*</section>
+          <section>SEO*</section>
+        </section>
+        <section>
+          <section><h1>Compatibilità</h1></section>
+          <section>Set di tecnologie per supplire alle incompatibilità dei browser (css escluso)</section>
+          <section>Supplisce alle incompatibilità</section>
+        </section>
+        <section>
+          <section><h1>Dichiaratività</h1></section>
+          <section>Codice reattivo!</section>
+          <section>c'era una volta jquery</section>
+          <section>Confronto di una funzionalità in JS e con un framework</section>
+          <section>Dichiarativo = Leggibile e Leggibile = Buon codice</section>
+        </section>
+        <section>
+          <section><h1>Componenti</h1></section>
+          <section>Cambiare il modo di guardare un applicazione</section>
+          <section>Suddividiamo tutto in componenti</section>
+          <section>I componenti si compongono come i lego</section>
+          <section>Padri e figli</section>
+          <section>I componenti sono un mondo che comunica in modo ben definito - Modularità - Incapsulamento di logica e stile</section>
+          <section>Input / Output</section>
+          <section>Stato dei componenti</section>
+          <section>Ciclo di vita dei componenti</section>
+          <section>Librerie di componenti</section>
+        </section>
+        <section>
+          <section><h1>Più pagine senza cambiare .html - SPAs</h1></section>
+          <section>Sistema di routing</section>
+          <section>Sistema di protezione delle rotte</section>
+          <section>Redirect etc.</section>
+        </section>
+        <section>
+          <a href="./angular.html">Angular</a>
+          <a href="./react.html">React</a>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>About React</title>
+
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/black.css" />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src * data: blob: ; "
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script
+      src="https://kit.fontawesome.com/492dfbd8db.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* TIMELINE */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <i
+            style="font-size: 20rem; color: lightblue"
+            class="fa-brands fa-react"
+          ></i>
+          <p class="r-fit-text">React</p>
+        </section>
+        <section>
+          <section>Un po' di storia</section>
+          <section>Framework vs Libreria</section>
+          <section>Environment agnostic - ReactDOM - ReactNative - ReactVR :D</section>
+          <section>Solo componenti</section>
+          <section>Minimale, forse anche troppo...</section>
+        </section>
+        <section>
+          <section>After CRA</section>
+          <section>Struttura dopo setup</section>
+        </section>
+        <section>
+          <section><h1>Componente</h1></section>
+          <section>Funzioni e classi</section>
+          <section>Funzione che ritorna degli elementi</section>
+          <section>JSX</section>
+          <section>Input - Props</section>
+          <section>Output - callbacks</section>
+          <section>State</section>
+          <section>Effects</section>
+          <section>children prop</section>
+        </section>
+        <section>
+          <section>Stile</section>
+          <section>css modules</section>
+          <section>Librerie per gestire lo stile</section>
+        </section>
+        <section>
+          <section><h1>Strategie comuni</h1></section>
+          <section>Come gestire una lista di elementi - CRUD</section>
+          <section>Come gestire una chiamata http</section>
+          <section></section>
+        </section>
+        <section>
+          <h1>DEMO TIME</h1>
+        </section>
+        <section>
+          <section><h1>Context API</h1></section>
+          <section>Prop drilling </section>
+          <section>Provider - Consumer</section>
+        </section>
+        <section>
+          <section><h1>React router</h1></section>
+        </section>
+        <section>
+          <section><h1>React - Under the hood</h1></section>
+          <section>vdom</section>
+          <section>useState - useEffect fanno triggerare un ricalcolo</section>
+        </section>
+        <section>
+          <section>Librerie di componenti</section>
+          <section>Material UI</section>
+        </section>
+        <section>
+          <section><h1>Approfondimenti</h1></section>
+          <section></section>
+        </section>
+        <section>
+          <section><h1>Esercizi</h1></section>
+          <section>Create a react app</section>
+          <section>Lista della spesa</section>
+          <section>Tabella di utenti CRUD</section>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>About Angular</title>
+
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/black.css" />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src * data: blob: ; "
+    />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <script
+      src="https://kit.fontawesome.com/492dfbd8db.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      /* TIMELINE */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <i
+            style="font-size: 20rem; color: red"
+            class="fa-brands fa-angular"
+          ></i>
+          <p class="r-fit-text"><span style="color: red">A</span>ngular</p>
+        </section>
+
+        <section>
+          <section>Un po' di storia</section>
+          <section>Angular è complicato...</section>
+          <section>Angular è compilato...Decorators</section>
+          <section>
+            Angular è cambiato...una delle ultime versioni ha introdotto un game
+            changer
+          </section>
+          <section>
+            Non solo componenti. Components, Services, Directives, Pipes,
+            Modules
+          </section>
+          <section>Angular CLI</section>
+          <section><a href="./typescript.html">TypeScript</a></section>
+          <section>Dependency injection</section>
+          <section>
+            Reactive eXtensions for JavaScript - un nuovo modo di vedere la
+            programmazione asincrona
+          </section>
+        </section>
+
+        <section>
+          <section>Angular CLI</section>
+          <section>ng new ...</section>
+          <section>
+            ng g<span style="opacity: 0.7">enereate</span> c<span
+              style="opacity: 0.7"
+              >omponent</span
+            >
+          </section>
+          <section>ng add ...</section>
+          <section>ng update</section>
+        </section>
+
+        <section>
+          <section><h1>Modules</h1></section>
+          <section>un pacchetto importabile di elementi</section>
+          <section>declarations - imports - exports</section>
+          <section>
+            Componenti Direttive e Pipes devono essere dichiarati in un modulo
+          </section>
+        </section>
+
+        <section>
+          <section><h1>Components</h1></section>
+          <section>file ts - file html - file scss</section>
+          <section>@Component decorator</section>
+          <section>@Input</section>
+          <section>@Output</section>
+          <section>ngOnInit - ngOnDestroy</section>
+          <section>ng-content</section>
+          <section>standalone mode</section>
+        </section>
+
+        <section>
+          <section><h1>Pipes</h1></section>
+          <section>file ts</section>
+          <section>input - output with args</section>
+          <section>impure pipes</section>
+        </section>
+
+        <section>
+          <section><h1>Directives</h1></section>
+          <section>un componente senza template... un parassita</section>
+          <section>@Input @Output etc. + @HostBinding, @HostListener</section>
+        </section>
+
+        <section>
+          <section><h1>Services</h1></section>
+          <section>Una classe Injectable</section>
+        </section>
+
+        <section>
+          <section><h1>Dependency Injection</h1></section>
+          <section>Accedere ai dati semplicemente richiedendoli - constructor injection, inject (a 14 +)</section>
+          <section>Da dove vengono questi dati? - providers</section>
+          <section>Puoi iniettare tutto...</section>
+        </section>
+
+        <section>
+          <section><h1>Routing</h1></section>
+        </section>
+        
+        <section>
+          <section>no promises - observables</section>
+
+          <section>Subjects</section>
+        </section>
+
+        <section>
+          <section><h1>Approfondimenti</h1></section>
+          <section></section>
+        </section>
+        <section>
+          <section><h1>Esercizi</h1></section>
+          <section>Create an angular app</section>
+          <section>Lista della spesa</section>
+          <section>Tabella di utenti CRUD</section>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>
