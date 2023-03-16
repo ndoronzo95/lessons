@@ -39,48 +39,1058 @@
             >ext <span style="color: red">M</span>arkup
             <span style="color: red">L</span>anguage
           </p>
+          <aside class="notes">
+            Perchè Hypertext?; Cosa significa Markup Language?
+          </aside>
         </section>
         <section>
-          <h1>Che cos'è e a cosa serve</h1>
+          <section>
+            <h2>
+              Il linguaggio di markup standard per documenti da visualizzare in
+              un browser
+            </h2>
+            <aside class="notes">
+              C'era una volta StandardGeneralizedMarkupLanguage...e poi venne
+              concepito un set di tag per internet...
+            </aside>
+          </section>
+          <section>
+            <h1>W3C</h1>
+            <aside class="notes">Chi decide come sarà HTML (e CSS)?</aside>
+          </section>
+          <section>
+            <h2>Lo scheletro della vostra applicazione</h2>
+            <aside class="notes">Un file html fa partire tutto</aside>
+          </section>
         </section>
 
         <section>
-          <section>Anatomia di un elemento html</section>
-          <section>Struttura ad albero</section>
+          <section data-auto-animate>
+            <h2>Anatomia di un elemento html</h2>
+
+            <img
+              src="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics/grumpy-cat-small.png"
+            />
+            <aside class="notes">
+              Salvo alcuni casi un tag va sempre aperto e chiuso
+            </aside>
+          </section>
+
+          <section data-auto-animate>
+            <h2>Commenti in html</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <p> <!-- QUESTA ROBA --> 
+                    Hello
+                    <!-- NON VERRA' -->
+                    world 
+                    <!-- MOSTRATA SULLO SCHERMO -->
+                  </p>
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>Innestare elementi</section>
+          <section data-auto-animate>
+            <pre>
+              <code data-trim>
+                <p> <!-- PARENT ELEMENT --> 
+                  <strong> <!-- CHILD ELEMENT -->
+                    Hello world <!-- CONTENT OF THE CHILD -->
+                  </strong>
+                </p> 
+              </code>
+            </pre>
+          </section>
+
+          <section data-auto-animate>
+            <pre>
+              <code data-trim >
+                <p>  <!-- PARENT ELEMENT -->
+                  <strong> <!-- 1st CHILD ELEMENT -->
+                    Hello
+                  </strong> 
+                  <i> <!-- 2nd CHILD ELEMENT -->
+                    world 
+                  </i>
+                </p> 
+              </code>
+            </pre>
+          </section>
+
+          <section data-auto-animate>
+            <pre>
+              <code data-trim >
+                <p> <!-- PARENT ELEMENT --> 
+                  Hello <!-- 1st CHILD ELEMENT (text)-->
+                  <strong> <!-- 2nd CHILD ELEMENT (html)-->
+                     world 
+                  </strong>
+                </p> 
+              </code>
+            </pre>
+          </section>
+
+          <section data-auto-animate>
+            <pre>
+              <code data-trim >
+                <p> <!-- PARENT ELEMENT --> 
+                  Hello <!-- 1st CHILD ELEMENT (text)-->
+                  <strong> <!-- 2nd CHILD ELEMENT (html)-->
+                     world 
+                  </strong>
+                </p> 
+              </code>
+            </pre>
+            <div class="tree" style="flex: 1">
+              <div
+                class="node element"
+                data-node-label="HTML Paragraph Element (&lt;p&gt;)"
+              >
+                <div
+                  class="node text"
+                  data-node-label="Text Content (Hello)"
+                ></div>
+                <div
+                  class="node element"
+                  data-node-label="HTML Strong Element (&lt;strong&gt;)"
+                >
+                  <div
+                    class="node text"
+                    data-node-label="Text Content (world)"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section>HTML flow</section>
+
+          <section>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <h1>Hello world</h1>
+                  <p>It's a <strong>nice</strong> day!</p>
+                  <button>Button 1</button>
+                  <button>Button 2</button>
+                  <button>Button 3</button>
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+
+            <aside class="notes">
+              Immaginatelo come un documento word (perchè in realtà word
+              funziona così);
+            </aside>
+          </section>
         </section>
 
         <section>
-          <section>Primi passi</section>
-          <section>Head - Body</section>
-          <section>h1-2-3-4-5-6</section>
-          <section>p</section>
-          <section>div</section>
-          <section>br</section>
-          <section>ul/ol li</section>
+          <section><h2>Primi passi</h2></section>
+          <section>
+            <h2>Doctype</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  &lt;!DOCTYPE html&gt;
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <aside class="notes">
+                Confronta con SVG o POML. Questi hanno altri tag!
+              </aside>
+            </div>
+          </section>
+          <section>
+            <h2>HTML Element (root)</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  &lt;!DOCTYPE html&gt;
+                  &lt;html&gt;
+
+                  &lt;/html&gt;
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Head</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  &lt;!DOCTYPE html&gt;
+                  &lt;html&gt;
+                    &lt;head&gt;
+                      <!-- METADATI... -->
+                      <title>My website | Homepage</title>
+                    &lt;/head&gt;
+                  &lt;/html&gt;
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Body</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  &lt;!DOCTYPE html&gt;
+                  &lt;html&gt;
+                    &lt;head&gt;
+                      <!-- METADATI... -->
+                      <title>My website | Homepage</title>
+                    &lt;/head&gt;
+                    &lt;body&gt;
+                      Hello world
+                    &lt;/body&gt;
+                  &lt;/html&gt;
+                </code>
+              </pre>
+
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>Inside body</section>
+
+          <section>
+            <h2>Headings</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <h1>The title</h1>
+                  <h2>The subtitle</h2>
+                  <h3>
+                    The subtitle of the subtitle
+                  </h3>
+                  <h4>
+                    The subtitle of the...you got the point
+                  </h4>
+                  <h5>Seriously...another one??</h5>
+                  <h6>I don't know why I even exist</h6>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Paragraph</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p> Lorem ipsum dolor sit 
+                    amet consectetur adipisicing elit. 
+                    Tenetur non molestiae, obcaecati, 
+                    pariatur provident eum facilis 
+                    reprehenderit iusto officia, 
+                    minus ab exercitationem accusantium 
+                    ipsum rem impedit repellat 
+                    aliquam harum. Odit! 
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Breaks</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p> Questo testo va a capo <br> 
+                    ogni volta che <br> aggiungo 
+                    questo <br> elemento
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Unordered list / List item</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <ul>
+                    <li>Fare la spesa</li>
+                    <li>Buttare la spazzatura</li>
+                    <li>Studiare programmazione</li>
+                  </ul> 
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Ordered list / list item</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <ol>
+                    <li>Imparare HTML</li>
+                    <li>Imparare CSS</li>
+                    <li>Imparare JavaScript</li>
+                    <li>Imparare un framework</li>
+                    <li>Get in da game</li>
+                  </ol>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Nested lists</h2>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <ul>
+                    <li>
+                      Imparare HTML
+                      <ul>
+                        <li>
+                          struttura degli elementi
+                        </li>
+                        <li>
+                          attributi
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      Imparare CSS
+                      <ul>
+                        <li>selectors</li>
+                        <li>regole visive</li>
+                        <li>etc.</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Content Divider</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div> 
+                    <h1>Title 1</h1>
+                    <p>Paragraph 1</p>
+                  </div>
+                  <div> 
+                    <h1>Title 2</h1>
+                    <p>Paragraph 2</p>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section>
-          <section>Elementi con attributi</section>
-          <section>a</section>
-          <section>img</section>
-          <section>video</section>
-          <section>attributi globali</section>
+          <section><h2>Attributi</h2></section>
+          <section>
+            <div class="html-example">
+              <pre>
+                <code data-trim data-html-src>
+                  <p align="right">Ciao</p>
+                  <p hidden>I am invisible</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">attributo - valore; alcuni attributi non hanno bisogno di valore, si possono scrivere anche direttamente</aside>
+          </section>
+          <section>
+            <h2>Anchor</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <a href="https://www.google.com/">
+                    Navigate to Google
+                  </a>
+                  <br>
+                  <a 
+                    href="https://www.google.com/" 
+                    target="_blank"
+                  >
+                    Navigate to Google...but in another tab
+                  </a>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Image</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <img src="https://picsum.photos/200">
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Video</h2>
+            <div class="html-example" style="flex-direction: column;">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <video width="320" height="240" autoplay>
+                    <source 
+                      src="https://freetestdata.com/wp-content/uploads/2022/02/Free_Test_Data_1MB_MP4.mp4"
+                      type="video/mp4" 
+                    >
+                    Your browser does not support the video tag.
+                  </video> 
+                  <video width="320" height="240" controls>
+                    <source 
+                      src="https://freetestdata.com/wp-content/uploads/2022/02/Free_Test_Data_1MB_MP4.mp4"
+                      type="video/mp4" 
+                    >
+                    Your browser does not support the video tag.
+                  </video> 
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Attributi globali</h2>
+            <div class="html-example" style="flex-direction: column;">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <img id="unique-image"></img>
+                  <div id="unique-section-name"></div>
+                  <p style="color: red">Red text!</p>
+                  <a style="color: red" href="./index.html">Red link!</a>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section>
-          <section>Tabelle</section>
-          <section>Elementi della tabella</section>
-          <section>Attributi</section>
+          <section>
+            <h2>Tabelle</h2> 
+            <aside class="notes">Un mondo di tabelle...ahime</aside>
+          </section>
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table>
+                    <thead>
+                      <tr> <!-- Table row -->
+                        <th>Name</th> <!-- table heading -->
+                        <th>Surname</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Nicola</td> <!-- table data -->
+                        <td>D'Oronzo</td>
+                        <td>FE dev</td>
+                      </tr>
+                      <tr>
+                        <td>Attilio</td> 
+                        <td>Gelosa</td>
+                        <td>BE dev</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Nicola</td>
+                        <td>D'Oronzo</td>
+                        <td>FE dev</td>
+                      </tr>
+                      <tr>
+                        <td>Attilio</td> 
+                        <td>Gelosa</td>
+                        <td>BE dev</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <aside class="notes">Sì, i bordi oldschool sono orribili. non usateli</aside>
+            </div>
+          </section>
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th colspan="2">Fullname</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Nicola</td>
+                        <td>D'Oronzo</td>
+                        <td rowspan="2">dev</td>
+                      </tr>
+                      <tr>
+                        <td>Attilio</td> 
+                        <td>Gelosa</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th colspan="2">Fullname</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Nicola</td>
+                        <td>D'Oronzo</td>
+                        <td rowspan="2">dev</td>
+                      </tr>
+                      <tr>
+                        <td>Attilio</td> 
+                        <td>Gelosa</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>6</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>3</td>
+                        <td>6</td>
+                        <td>9</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>4</td>
+                        <td>8</td>
+                        <td>12</td>
+                        <td>16</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th colspan="2">Prospetto RCA</th>
+                        <th>Commerciale</th>
+                        <th>CMC</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" rowspan="2">
+                          Base mensile
+                        </th>
+                        <th scope="row">% target</th>
+                        
+                        <td>59.00%</td>
+                        <td>25.00%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">% in essere</th>
+                        <td>11.00%</td>
+                        <td>32.50%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" rowspan="2">
+                          Base annua
+                        </th>
+                        <th scope="row">% target</th>
+                        
+                        <td>91.00%</td>
+                        <td>17.75%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">% in essere</th>
+                        <td>15.50%</td>
+                        <td>76.10%</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" rowspan="2">
+                          Plafond
+                        </th>
+                        <th scope="row">Disponibile</th>
+                        
+                        <td>3.241,30</td>
+                        <td>1.241,10</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Prenotato</th>
+                        <td>2.911,00</td>
+                        <td>289,10</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <table border="">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Ivo</td>
+                        <td>Avido</td>
+                        <td>45</td>
+                      </tr>
+                      <tr>
+                        <td>Maccio</td>
+                        <td>Capatonda</td>
+                        <td>49</td>
+                      </tr>
+                      <tr>
+                        <td>Rupert</td>
+                        <td>Sciamenna</td>
+                        <td>??</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="3">3 elements found</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section>
-          <section>Forms</section>
-          <section>Input</section>
-          <section>Select - Option</section>
-          <section>Label</section>
-          <section>Button</section>
-          <section>Validazioni</section>
+          <section>
+            <h2>Forms</h2>
+            <aside class="notes">Un mondo di form</aside>
+          </section>
+          <section>
+            <h2>Input</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <input> 
+                  <input type="text">
+                  <br>
+                  <input type="checkbox">
+                  <input type="checkbox" checked>
+                  <br>
+                  <input type="color">
+                  <br>
+                  <input type="password">
+                  <br>
+                  <input type="radio" name="un-qualche-nome">
+                  <input type="radio" name="un-qualche-nome">
+                  <br>
+                  <input type="file">
+                  <br>
+                  <input type="range">
+                  <textarea cols="30" rows="10"></textarea>
+                  <p>and many many more....</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">elemento principale</aside>
+          </section>
+
+          <section>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <input type="text" value="valore di partenza">
+                  <input type="text" placeholder="Inserisci">
+                  <input type="text" disabled>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Select - Option</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <select>
+                    <option >Scegli un opzione...</option>
+                    <option value="e5-576-33br">Acer Aspire E 15</option>
+                    <option value="hp-3141-23s">HP Super Hyper Mega</option>
+                    <option value="a9-3132-469">Asus Awesome G32</option>
+                  </select>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">Attenzione! Aspetto brutto su pc. Aspetto bello su mobile</aside>
+          </section>
+          <section>
+            <h2>Label</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <label for="my-input">My input</label>
+                  <input id="my-input">
+
+                  <label for="my-radio-1">Option 1</label>
+                  <label for="my-radio-2">Option 2</label>
+                  <label for="my-radio-3">Option 3</label>
+                  <br>
+                  <br>
+                  <input id="my-radio-1" type="radio" name="some-name">
+                  <input id="my-radio-2" type="radio" name="some-name">
+                  <input id="my-radio-3" type="radio" name="some-name">
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Button</h2>
+            <div class="html-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <button>My button</button>
+                  <button disabled>My disabled button</button>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          
+          <section>
+            <h2>Mettere tutto insieme - Form</h2>
+          </section>
+          
+          <section>
+            <div class="html-example" style="flex-direction: column">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <h2>Login</h2>
+                  <form action="./login.php" method="post">
+                      <label for="user-input">Username:</label>
+                      <input id="user-input" name="user">
+                      <br>
+                      <label for="pass-input">Password:</label>
+                      <input id="pass-input" name="password" type="password">
+                      <br>
+                      <br>
+                      <button type="button">Annulla</button>
+                      <button type="reset">Reset</button>
+                      <button type="submit">Login</button>
+                  </form>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="html-example" style="flex-direction: column">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <form action="./search-user.php" method="get">
+                    <fieldset>
+                      <legend>Dati conto</legend>
+                      <label for="filiale">Filiale:</label><br>
+                      <input id="filiale" name="filiale">
+                      <br>
+                      <label for="categoria">Categoria:</label><br>
+                      <input id="categoria" name="categoria">
+                      <br>
+                      <label for="conto">Conto:</label><br>
+                      <input id="conto" name="conto">
+                    </fieldset>  
+                    <fieldset>
+                        <legend>Cliente</legend>
+                        <label for="nome">Nome:</label><br>
+                        <input id="nome" name="nome">
+                        <br>
+                        <label for="cognome">Password:</label><br>
+                        <input id="cognome" name="cognome">
+                        <br>
+                        <label for="pf-radio">Persona fisica</label>
+                        <input id="pf-radio" type="radio" name="tipoCliente" value="pf">
+                        <label for="pg-radio">Persona giuridica</label>
+                        <input id="pg-radio" type="radio" name="tipoCliente" value="pg">
+
+                      </fieldset>
+                      <br>
+                      <br>
+                      <button type="reset">Annulla</button>
+                      <button type="submit">Applica filtri</button>
+                  </form>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section>
@@ -125,9 +1135,15 @@
 
         <section>
           <section>Esercizi</section>
-          <section>Scriviere il proprio curriculum vitae in html - curriculum.html</section>
-          <section>Creare una tabella che rappresenta la nostra classe - class.html</section>
-          <section>Scrivere un form di iscrizione al nostro corso - subscription.html</section>
+          <section>
+            Scriviere il proprio curriculum vitae in html - curriculum.html
+          </section>
+          <section>
+            Creare una tabella che rappresenta la nostra classe - class.html
+          </section>
+          <section>
+            Scrivere un form di iscrizione al nostro corso - subscription.html
+          </section>
         </section>
       </div>
     </div>
