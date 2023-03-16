@@ -2,6 +2,7 @@ import { extend, queryAll, closest, getMimeTypeFromFile, encodeRFC3986URI } from
 import { isMobile } from '../utils/device.js'
 
 import fitty from 'fitty';
+import { htmlAutodisplay } from './html-autogen.js';
 
 /**
  * Handles loading, unloading and playback of slide
@@ -48,6 +49,8 @@ export default class SlideContent {
 
 		// Show the slide element
 		slide.style.display = this.Reveal.getConfig().display;
+		
+		htmlAutodisplay(slide);
 
 		// Media elements with data-src attributes
 		queryAll( slide, 'img[data-src], video[data-src], audio[data-src], iframe[data-src]' ).forEach( element => {
