@@ -1,13 +1,23 @@
 export const htmlAutodisplay = (section) => {
-  const src = section.querySelector("[data-html-src]");
+  const htmlSrc = section.querySelector("[data-html-src]");
+  const cssSrc = section.querySelector("[data-css-src]");
   const sink = section.querySelector("[data-html-sink]");
-  if (src && sink) {
+  if (htmlSrc && sink) {
     const url = URL.createObjectURL(
       new Blob(
         [
           `
       <!DOCTYPE html>
-      ${src.textContent}  
+      <html>
+          <head>
+          ${cssSrc ? `<style>${cssSrc.textContent}</style>` : ""}
+
+          </head>
+          <body>
+          ${htmlSrc.textContent}  
+
+          </body>
+      </html>
     `,
         ],
         { type: "text/html" }

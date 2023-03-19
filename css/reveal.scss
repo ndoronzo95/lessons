@@ -2007,19 +2007,47 @@ $notesWidthPercent: 25%;
 		width: 100%;
 		height: 100%;
 	}
+
+	&.resizable {
+		overflow: auto;
+		resize: both;
+	}
 }
 
 iframe[data-html-sink] {
 	background-color: white;
 }
 
-.html-example {
+.two-screen-example {
 	display: flex;
 	align-items: stretch;
 	gap: 1em;
 
-	>* {
+	> * {
 		flex: 1 1 50%;
+	}
+}
+
+.three-screen-example {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+
+	> *:last-child {
+		margin: 0 auto;
+		grid-column: 1 / 3;
+	}
+}
+
+.three-screen-example-2 {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	
+	> *:first-child {
+		grid-row: 1 / 3;
 	}
 }
 

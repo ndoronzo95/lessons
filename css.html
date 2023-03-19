@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="./dist/reset.css" />
     <link rel="stylesheet" href="./dist/reveal.css" />
     <link rel="stylesheet" href="./dist/theme/black.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif&family=Noto+Serif+Display:wght@100;300;400&display=swap"
+      rel="stylesheet"
+    />
 
     <meta
       http-equiv="Content-Security-Policy"
@@ -41,66 +47,2641 @@
             <span style="color: lightblue">S</span>tyle
             <span style="color: lightblue">S</span>heet
           </p>
+          <aside class="notes">A cascata, con priorità</aside>
         </section>
         <section>
-          <section>Che cos'è CSS</section>
-          <section>Un po' di storia</section>
-          <section>Cosa si può fare con solo CSS</section>
-        </section>
-        <section>
-          <section>Stile come attributo degli elementi HTML</section>
-          <section>Style tag</section>
-          <section>link tag</section>
-          <section>Struttura di una regola</section>
-        </section>
-        <section>
-          <section><h1>Selectors</h1></section>
-          <section>by tag</section>
-          <section>by class</section>
-          <section>by id</section>
-          <section>specificita'</section>
-          <section>pseudoclassi</section>
-          <section>discendenza</section>
-        </section>
-        <section>
-          <section><h1>Regole Visive</h1></section>
-          <section>colori</section>
-          <section>fonts</section>
-          <section>text align</section>
-          <section>opacity</section>
-          <section>alcune unità di misura (px, %, em, rem, vh, vw)</section>
-        </section>
-        <section>
-          <section><h1>Box Model</h1></section>
-          <section>height e width</section>
-          <section>padding</section>
-          <section>border</section>
-          <section>margin</section>
-          <section>max-width e max-height</section>
-          <section>content-box e border-box</section>
           <section>
-            Lasciate che l'altezza di un elemento venga determinata dal
-            contenuto
+            Separation of concerns
+            <aside class="notes">
+              Se HTML è lo scheletro, CSS è la pelle; Stesso scheletro, aspetti
+              diversi. Tramite css si può modificare radicalmente l'aspetto del
+              nostro file html
+            </aside>
+          </section>
+          <section>
+            <a href="https://codepen.io/trending"
+              >Cosa si può fare con solo CSS</a
+            >
           </section>
         </section>
         <section>
-          <section><h1>Modificare il flow dell'HTML</h1></section>
-          <section>Position</section>
-          <section>Display</section>
-          <section>Flexbox</section>
-          <section>Grid</section>
+          <section>
+            <h2>Applicare stile agli elementi HTML</h2>
+          </section>
+          <section>
+            <h2>Stile di default</h2>
+            <div class="two-screen-example">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <h1>Hello world</h1>
+                  <h2>Goodbye world</h2>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Perchè ci sono stili di default. Esistono dei reset.css
+            </aside>
+          </section>
+          <section>
+            <h2>style attribute</h2>
+            <div class="two-screen-example" style="flex-direction: column">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p style="color:red; font-weight: bold; text-align: center"> 
+                    Hello world 
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame" style="margin: auto">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>HTML Style element</h2>
+            <div class="two-screen-example" style="flex-direction: column">
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <style>
+                    p {
+                      color:red; 
+                      font-weight: bold; 
+                      text-align: center;
+                    }
+                  </style>
+                  <p> 
+                    Hello world 
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame" style="margin: auto">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>HTML Link element</h2>
+            <pre class="language-xml">
+              <code data-trim data-html-src>
+                <link rel="stylesheet" href="my-stylesheet.css">
+              </code>
+            </pre>
+            <aside class="notes">
+              Questo è il metodo più usato...file esterno intercambiabile.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Struttura di una regola CSS</h2>
+            <img
+              src="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics/css-declaration-small.png"
+            />
+            <aside class="notes">
+              Perchè parliamo di regole? Struttura a cascata. Accenno alla
+              specificità delle regole.
+            </aside>
+          </section>
+          <section>
+            <h2>Commenti</h2>
+            <pre class="language-css">
+              <code data-trim data-html-src>
+                p {
+                  /* color: red; */
+                  color: blue;
+                }
+              </code>
+            </pre>
+          </section>
         </section>
         <section>
-          <section><h1>Organizzare il css</h1></section>
-          <section>B.E.M</section>
-          <section>Css atomico</section>
-          <section>usare un framework css</section>
-          <section>css reset</section>
-          <section>SASS</section>
+          <section>
+            <h1>Selectors</h1>
+            <aside class="notes">
+              Importanza dei selectors come concetto generale. Linguaggio a se
+              stante...
+            </aside>
+          </section>
+          <section>
+            <h4>tag selector</h4>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  p {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p>Some paragraph</p>
+                  <div>Another element which is not a paragraph</div>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">Meno specifico. Meno forte.</aside>
+          </section>
+          <section>
+            <h2>class selector</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .text-red {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p class="text-red">Some paragraph</p>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Le classi sono dei token se vogliamo, a cui attribuiamo una
+              regola. Servono fondamentalmente per applicare stile. Piu
+              specifiche dei tag selector
+            </aside>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .cool-text {
+                    color: yellow;
+                  }
+                  .cool-bg {
+                    background-color: hotpink;
+                  }
+                  .text-center {
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <h1 class="cool-text cool-bg text-center">
+                    Some paragraph
+                  </h1>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Le classi sono dei token se vogliamo, a cui attribuiamo una
+              regola. Servono fondamentalmente per applicare stile. Piu
+              specifiche dei tag selector
+            </aside>
+          </section>
+          <section>
+            <h2>id selector</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  #the-one-and-only-p {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p id="the-one-and-only-p">Paragraph</p>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Gli id sono degli identificativi unici...teoricamente...Maggiore
+              specificità
+            </aside>
+          </section>
+          <section class="fragmented">
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  p {
+                    color: black;
+                  }
+                  .text-blue {
+                    color: blue;
+                  }
+                  #first-line-of-dantes-inferno {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p class="text-bleu">Paragraph</p>
+                  <p id="first-line-of-dantes-inferno">
+                    Nel mezzo del cammin di nostra vita
+                  </p>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame fragment">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h1>!important</h1>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  p {
+                    color: black !important;
+                  }
+                  .text-blue {
+                    color: blue;
+                  }
+                  #first-line-of-dantes-inferno {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p class="text-blue">Paragraph</p>
+                  <p id="first-line-of-dantes-inferno">
+                    Nel mezzo del cammin di nostra vita
+                  </p>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Pseudoclassi</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  p:nth-child(2) {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p>Paragraph</p>
+                  <p>Nel mezzo del cammin di nostra vita</p>
+                  <p>Some other paragraph</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              le pseudoclassi selezionano per stato / condizione
+            </aside>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  button {
+                    padding: 5px 10px;
+                    border: 2px solid green;
+                    border-radius: 3px;
+                    color: green;
+                    background-color: transparent;
+                    transition: background .2s;
+                    font-weight: bold;
+                  }
+                  button:hover {
+                    color: white;
+                    background-color: green;
+                  }
+                  button:active {
+                    background-color: darkgreen;
+                  }
+                  button:disabled {
+                    opacity: .5;
+                    background: transparent;
+                    color: green;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <button>Press me</button>
+                  <button disabled>Press me</button>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>discendenza</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .section-1 p {
+                    color: red;
+                  } 
+                  
+                  .section-2 p {
+                    color: blue;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="section-1">
+                    <p>Lorem ipsum</p>
+                    <p>Vero, sed accusamus</p>
+                  </div>
+                  <div class="section-2">
+                    <p>Lorem ipsum</p>
+                    <p>Vero, sed accusamus,</p>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .section-1 p {
+                    color: red;
+                  } 
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="section-1">
+                    <p>Lorem ipsum</p>
+                    <div>
+                      <p>Vero, sed accusamus</p>
+                    </div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  h1, h2, h3 {
+                    font-family: sans-serif;
+                  } 
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="section-1">
+                    <h1>Title</h1>
+                    <h2>Subtitle</h2>
+                    <h3>Subtitle of subtitle</h3>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>discendenza diretta (>)</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .section-1 > p {
+                    color: red;
+                  } 
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="section-1">
+                    <p>Lorem ipsum</p>
+                    <div>
+                      <p>Vero, sed accusamus</p>
+                    </div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>adjacent sibling (+)</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  p + p {
+                    color: red;
+                  } 
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p>Paragraph 1</p>
+                  <p>Paragraph 2</p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  button + button {
+                    margin-left: 5px;
+                  } 
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <button>Button 1</button>
+                  <button>Button 2</button>
+                  <button>Button 3</button>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section><h1>Regole Visive</h1></section>
+          <section>
+            <h2>
+              <a href="https://cssreference.io/typography/" target="_blank"
+                >Typography</a
+              >
+            </h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  body {
+                    font-family: 'Noto Serif';
+                    color: rgb(200, 200, 200);
+                    background-color: rgb(30, 30, 30);
+                  }
+                  
+                  h1 {
+                    font-weight: 700;
+                    font-size: 1.7rem;
+                    text-align: center;
+                    color: rgb(230, 230, 230);
+                  }
+  
+                  h2 {
+                    font-weight: 500;
+                    font-size: 1.5rem;
+                    font-style: italic;
+                    letter-spacing: .2rem;
+                    text-align: center;
+                  }
+
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <h1>Lorem Ipsum</h1>
+                  <h2>Nemo fuga delectus.</h2>
+                  <p>Lorem ipsum dolor sit 
+                    amet consectetur adipisicing elit.
+                    Dignissimos est eaque sit.
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              ereditarietà delle proprietà visive; il font è un asset. Da dove
+              si prende?
+            </aside>
+          </section>
+          <section>
+            <h1>
+              <a href="https://fonts.google.com/" target="_blank"
+                >google fonts</a
+              >
+            </h1>
+          </section>
+          <section>
+            <h2>color</h2>
+            <pre class="language-css">
+              <code data-trim data-css-src>
+                .named-red {
+                  color: red;
+                  background-color: black;
+                } 
+                .rgb-red {
+                  color: rgb(255, 0, 0);
+                  background-color: rgb(0, 0, 0);
+                }
+                .hex-red {
+                  color: #ff0000;
+                  background-color: #000000;
+                }
+                .hsv-red {
+                  color: hsv(0, 100%, 100%);
+                  background-color: hsv(0, 100%, 0%);
+                }
+                .hsl-red {
+                  color: hsl(0, 100%, 50%);
+                  background-color: hsl(0, 0%, 0%);
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/background"
+                target="_blank"
+                >background</a
+              >
+            </h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .item-1 {
+                    background-color: hotpink;
+                  }
+                  
+                  .item-2 {
+                    background-image: 
+                      url(https://picsum.photos/800/800);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                  }
+
+                  .item-3 {
+                    background: 
+                      no-repeat
+                      url(https://picsum.photos/100/100); 
+                  }
+
+                  div {
+                    width: 100px;
+                    height: 100px;
+                    display: inline-block;
+                  }
+
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="item-1"></div>
+                  <div class="item-2"></div>
+                  <div class="item-3"></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">menziona le shorthands</aside>
+          </section>
+          <section>
+            <h2>opacity</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .light {
+                    opacity: 0.2; 
+                  }
+                  .medium {
+                    opacity: 0.5; 
+                  }
+                  .heavy {
+                    opacity: 1; 
+                  }
+
+                  p {
+                    background-color: yellow;
+                  }
+
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <p class="light">Hard to see</p>
+                  <p class="medium">Kinda hard to see</p>
+                  <p class="heavy">
+                    You definitely can see this
+                  </p>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units"
+                target="_blank"
+                >unità di misura</a
+              >
+            </h1>
+          </section>
+          <section>
+            <h2>assolute</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Keyword</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pixels</td>
+                  <td>px</td>
+                </tr>
+                <tr>
+                  <td>Centimeters</td>
+                  <td>cm</td>
+                </tr>
+                <tr>
+                  <td>Millimeters</td>
+                  <td>mm</td>
+                </tr>
+                <tr>
+                  <td colspan="2">e altre ancora...</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h2>relative</h2>
+            <table style="font-size: 1.2rem">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Keyword</th>
+                  <th>Relativo a</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Root Element Measure</td>
+                  <td>rem</td>
+                  <td>elemento html</td>
+                </tr>
+                <tr>
+                  <td>Element Measure</td>
+                  <td>em</td>
+                  <td>
+                    <ul>
+                      <li>
+                        font-size dell'elemento padre quando applicato a alla
+                        proprietà font-size
+                      </li>
+                      <li>
+                        font-size dell'elemento stesso quando applicato a
+                        proprietà come <i>width</i>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Percentage</td>
+                  <td>%</td>
+                  <td>proprietà dell'elemento padre</td>
+                </tr>
+                <tr>
+                  <td>Character</td>
+                  <td>ch</td>
+                  <td>grandezza del carattere "0" dell'elemento corrente</td>
+                </tr>
+                <tr>
+                  <td>Viewport height</td>
+                  <td>vh</td>
+                  <td>altezza della pagina</td>
+                </tr>
+                <tr>
+                  <td>Viewport width</td>
+                  <td>vw</td>
+                  <td>largezza della viewport</td>
+                </tr>
+                <tr>
+                  <td colspan="3">e tante altre ancora...</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h1>Responsive design</h1>
+            <aside class="notes">
+              adattabilità. Le unità di misura sono solo uno degli strumenti
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section><h1>Box Model</h1></section>
+          <section>
+            <img
+              src="data:image/png;base64,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"
+            />
+          </section>
+          <section>
+            <h2>proprietà principali</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  
+                  .item-1 {
+                    background-color: hotpink;
+
+                    width: 100px;
+                    height: 100px;
+
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+
+                    margin-bottom 10px:
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: black;
+                  }
+                  
+                  .item-2 {
+                    background-color: firebrick;
+                    width: 100px;
+                    height: 100px;
+                    padding: 10px 20px;
+                    margin: 10px;
+                    border: 1px solid black;
+                  }
+
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="item-1">Content 1</div>
+                  <div class="item-2">Content 2</div>
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Importante! Menziona il margin collapse! (ricorda, solo verticale)
+              Menziona che larghezza meglio non assoluta e altezza meglio non
+              settarla
+            </aside>
+          </section>
+          <section>
+            <h2>min-width e max-width</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>    
+                  .item-1 {
+                    background-color: hotpink;
+                    width: 50%;
+                    max-width: 300px;
+                    min-width: 80px;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="item-1">Content 1</div>
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>box sizing</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>    
+                  .content-box {
+                    box-sizing: content-box;
+                  }
+
+                  .border-box {
+                    box-sizing: border-box;
+                  }
+
+                  .parent {
+                    background-color: black;
+                    width: 100px;
+                    border: 3px solid orange;
+                    height: 100px;
+                  }
+                  .child {
+                    background-color: black;
+                    width: 100%;
+                    height: 50px;
+                    padding: 10px;
+                    border: 3px solid yellow;
+                  }
+
+                  .parent + .parent {
+                    margin-top: 20px;
+                  }
+
+                  div {
+                    color: white;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="parent">
+                    <div class="child content-box">
+                      Child
+                    </div>
+                  </div>
+                  <div class="parent">
+                    <div class="child border-box">
+                      Child
+                    </div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">default content-box;</aside>
+          </section>
+          <section>
+            <pre class="language-css">
+              <code data-trim data-css-src>    
+                * {
+                  box-sizing: border-box;
+                }
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Modificare il flow dell'HTML</h1>
+          </section>
+          <section>
+            <h2>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/position"
+                target="_blank"
+                >Position</a
+              >
+            </h2>
+            <ul>
+              <li>static - default</li>
+              <li>relative</li>
+              <li>absolute</li>
+              <li>fixed</li>
+              <li>sticky</li>
+            </ul>
+          </section>
+          <section>
+            <h2>proprietà disponibili (no static)</h2>
+            <ul>
+              <li>top</li>
+              <li>bottom</li>
+              <li>left</li>
+              <li>right</li>
+              <li>z-index</li>
+            </ul>
+          </section>
+          <section>
+            <h2>static - (normal flow)</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>    
+                  div {
+                    height: 100px;
+                    border-width: 5px;
+                    border-style: solid;
+                    margin-bottom: 10px;
+                  }
+                  div:first-of-type, div:last-of-type {
+                    border-color: darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                  
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>relative - (normal flow)</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="12-14">    
+                  div {
+                    height: 100px;
+                    border-width: 5px;
+                    border-style: solid;
+                    margin-bottom: 10px;
+                  }
+                  div:first-of-type, div:last-of-type {
+                    border-color: darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    position: relative;
+                    top: 40px;
+                    left: 50px;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                  
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>z-index</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="10,11,14-16">    
+                  div {
+                    height: 100px;
+                    border-width: 5px;
+                    border-style: solid;
+                    margin-bottom: 10px;
+                  }
+                  div:first-of-type, div:last-of-type {
+                    border-color: darkblue;
+                    background-color: blue;
+                    position: relative;
+                    z-index: 1;
+                  }
+                  div:nth-of-type(2) {
+                    position: relative;
+                    top: 40px;
+                    left: 50px;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                  
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>absolute</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="12-15">    
+                  div {
+                    height: 100px;
+                    border-width: 5px;
+                    border-style: solid;
+                    margin-bottom: 10px;
+                  }
+                  div:first-of-type, div:last-of-type {
+                    border-color: darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    box-sizing: border-box;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              L'elemento assoluto viene rimosso dal normal flow. Per questo
+              motivo la sua larghezza non può essere definita automaticamente
+              dal browser. Quindi deve essere esplicita.
+            </aside>
+          </section>
+          <section>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="16">    
+                  div {
+                    height: 100px;
+                    border-width: 5px;
+                    border-style: solid;
+                    margin-bottom: 10px;
+                  }
+                  div:first-of-type, div:last-of-type {
+                    border-color: darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  .relative {
+                    position: relative; 
+                    bottom: 20px; 
+                    right: 30px;
+                  }
+                  .absolute {
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    width: 50%;
+                    border-color: orange;
+                    background-color: yellow;
+                  }    
+                  
+                  div {
+                    height: 100px;
+                    border: 5px solid darkblue;
+                    background-color: blue;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="relative">
+                    <div class="absolute"></div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Elemento assoluto relativo al primo elemento con position:
+              relative;
+            </aside>
+          </section>
+
+          <section>
+            <h2>Fixed</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="12-15">    
+                  div {
+                    height: 100px;
+                    margin-bottom: 10px;
+                    border: 5px solid darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Come per absolute, rimosso dal normal flow. Per questo motivo la
+              sua larghezza non può essere definita automaticamente dal browser.
+              Quindi deve essere esplicita.
+            </aside>
+          </section>
+          <section>
+            <h2>Sticky</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="7-9">    
+                  div {
+                    height: 100px;
+                    margin-bottom: 10px;
+                    border: 5px solid darkblue;
+                    background-color: blue;
+                  }
+                  div:nth-of-type(2) {
+                    position: sticky;
+                    top: 20px;
+                    border-color: orange;
+                    background-color: yellow;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Come per absolute, rimosso dal normal flow. Per questo motivo la
+              sua larghezza non può essere definita automaticamente dal browser.
+              Quindi deve essere esplicita.
+            </aside>
+          </section>
+          <section>
+            <h2>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
+                target="_blank"
+                >Display</a
+              >
+            </h2>
+            <ul>
+              <li>block</li>
+              <li>inline</li>
+              <li>inline-block</li>
+              <li>none</li>
+              <li style="color: gold">flex</li>
+              <li style="color: gold">grid</li>
+              <li style="opacity: 0.5">table</li>
+              <li style="opacity: 0.5">list-item</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Block</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1,2,9,10">    
+                  p, h1, div, span {
+                    /* display: block; implicito */
+                    background-color: black;
+                    color: white;
+                    text-align: center;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                  }
+                  span {
+                    display: block;
+                    background-color: black;
+                    padding: 10px;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <h1>I'm a block</h1>
+                  <p>Me too</p>
+                  <div>I'm THE block</div>
+                  <span>I can be a block too!</span>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>inline (no width / height)</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1,2,5,6,8,9">    
+                  span {
+                    /* display: inline; implicito */
+                    background: darkblue;
+                    color: white;
+                    width: 100000px;
+                    height: 100000px;
+                  }
+                  div {
+                    display: inline;
+                    background: darkred;
+                    color: white;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <span>Lorem ipsum</span> 
+                  dolor sit amet, <a>elit</a>. 
+                  <b>facere</b> culpa 
+                  quibusdam, <i>nulla</i> 
+                  reiciendis illo magnam  
+                  <div>corrupti ratione!</div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              un elemento inline si APPLICA al contenuto
+            </aside>
+          </section>
+          <section>
+            <h2>inline-block</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1,2,4,5">    
+                  button, input  {
+                    /* display: inline-block; implicito */
+                  }
+                  div {
+                    display: inline-block;
+                    width: 20px;
+                    padding: 3px;
+                    background: darkred;
+                    color: white;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <button>Until</button>
+                  <button>There</button>
+                  <input value="is">
+                  <div>space</div>
+                  <input value="left">
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>none</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1,2,4,5">    
+                  .d-none {
+                    display: none;
+                  }
+                  div {
+                    background-color: black;
+                    color: white;
+                    text-align: center;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div>Item 1</div>
+                  <div class="d-none">Item 2</div>
+                  <div>Item 3</div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox"
+                target="_blank"
+                >Flexbox</a
+              >
+            </h1>
+            <aside class="notes">creato per design responsive e semplice</aside>
+          </section>
+          <section>
+            <h2>Normal flow</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src>    
+                  div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div>Item 1</div>
+                  <div>Item 2</div>
+                  <div>Item 3</div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>display flex</h2>
+            <div class="three-screen-example-2">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1,2">    
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+            <aside class="notes">
+              Dentro il flex container vigono altre regole di visualizzazione
+            </aside>
+          </section>
+          <section>
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20200719215048/202007192.png"
+            />
+          </section>
+          <section>
+            <h2>justify-content (main axis)</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="2,3,6,9,12,15,18">    
+                  .container {
+                    display: flex;
+                    justify-content: start;
+                  }
+                  .container:nth-of-type(2) {
+                    justify-content: center;
+                  }
+                  .container:nth-of-type(3) {
+                    justify-content: end;
+                  }
+                  .container:nth-of-type(4) {
+                    justify-content: space-between;
+                  }
+                  .container:nth-of-type(5) {
+                    justify-content: space-around;
+                  }
+                  .container:nth-of-type(6) {
+                    justify-content: space-evenly;
+                  }
+                  .container {
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>align-items (cross axis)</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="2,3,6,9,12">    
+                  .container {
+                    display: flex;
+                    align-items: start;
+                  }
+                  .container:nth-of-type(2) {
+                    align-items: center;
+                  }
+                  .container:nth-of-type(3) {
+                    align-items: end;
+                  }
+                  .container:nth-of-type(4) {
+                    align-items: stretch;
+                  }
+                  .container {
+                    height: 100px;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div> 
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>  
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>flex-direction (swapping axis)</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-5">    
+                  .container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 300px;
+                  }
+                  
+                  .container {
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>flex-wrap</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-3">    
+                  .container {
+                    display: flex;
+                    flex-wrap: wrap;
+                  }
+                  
+                  .container {
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                    <div>Item 6</div>
+                    <div>Item 7</div>
+                    <div>Item 8</div>
+                    <div>Item 9</div>
+                  </div>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
+          <section><h2>flex child properties</h2></section>
+          <section>
+            <h2>flex-grow</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-3">    
+                  .container > div {
+                    flex-grow: 1; /* default 0 */
+                  }
+
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+              <aside class="notes">responsive!</aside>
+            </div>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-9">    
+                  .container > div:first-child {
+                    flex-grow: 1;
+                  }
+                  .container > div:nth-child(2) {
+                    flex-grow: 2;
+                  }
+                  .container > div:last-child {
+                    flex-grow: 3;
+                  }
+
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>Flex shrink</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-11">    
+                  .container > div {
+                    width: 100px;
+                  }
+                  .container > div:nth-child(1) {
+                    flex-shrink: 0; /* default 1 */ 
+                  }
+                  .container > div:nth-child(2) {
+                    flex-shrink: 1; 
+                  }
+                  .container > div:nth-child(3) {
+                    flex-shrink: 2; 
+                  }
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+
+          <section>
+            <h2>Flex basis</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-8">    
+                  .container > div:nth-child(1) {
+                    flex-basis: 100px; /* default auto */ 
+                  }
+                  .container > div:nth-child(2) {
+                    flex-basis: 33%; 
+                  }
+                  .container > div:nth-child(3) {
+                    flex-basis: 20%; 
+                  }
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+            <aside class="notes">
+              la larghezza che gli elementi vorrebbero avere!
+            </aside>
+          </section>
+
+          <section>
+            <h2>flex (shorthand)</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-8">    
+                  .container > div:nth-child(1) {
+                    flex: 1 0 100px; 
+                  }
+                  .container > div:nth-child(2) {
+                    flex: 2 2 33%; 
+                  }
+                  .container > div:nth-child(3) {
+                    flex: 1 1 20%; 
+                  }
+                  .container {
+                    display: flex;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+            <aside class="notes">
+              la larghezza che gli elementi vorrebbero avere!
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid"
+                target="_blank"
+                >Grid</a
+              >
+            </h1>
+            <aside class="notes">
+              Fatto per design responsive complessi...ma non solo. Più potente
+              di flex
+            </aside>
+          </section>
+          <section>
+            <h2>display: grid</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-2">    
+                  .container {
+                    display: grid;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>grid-template-columns</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-3">    
+                  .container {
+                    display: grid;
+                    grid-template-columns: 100px 100px 33%;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>fractions - fr</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-3">    
+                  .container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>repeat</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-3">    
+                  .container {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>grid-template-rows</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-4">    
+                  .container {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-template-rows: 40px 100px 1fr;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+            <aside class="notes">
+              spesso non vale la pena dichiararle, perchè vengono autogenerate
+            </aside>
+          </section>
+
+          <section>
+            <h3>
+              justify-content (main axis) / <br />align content (cross axis)
+            </h3>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-6">    
+                  .container {
+                    display: grid;
+                    height: 400px;
+                    grid-template-columns: repeat(3, 60px);
+                    justify-content: center;
+                    align-content: center;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+
+          <section>
+            <h3>
+              justify-items (child main axis) / <br />align items (child cross
+              axis)
+            </h3>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-6">    
+                  .container {
+                    display: grid;
+                    height: 400px;
+                    grid-template-columns: repeat(3, 1fr);
+                    justify-items: center;
+                    align-items: center;
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>gap</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-6">    
+                  .container {
+                    display: grid;
+                    gap: 10px;
+                    grid-template-columns: repeat(3, 1fr);
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+            <aside class="notes">
+              Gap disponibile anche in flexbox, cosa recente
+            </aside>
+          </section>
+          <section>
+            <h2>child properties</h2>
+          </section>
+          <section>
+            <h2>grid-column / grid-row</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src data-line-numbers="1-8">    
+                  .container > div:nth-child(1) {
+                    grid-row: 1 / 3;
+                  }
+                  .container > div:nth-child(2) {
+                    grid-column: 2 / 4;
+                  }
+                  .container > div:nth-child(5) {
+                    grid-column: 1 / span 3;
+                  }
+            
+                  .container {
+                    display: grid;
+                    gap: 10px;
+                    grid-template-columns: repeat(3, 1fr);
+                    padding: 10px;
+                    background-color: aqua;
+                    margin: 5px;
+                  }
+                  .container > div {
+                    background-color: yellow;
+                    border: 5px solid orange;
+                    padding: 10px;
+                    text-align: center;
+                  }
+                </code>
+              </pre>
+              <div class="browser-frame resizable">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+              <pre class="language-xml" style="display: none">
+                <code data-trim data-html-src>
+                  <div class="container">
+                    <div>Item 1</div>
+                    <div>Item 2</div>
+                    <div>Item 3</div>
+                    <div>Item 4</div>
+                    <div>Item 5</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <a
+              href="https://css-tricks.com/snippets/css/complete-guide-grid/"
+              target="_blank"
+            >
+              much more...
+            </a>
+          </section>
+        </section>
+
+        <section>
+          <section><h1>Organizzare css</h1></section>
+          <section>
+            <h2>Block Element Modifier (B.E.M)</h2>
+            <img
+              src="https://scalablecss.com/static/04158e912667d940eeb914f724379072/2e367/nesting-elements-within-block.png"
+              alt=""
+            />
+          </section>
+          <section>
+            <img
+              src="https://keepinguptodate.com/pages/2020/05/05-bem-naming-structure.svg"
+            />
+            <aside class="notes">convenzione</aside>
+          </section>
+          <section>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim>    
+                  .card {
+                    padding: 10px;
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: darkgray;
+                    color: whitesmoke;
+                  }
+
+                  .card .card__img {
+                    width: 30%;
+                    min-width: 150px;
+                  }
+
+                  .card .card__img .card__img--rounded {
+                    border-radius: 50%;
+                  }
+
+                  .card .card__title {
+                    text-align: center;
+                    font-size: 1.5rem;
+                  }
+
+                  .card .card__paragraph {
+                    font-size: 1.1rem;
+                  }
+
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim>    
+                  <div class="card">
+                    <img src="cat" class="card__img card__img--rounded">
+                    <h1 class="card__title">Title</h1>
+                    <p class="card__paragraph">
+                      Lorem, ipsum dolor sit 
+                      amet consectetur adipisicing elit. 
+                      Eum numquam fuga ratione beatae 
+                      incidunt in velit temporibus? 
+                      Tempore nisi culpa, tenetur minima maiores dolore, 
+                      nemo a harum ea dolorum nostrum.
+                    </p>
+                  </div>
+                  <!-- ETC. ETC. -->
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>Css atomico</h2>
+            <div class="two-screen-example">
+              <pre class="language-css">
+                <code data-trim>    
+                  .text-center {
+                    text-align: center;
+                  }
+                  .primary-color {
+                    color: red;
+                  }
+                  .accent-color {
+                    color: blue;
+                  }
+                  .d-flex {
+                    display: flex;
+                  }
+                  .w-100 {
+                    width: 100%;
+                  }
+                  .font-lg {
+                    font-size: 2rem;
+                  }
+                  .font-md {
+                    font-size: 1.4rem;
+                  }
+                  .flex-1 {
+                    flex: 1;
+                  }
+                  .flex-2 {
+                    flex: 2;
+                  }
+                  /* etc. etc. */
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim>    
+                  <h1 class="primary-color text-center font-lg">Title</h1>
+                  <h2 class="accent-color font-md">Subtitle</h2>
+                  <div class="d-flex">
+                    <div class="flex-1 primary-color">item 1</div>
+                    <div class="flex-2">item 2</div>
+                    <div class="flex-1">item 3</div>
+                    <div class="flex-2">item 4</div>
+                  </div>
+                  <!-- ETC. ETC. -->
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h2>usare un framework css</h2>
+            <ul>
+              <li>
+                <a href="https://tailwindcss.com/" target="_blank"
+                  >Tailwind CSS</a
+                >
+              </li>
+              <li>
+                <a href="https://getbootstrap.com/" target="_blank">
+                  Bootstrap
+                </a>
+              </li>
+              <li>
+                <a href="https://get.foundation/" target="_blank">Foundation</a>
+              </li>
+              <li>etc.</li>
+            </ul>
+            <aside class="notes">Occhio ai framework!</aside>
+          </section>
+          <section>
+            <h2>
+              <a
+                href="https://meyerweb.com/eric/tools/css/reset/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                css reset
+              </a>
+            </h2>
+          </section>
+          <section>
+            <h2><a href="https://sass-lang.com/" target="_blank">SASS</a></h2>
+          </section>
         </section>
         <section>
           <section><h1>Cosa ho omesso</h1></section>
-          <section>Un infinità di regole</section>
+          <section>Un infinità di proprietà</section>
           <section>Transitions</section>
           <section>CSS Variables</section>
           <section>CSS Functions</section>
@@ -109,93 +2690,65 @@
           <section>Pseudoelements</section>
         </section>
         <section>
-          <section><h1>Recap</h1></section>
+          <section>
+            <h1>Approfondimenti</h1>
+          </section>
           <section>
             <ul>
-              <li>Scrivere css</li>
               <li>
-                Collegare CSS ad HTML
-                <ul>
-                  <li>attributo style</li>
-                  <li>style tag</li>
-                  <li>link a css</li>
-                </ul>
-              </li>
-              <li>Collegare CSS ad HTML</li>
-              <li>
-                Selectors
-                <ul>
-                  <li>by tag</li>
-                  <li>by class</li>
-                  <li>by id</li>
-                  <li>specificità</li>
-                  <li>pseudoclassi</li>
-                  <li>discendenza</li>
-                </ul>
-              </li>
-              <li>Regole Visive</li>
-              <li>
-                Box model
-                <ul>
-                  <li>width/height</li>
-                  <li>padding</li>
-                  <li>border</li>
-                  <li>margin</li>
-                  <li>content-box/border-box</li>
-                </ul>
+                <a
+                  href="https://www.youtube.com/watch?v=JnTPd9G6hoY"
+                  target="_blank"
+                  >The 6 most important CSS concepts for beginners</a
+                >
               </li>
               <li>
-                Modificare il flow dell'HTML
-                <ul>
-                  <li>position</li>
-                  <li>
-                    display
-                    <ul>
-                      <li>block</li>
-                      <li>inline</li>
-                      <li>inline-block</li>
-                      <li>flex</li>
-                      <li>inline-flex</li>
-                      <li>grid</li>
-                    </ul>
-                  </li>
-                </ul>
+                <a
+                  href="https://www.youtube.com/watch?v=vHuSz4fRM88"
+                  target="_blank"
+                  >The secret to mastering CSS layouts</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=a69OMEJXaJo"
+                  target="_blank"
+                  >CSS Selectors - beyond the very basic</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=rg7Fvvl3taU"
+                  target="_blank"
+                >
+                  Learn CSS Grid the easy way
+                </a>
+              </li>
+              <li>
+                <a href="https://codepen.io/" target="_blank">Codepen</a>
               </li>
             </ul>
           </section>
+        </section>
+        <section>
           <section>
-            <section>
-              <h1>Approfondimenti</h1>
-            </section>
-            <section>
-              <a href="https://www.youtube.com/watch?v=JnTPd9G6hoY"
-                >The 6 most important CSS concepts for beginners</a
-              >
-              <a href="https://www.youtube.com/watch?v=vHuSz4fRM88"
-                >The secret to mastering CSS layouts</a
-              >
-              <a href="https://www.youtube.com/watch?v=a69OMEJXaJo"
-                >CSS Selectors - beyond the very basic</a
-              >
-              <a href="https://flexboxfroggy.com/">Flexbox froggy</a>
-              <a href="https://www.youtube.com/watch?v=rg7Fvvl3taU">
-                Learn CSS Grid the easy way
-              </a>
-              <a href="https://codepen.io/">Codepen</a>
-            </section>
+            <h1>Esercizi</h1>
           </section>
           <section>
-            <section>
-              <h1>Esercizi</h1>
-            </section>
-            <section>
-              <ul>
-                <li>Migliorare il proprio curriculum vitae</li>
-                <li>Migliorare tabella e form</li>
-                <li>Copiare una pagina web</li>
-              </ul>
-            </section>
+            <ul>
+              <li>Migliorare tabella e form</li>
+              <li>
+                <a href="https://flexboxfroggy.com/" target="_blank"
+                  >Flexbox froggy</a
+                >
+              </li>
+              <li>Migliorare il proprio curriculum vitae</li>
+              <li>Copiare una pagina web</li>
+            </ul>
           </section>
+        </section>
+        <section>
+          <a href="./jslang.html">prossima lezione</a>
         </section>
       </div>
     </div>
