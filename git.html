@@ -1139,15 +1139,31 @@
             </ul>
           </section>
           <section>
-            <p>
-              E' possibile creare più branches nello stesso progetto (<span
-                class="git-command"
-                >git branch</span
-              >
-              <span class="git-arg">BRANCH_NAME</span>) <br>e unire i commit (<span
-                class="git-command"
-                >git merge</span
-              > <span class="git-arg">BRANCH_NAME</span>)
+            <p >
+              E' possibile 
+              <ul style="font-size: 1.8rem;">
+                <li>
+                  creare più branches nello stesso progetto (<span
+                    class="git-command"
+                    >git branch</span
+                  >
+                  <span class="git-arg">BRANCH_NAME</span>)
+                </li>
+                <li>
+                    spostarsi su un altro branch (<span class="git-command"
+                    >git checkout</span
+                  >
+                  <span class="git-arg">BRANCH_NAME</span>)
+                </li>
+                <li>
+                  unire i commit di un branch nel branch corrente (<span
+                  class="git-command"
+                  >git merge</span
+                >
+                <span class="git-arg">OTHER_BRANCH_NAME</span>)
+                </li>
+              </ul>
+              
             </p>
             <div class="branches r-stretch">
               <div class="branch master">
