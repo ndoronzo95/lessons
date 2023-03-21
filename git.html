@@ -1139,7 +1139,16 @@
             </ul>
           </section>
           <section>
-            <p>E' possibile creare più branches nello stesso progetto</p>
+            <p>
+              E' possibile creare più branches nello stesso progetto (<span
+                class="git-command"
+                >git branch</span
+              >
+              <span class="git-arg">BRANCH_NAME</span>) <br>e unire i commit (<span
+                class="git-command"
+                >git merge</span
+              > <span class="git-arg">BRANCH_NAME</span>)
+            </p>
             <div class="branches r-stretch">
               <div class="branch master">
                 <div class="timeline"></div>
@@ -1167,7 +1176,8 @@
           <section>
             <p>
               E' possibile "navigare" la timeline, visualizzare vecchie versioni
-              del codice, modificarla, etc.
+              del codice (<span class="git-command">git checkout</span>),
+              modificarla, etc. (<span class="git-command">git reset</span>)
             </p>
             <div class="branch master r-stretch">
               <div class="timeline"></div>
