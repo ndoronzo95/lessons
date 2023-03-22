@@ -71,7 +71,7 @@
         </section>
 
         <section>
-          <section data-auto-animate>
+          <section>
             <h2>Anatomia di un elemento html</h2>
 
             <img
@@ -82,17 +82,16 @@
             </aside>
           </section>
 
-          <section data-auto-animate>
+          <section>
             <h2>Commenti in html</h2>
             <div class="two-screen-example">
               <pre>
                 <code data-trim data-html-src>
-                  <p> <!-- QUESTA ROBA --> 
-                    Hello
-                    <!-- NON VERRA' -->
-                    world 
-                    <!-- MOSTRATA SULLO SCHERMO -->
-                  </p>
+                  <!-- QUESTA ROBA --> 
+                  Hello
+                  <!-- NON VERRA' -->
+                  world 
+                  <!-- MOSTRATA SULLO SCHERMO -->
                 </code>
               </pre>
 
@@ -105,8 +104,8 @@
             </div>
           </section>
 
-          <section>Innestare elementi</section>
-          <section data-auto-animate>
+          <section>
+            <h2>Innestare elementi</h2>
             <pre>
               <code data-trim>
                 <p> <!-- PARENT ELEMENT --> 
@@ -118,7 +117,7 @@
             </pre>
           </section>
 
-          <section data-auto-animate>
+          <section>
             <pre>
               <code data-trim >
                 <p>  <!-- PARENT ELEMENT -->
@@ -179,9 +178,9 @@
             </div>
           </section>
 
-          <section>HTML flow</section>
-
+          
           <section>
+            <h2>HTML flow</h2>
             <div class="two-screen-example">
               <pre>
                 <code data-trim data-html-src>
@@ -202,6 +201,7 @@
             </div>
 
             <aside class="notes">
+              Cosa si intende per "flow"?
               Immaginatelo come un documento word (perchè in realtà word
               funziona così);
             </aside>
@@ -274,6 +274,7 @@
                 <iframe data-html-sink></iframe>
               </div>
             </div>
+            <aside class="notes">Cosa che possono cambiare il comportamento del browser</aside>
           </section>
           <section>
             <h2>Body</h2>
@@ -283,7 +284,7 @@
                   &lt;!DOCTYPE html&gt;
                   &lt;html&gt;
                     &lt;head&gt;
-                      <!-- METADATI... -->
+                      <meta charset="utf-8" />
                       <title>My website | Homepage</title>
                     &lt;/head&gt;
                     &lt;body&gt;
@@ -1102,8 +1103,8 @@
         </section>
 
         <section>
-          <section><h2>Semantic HTML</h2></section>
           <section>
+            <h2>Semantic HTML</h2>
             <div class="two-screen-example">
               <pre class="language-xml">
                 <code data-trim data-html-src>
@@ -1179,6 +1180,40 @@
             
             
           </section>
+          <section>
+            <h2>
+              <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">Accessible Rich Internet Applications</a> 
+            </h2>
+            <div class="two-screen-example">
+              <pre class="language-xml">
+                <code data-trim>
+                  <div>
+                    <div>
+                      <div>Item 1</div>
+                      <div>Item 2</div>
+                      <div>Item 3</div>
+                    </div>
+                  </div>
+                  <img src="./fat-cat.jpeg">
+                  <button>X</button>
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim>
+                  <div role="navigation">
+                    <div role="list">
+                      <div role="listitem">Item 1</div>
+                      <div role="listitem">Item 2</div>
+                      <div role="listitem">Item 3</div>
+                    </div>
+                  </div>
+                  <img src="./fat-cat.jpeg" alt="Picture of a fat cat">
+                  <button aria-label="close">X</button>
+                </code>
+              </pre>
+
+            </div>
+          </section>
         </section>
 
         <section>
@@ -1216,6 +1251,16 @@
                   href="https://www.youtube.com/watch?v=HJ0-fUJ-2F0"
                   target="_blank"
                   >HTML concepts for beginners
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=dEbl5jvLKGQ" target="_blank">
+                  Screen Reader Demo for Digital Accessibility
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=qr0ujkLLgmE" target="_blank">
+                  Getting started with web accessibility with Ashlee Boyer
                 </a>
               </li>
             </ul>
