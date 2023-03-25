@@ -115,6 +115,7 @@
           <section>
             <h2>Garbage collection</h2>
             <img src="https://i.redd.it/t7936cogdc361.jpg" width="500" />
+            <aside class="notes">Js cerca di capire quando quella variabile non ti serve piu</aside>
           </section>
           <section>
             <h2>debugging console</h2>
@@ -171,23 +172,6 @@
         </section>
 
         <section>
-          <section><h1>Le basi</h1></section>
-          <section>
-            <h2>Operatori matematici</h2>
-            <pre class="language-js">
-              <code data-trim data-line-numbers="1-4|5|6-7|8|9">
-                console.log(1 + 1) // output: 2;
-                console.log(1 - 1) // output: 0
-                console.log(1 * 2) // output: 2;
-                console.log(1 / 1) // output: 1;
-                console.log(1 % 3) // output: 1;
-                console.log(1 / 0) // output: Infinity;
-                console.log(-1 / 0) // output: -Infinity;
-                console.log(0 / 0) // output: NaN;
-                console.log(0.1 * 0.2) // output: 0.020000000000000004
-              </code>
-            </pre>
-          </section>
           <section><h2>Variabili</h2></section>
           <section>
             <h2>let</h2>
@@ -230,7 +214,6 @@
             </pre>
           </section>
           <section>
-            <h2>const</h2>
             <pre class="language-js">
               <code data-trim data-line-numbers>
                 const PI;
@@ -293,6 +276,12 @@
         <section>
           <section>
             <h1>Data types</h1>
+            <pre class="language-js">
+              <code data-trim>
+                typeof 1 // outputs: 'number'
+                typeof 'hello world' // outputs: 'string'
+              </code>
+            </pre>
             <aside class="notes">
               si sente dire che js non ha i tipi...non è vero. I tipi ce li ha,
               ma ti permette di mischiarli. Sono "deboli" in questo senso
@@ -303,9 +292,39 @@
             <pre class="language-js">
               <code data-trim data-line-numbers>
                 const myNumber = 3.14;
+                console.log(typeof myNumber) // 'number'
               </code>
             </pre>
             <aside class="notes">Tutti i numeri in js sono floats</aside>
+          </section>
+          <section>
+            <h2>La matematica secondo js</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers="1-4|5|6-7|8|9|10">
+                console.log(1 + 1) // output: 2;
+                console.log(1 - 1) // output: 0
+                console.log(1 * 2) // output: 2;
+                console.log(1 / 1) // output: 1;
+                console.log(7 % 3) // output: 1;
+                console.log(1 / 0) // output: Infinity;
+                console.log(-1 / 0) // output: -Infinity;
+                console.log(0 / 0) // output: NaN;
+                console.log(0.1 * 0.2) // output: 0.020000000000000004
+                console.log('Banana' * 2) // output: NaN;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Math "library"</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                console.log(Math.random()) // random value between 0 and 1
+                console.log(Math.abs(-1)) // 1
+                console.log(Math.floor(1.3)) // 1
+                console.log(Math.ceil(1.3)) // 2
+                console.log(Math.round(1.51)) // 2
+              </code>
+            </pre>
           </section>
 
           <section>
@@ -322,10 +341,10 @@
           <section>
             <h2>booleans</h2>
             <pre class="language-js">
-              <code data-trim data-line-numbers="1-2|4-5|6-7|9-10">
+              <code data-trim data-line-numbers="1-3|4-5|6-7|9-10">
                 const definetelyTrue = true;
                 const definetelyFalse = false;
-
+                console.log(typeof definetelyTrue) // 'boolean'
                 const notTrue = !definetelyTrue;
                 const notFalse = !definetelyFalse;
                 const trueAgain = !!definetelyTrue;
@@ -495,7 +514,7 @@
 
           <section>
             <h2>Bigints</h2>
-            <pre>
+            <pre class="language-js">
               <code data-trim data-line-numbers>
                 const veryBigNumber = 9007199254740991n;
                 const anotherBigNumber = BigInt(17001979472540991)
@@ -527,8 +546,57 @@
             </div>
           </section>
           <section>
-            <h1>PASS BY REF / BY VALUE</h1>
-            <!-- TODO! -->
+            <h3>Primitives passed by value</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const firstNum = 1;
+                const secondNum = 1;
+                const hello1 = 'Hello';
+                const hello2 = 'Hello';
+                console.log(firstNum === secondNum) // true
+                console.log(hello1 === hello2) // true
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let firstnum = 10;
+                let secondNum = firstNum;
+                secondNum = 20;
+                console.log(firstNum) // ??
+              </code>
+            </pre>
+            <aside class="notes">
+              come modello mentale immaginate i primitivi come valori assoluti che esistono da sempre in memoria. 
+              Quando noi assegnamo un primitivo ad una variabile copiamo il valore di quel primitivo nella nostra variabile.
+            </aside>
+          </section>
+          <section>
+            <h3>Non-primitives passed by reference</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const firstObj = {}; // nuovo oggetto in memoria
+                const secondObj = {}; // nuovo oggetto in memoria
+                const firstArr = ['Hei!']; // nuovo array in memoria
+                const secondArr = ['Hei!']; // nuovo array in memoria
+                console.log(firstObj === secondObj) // false
+                console.log(firstArr === secondArr) // false
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const firstObj = {
+                  name: 'Jack'
+                };
+                const secondObj = firstObj;
+                secondObj.name = 'John';
+                console.log(firstObj === secondObj) // true
+                console.log(firstObj.name) // ??
+              </code>
+            </pre>
+            <aside class="notes">
+              I non-primitivi vengono invece creati in memoria quando vengono dichiarati. Non esistono da sempre...quando ne creiamo uno ci viene fornito un 
+              riferimento alla sua posizione in memoria, ed è questo riferimento il valore che viene assegnato effettivamente alla variabile. 
+            </aside>
           </section>
         </section>
         <section>
@@ -608,63 +676,559 @@
         </section>
         <section>
           <section><h1>Cicli</h1></section>
-          <section>while</section>
-          <section>for</section>
+          <section>
+            <h2>while</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let iteration = 0;
+                while(iteration > 3) {
+                  i++;
+                  console.log('Iteration number: ' + i);
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let iteration = 0;
+                while(true) {
+                  i++;
+                  if (i > 3) break;
+                }
+              </code>
+            </pre>
+            <aside class="notes">qualsiasi blocco può essere interrotto da break</aside>
+          </section>
+          <section>
+            <h2>for</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                for (let i = 0; i < 5; i++) {
+                  console.log('this is gonna output 5 times');
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                for (let i = 0; i < 5; i++) {
+                  if (i === 2) continue;
+                  console.log('this is gonna output ?? times');
+                }
+              </code>
+            </pre>
+            <aside class="notes">quiz</aside>
+          </section>
         </section>
         <section>
           <section><h1>Funzioni</h1></section>
-          <section>Creare una funzione</section>
-          <section>Chiamare una funzione</section>
-          <section>Passare argomenti ad una funzione</section>
-          <section>Restituire un risultato</section>
-          <section>Scope</section>
-          <section>Closures</section>
-          <section>First class citizen</section>
-          <section>Hight-order functions e callbacks</section>
+          <section>
+            <h2>Creare una funzione</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function logStuff() {
+                  console.log('Hello world')
+                }
+                const logOtherStuff = function() {
+                  console.log('Goodbye world')
+                }
+                const sum = (a, b) => a + b;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Chiamare una funzione</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function logStuff() {
+                  console.log('Hello world')
+                }
+                logStuff();
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const aNumber = 0;
+                aNumber();
+                // TypeError: aNumber is not a function
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>parametri di una funzione</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function logSum(a, b) {
+                  console.log(a + b);
+                }
+                logSum(1, 2) // logs in console: 3
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              Restituire un risultato
+            </h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function sum(a, b) {
+                  return a + b;
+                }
+                const result = sum(1, 2)
+                console.log(result) // 3;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              implicit arrow function return
+            </h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const sum = (a,b) => {
+                  return a + b
+                }
+                const implicitlyReturnedSum = (a,b) => a + b;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Scope</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let str = 'Hello'
+                function myFunction() {
+                  let str2 = 'World'
+                  console.log(str) // 'Hello'
+                  console.log(str2) // 'World'
+                }
+                console.log(str) // 'Hello'
+                console.log(str2) // ReferenceError
+              </code>
+            </pre>
+            <aside class="notes">Function scope</aside>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                if (true) {
+                  let str = 'Hello';
+                  var str2 = 'World';
+                }
+                console.log(str) // ReferenceError
+                console.log(str2) // 'World'
+              </code>
+            </pre>
+            <aside class="notes">questo e' un block scope. var non block scoped</aside>
+          </section>
+          <section>
+            <h2>
+              First class citizen
+            </h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function myFunction() { 
+                  console.log('Hello World') 
+                }
+                console.log(myFunction.name) // "myFunction"
+                const fun = myFunction;
+                console.log(fun.name) // "myFunction"
+                fun() // 'Hello World'
+              </code>
+            </pre>
+            <aside class="notes">
+              Attenzione! Momento spaccacervello. 
+              Che significa first class citizen? 
+              La funzione in js è un oggetto che 
+              ha la particolarità di poter essere chiamato.
+              Due grandi capacità: hof e closures
+              Ci da accesso a elementi della programmazione funzionale.
+            </aside>
+          </section>
+          <section>
+            <h2>High-order functions / callbacks</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function myHighOrderFunction(fn) {
+                  fn()
+                }
+                function myCallbackFunction() {
+                  console.log('Hello World')
+                }
+                myHighOrderFunction(myCallbackFunction) // 'Hello World'
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Closures</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let str = 'Hello'
+                function myFunction() {
+                  let str2 = 'World'
+                  return function() {
+                    console.log(str)
+                    console.log(str2)
+                  }
+                }
+                const myReturnedFunction = myFunction();
+                myReturnedFunction() // 'Hello' 'World'
+              </code>
+            </pre>
+          </section>
         </section>
         <section>
           <section><h1>Arrays</h1></section>
-          <section>Creare una array</section>
-          <section>Mettere roba dentro un array</section>
-          <section>for of</section>
-          <section>iterators</section>
-          <section>Destrutturazione</section>
+          <section>
+            <h2>Creare una array</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const myMixedArray = ['hi', 1, null, [], function() {}]
+                console.log(myArray[0]) // 1
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Metodi che mutano l'array</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1];
+                myArray.push(2);
+                console.log(myArray) // [1, 2]
+                myArray.unshift(0)
+                console.log(myArray) // [0, 1, 2]
+                myArray.pop()
+                console.log(myArray) // [0, 1];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Metodi che non mutano l'array (e ne creano uno nuovo)</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const sliceOfArray = myArray.slice(1, 2);
+                console.log(sliceOfArray) // [2, 3]
+                const arrayWithFour = myArray.concat(4)
+                console.log(arrayWithFour) // [1, 2, 3, 4]
+                console.log(myArray) // [1, 2, 3]
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>for of</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3, 4];
+                for (const myElement of myArray) {
+                  console.log(myElement) // 1, 2, 3, 4
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>high-order array methods</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const myNewArray = myArray.map(function(element, index) {
+                  return element + index
+                })
+                console.log(myNewArray) // [1, 3, 5]
+                const myFilteredArray = myNewArray.filter((element) => element > 2)
+                console.log(myFilteredArray) // [3, 5]
+                const hasOneEvenNumber = myFilteredArray.some(element => element % 2 === 0)
+                console.log(hasOneEvenNumber) // false
+                const firstOddNumber = myFilteredArray.find(element => element % 2 === 1)
+                console.log(firstOddNumber) // 3
+                const sum = myArray.reduce((accumulator, element) => , 0)
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>reduce</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const sum = myArray.reduce(
+                  (accumulator, element) => accumulator + element, 
+                  0
+                )
+                console.log(sum) // 6
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Destrutturazione</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const firstElement = myArray[0]
+                const secondElement = myArray[1]
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const [firstElement, secondElement] = myArray
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Spread operator (...)</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myArray = [1, 2, 3];
+                const myNewArray = [...myArray, 4, 5, 6];
+                console.log(myNewArray) // [1, 2, 3, 4, 5, 6]
+              </code>
+            </pre>
+          </section>
         </section>
         <section>
-          <section><h1>Oggetti</h1></section>
-          <section>Oggetti in altre lingue</section>
-          <section>Tutto (o quasi) in JS è in realtà un oggetto</section>
-          <section>Creare un oggetto</section>
-          <section>Proprietà e metodi</section>
-          <section>Innestare oggetti</section>
-          <section>For in</section>
-          <section>this</section>
-          <section>this e arrow functions</section>
-          <section>Privacy</section>
-          <section>getters e setters</section>
-          <section>factory function</section>
-          <section>Destrutturazione</section>
-          <section>Spread operator</section>
+          <section>
+            <h1>Oggetti</h1>
+            <aside class="notes">quelli che chiamiamo oggetti in js vengono chiamati anche i.e. record types, dictionaries, maps, key value pairs</aside>
+          </section>
+          <section>
+            <h2>Tutto (o quasi) in JS è in realtà un oggetto</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                ('Hello').split('')
+                (1).toString();
+                (function myFn() { }).name 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Dietro le quinte</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                String('Hello').split('')
+                Number(1).toString();
+                Function(function myFn() { }).name 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Creare un oggetto</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myObj = {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Proprietà e metodi</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  age: 20,
+                  talkV1: function() {
+                    console.log('Hei!')
+                  },
+                  talkV2() {
+                    console.log('Hei!')
+                  } 
+                }
+                console.log(person.name) // 'John'
+                console.log(person['age']) // 20
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Innestare oggetti</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  father: {
+                    name: 'Jim'
+                  },
+                  siblings: [
+                    {
+                      name: 'Joey'
+                    },
+                    {
+                      name: 'Johanna'
+                    }
+                  ]
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>For in</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  age: 20,
+                  profession: 'programmer'
+                }
+
+                for (const key in person) {
+                  console.log(key) // 'name', 'age', 'profession'
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Object methods</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  age: 20,
+                  profession: 'programmer'
+                }
+                const keys = Object.keys(person)
+                console.log(keys) // ['name', 'age', 'profession']
+                const values = Object.values(person)
+                console.log(values) // ['John', 20, 'programmer']
+                const entries = Object.entries(person)
+                console.log(entries) // [['name', 'John'], ['age', 20], ['profession', 'programmer']]
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>this</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  greet() {
+                    console.log('Hey!, my name is ' + this.name)
+                  }
+                }
+                person.greet() // 'Hey!, my name is John'
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>this e arrow functions</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  greet: () => {
+                    console.log('Hey!, my name is ' + this.name)
+                  }
+                }
+                person.greet() // 'Hey!, my name is undefined'
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>getters</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const azienda = {
+                  entrate: [100, 300, 500, 20],
+                  uscite: [220, 100],
+                  get bilancio() {
+                    const sumReducer = (a, el) => a + el;
+                    const sommaEntrate = this.entrate.reduce(sumReducer, 0) 
+                    const sommaUscite = this.entrate.reduce(sumReducer, 0)
+                    return sommaEntrate - sommaUscite 
+                  },
+                }
+                console.log(azienda.bilancio) // 600
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>setters</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  _name: 'John',
+                  get name() {
+                    return this._name;
+                  }
+                  set name() {
+                    console.log(
+                      'Non puoi cambiare nome!'
+                    )
+                  },
+                }
+                azienda.nome = 'Jim' // 'Non puoi cambiare nome!'
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Destrutturazione</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  age: 20
+                }
+                const nameOfPerson = person.name;                
+                const ageOfPerson = person.age;                
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const person = {
+                  name: 'John',
+                  age: 20
+                }
+                const { name, age } = person;
+                const { name: nameOfPerson, age: ageOfPerson } = person;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Spread operator (...)</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const obj = {
+                  field1: 'value1',
+                  field2: 'value2',
+                  field3: 'value3',
+                }
+                const obj2 = {
+                  ...obj,
+                  field3: 'my value'
+                  field4: 'value4'
+                }
+                console.log(obj2) 
+                // {
+                //  field1: 'value1',
+                //  field2: 'value2',
+                //  field3: 'my value',
+                //  field4: 'value4', 
+                // }
+              </code>
+            </pre>
+          </section>
         </section>
-        <section><h1>Primitivi e non primitivi</h1></section>
         <section>
           <section><h1>Errori</h1></section>
-          <section>Lanciare errori</section>
-          <section>Gestire errori</section>
-        </section>
-        <section>
-          <section><h1>Recap</h1></section>
           <section>
-            <ul>
-              <li>Variabili</li>
-              <li>Data types</li>
-              <li>Controlli di flusso</li>
-              <li>Cicli</li>
-              <li>Funzioni</li>
-              <li>Arrays</li>
-              <li>Oggetti</li>
-              <li>Errori</li>
-            </ul>
+            <h2>Lanciare e gestire errori</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function divide(a, b) {
+                  if (b === 0) {
+                    throw 'Cannot divide by 0'
+                  }
+                }
+
+                try {
+                  divide(4, 0)
+                } catch(e) { 
+                  console.log('Error: ', e) // Error: Cannot divide by 0
+                }
+              </code>
+            </pre>
           </section>
         </section>
         <section>
@@ -673,6 +1237,11 @@
           </section>
           <section>
             <ul>
+              <li>
+                <a href="https://leanpub.com/piccolo-javascript/" target="_blank">
+                  Il piccolo libro di JavaScript
+                </a>
+              </li>
               <li>
                 <a
                   href="https://www.youtube.com/watch?v=3-9fnjzmXWA"
