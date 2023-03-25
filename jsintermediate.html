@@ -43,7 +43,43 @@
           </p>
         </section>
         <section>
-          <section><h1>Classi</h1></section>
+          <section><h1>Classi e funzioni</h1></section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                class Pokemon {
+                  constructor(name, power, lifepoints) {
+                    this.name = name;
+                    this.power = power;
+                    this.lifepoints = lifepoints;
+                  }
+
+                  attack(pokemon) {
+                    pokemon.lifepoints -= this.power;
+                  }
+                }
+
+                const pickachu = new Pokemon('Pickachu', 100, 500);
+                const charmender = new Pokemon('Charmender', 200, 300);
+                pickachu.attack(charmender);
+                console.log(charmender.lifepoints) // 200 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>"Inheritance"</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                class Rattata extends Pokemon {
+                  constructor(lvl) {
+                    super('Rattata', 100 * lvl, 300 * lvl)
+                  }
+                }
+                const rattata = new Rattata(10);
+                console.log(rattata.power) // 1000
+              </code>
+            </pre>
+          </section>
           <section>Le classi sono funzioni sotto copertura</section>
           <section>fields, methods, constructor, new</section>
           <section>prototype??</section>
