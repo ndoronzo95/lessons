@@ -101,7 +101,6 @@
                 alt=""
               />
             </div>
-            <h6 align="right">*Ma non tutto deve essere fatto con js</h6>
           </section>
           <section>
             <p>Linguaggio dinamico, senza tipi</p>
@@ -136,10 +135,12 @@
             <div class="two-screen-example" style="flex-direction: column">
               <pre>
                 <code data-trim data-html-src>
-                  <h1>Hello script element</h1>
-                  <script>
-                    console.log('Hello browser');
-                  </script>
+                  &lt;body&gt;
+                    <h1>Hello script element</h1>
+                    <script>
+                      console.log('Hello browser');
+                    </script>
+                  &lt;/body&gt;
                 </code>
               </pre>
               <div class="browser-frame">
@@ -149,6 +150,7 @@
                 <iframe data-html-sink></iframe>
               </div>
             </div>
+            <aside class="notes">Perche' il vostro js si mette a fine body?</aside>
           </section>
           <section>
             <h2>Caricando un file esterno</h2>
@@ -173,6 +175,17 @@
 
         <section>
           <section><h2>Variabili</h2></section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                let myString = "Hello";
+                let myNumber = 0;
+                myNumber = myNumber + 1;
+                myNumber += 1;
+                myNumber++;
+              </code>
+            </pre>
+          </section>
           <section>
             <h2>let</h2>
             <pre class="language-js">
@@ -372,11 +385,12 @@
           <section>
             <h2>== vs === <br />(!= vs !==)</h2>
             <pre class="language-js">
-              <code data-trim data-line-numbers="1-2|4-5|6-7|9-10">
+              <code data-trim data-line-numbers="1-2|3-4|5-6">
                 console.log(1 == '1') // true
                 console.log(1 === '1') // false
                 console.log('' == false) // true
                 console.log('' === false) // false
+                console.log(null == undefined) // ??
                 console.log(null === undefined) // ??
               </code>
             </pre>
@@ -406,7 +420,14 @@
 
           <section>
             <h2>logical ternary operator</h2>
-            
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const result = true ? 'Hello' : 'World';
+                const result2 = false ? 'Hello' : 'World';
+                console.log(result) // 'Hello'
+                console.log(result2) // 'World'
+              </code>
+            </pre>
           </section>
 
           <section>
@@ -415,7 +436,15 @@
               <code data-trim data-line-numbers>
                 let emptyVariable;
                 const noValue = null;
-                const asBelow = undefined;
+                const sameAsEmptyVariable = undefined;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                console.log(typeof undefined) // 'undefined'
+                console.log(typeof null) // 'object' (wut??)
               </code>
             </pre>
           </section>
@@ -469,6 +498,14 @@
                 ];
               </code>
             </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                console.log(typeof []) // 'object'
+                console.log(Array.isArray([])) // true
+              </code>
+            </pre>
             <aside class="notes">
               Non è una buona idea mischiare i tipi in un array
             </aside>
@@ -484,6 +521,13 @@
                   console.log('Goodbye world')
                 }
                 const sum = (a, b) => a + b;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                console.log(typeof function myFn() {}) // 'function'
               </code>
             </pre>
           </section>
