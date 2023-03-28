@@ -103,7 +103,7 @@
             </div>
           </section>
           <section>
-            <p>Linguaggio dinamico, senza tipi</p>
+            <p>Linguaggio dinamico, tipi "deboli"</p>
             <img
               src="https://storage.googleapis.com/www.josephspurrier.com/wp-content/uploads/2014/02/strongweakstaticdynamic_type.png"
             />
@@ -506,9 +506,6 @@
                 console.log(Array.isArray([])) // true
               </code>
             </pre>
-            <aside class="notes">
-              Non è una buona idea mischiare i tipi in un array
-            </aside>
           </section>
           <section>
             <h2>functions</h2>
@@ -1029,6 +1026,7 @@
                 const [firstElement, secondElement] = myArray
               </code>
             </pre>
+            <aside class="notes">estrarre variabili da un array, in ordine</aside>
           </section>
           <section>
             <h2>Spread operator (...)</h2>
@@ -1037,6 +1035,17 @@
                 const myArray = [1, 2, 3];
                 const myNewArray = [...myArray, 4, 5, 6];
                 console.log(myNewArray) // [1, 2, 3, 4, 5, 6]
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function sum3Numbers(a, b, c) {
+                  return a + b + c
+                }
+                const myNumbers = [1, 2, 3];
+                console.log(sum3Numbers(...myNumbers))
               </code>
             </pre>
           </section>
@@ -1304,7 +1313,7 @@
               </li>
               <li>
                 <a
-                  href="https://youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8"
+                  href="https://www.youtube.com/watch?v=IDDmrzzB14M&list=PLeLzIg9tqA3LQW-RiFA8zJUBcTKqUVLMU"
                   target="_blank"
                   >Harvard - Computer Science lectures</a
                 >
@@ -1323,6 +1332,11 @@
                 >
                   The worst programming language</a
                 >
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=0fpDlAEQio4" target="_blank">
+                  Four languages from forty years ago
+                </a>
               </li>
             </ul>
           </section>
