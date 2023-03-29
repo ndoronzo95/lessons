@@ -89,22 +89,27 @@
                   this.power = power;
                   this.lifepoints = lifepoints;
                 }
-                const pikachu = new Pokemon('Pikachu', 100, 500);
-              </code>
-            </pre>
-            <aside class="notes">e i metodi??</aside>
-          </section>
-          <section>
-            <h2><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank">prototype</a></h2>
-            <pre class="language-js">
-              <code data-trim data-line-numbers>
+                
                 Pokemon.prototype.attack = function(pokemon) {
                   pokemon.lifepoints -= this.power;
                 }
+
+                const pikachu = new Pokemon('Pikachu', 100, 500);
+                
               </code>
             </pre>
+          </section>
+          <section>
+            <h2><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank">Prototypal inheritance</a></h2>
+            <ul>
+              <li class="fragment">constructor</li>
+              <li class="fragment">prototype</li>
+              <li class="fragment">__proto__</li>
+            </ul>
+            <h2 class="fragment">???</h2>
             <aside class="notes">Argomento lungo e complicato...da approfondire</aside>
           </section>
+          <section><h1>DEMO TIME</h1></section>
         </section>
 
         <section>
@@ -516,7 +521,10 @@
         <section>
           <section><h1>Approfondimenti</h1></section>
           <section>
-
+            <ul>
+              <li><a href="https://www.youtube.com/watch?v=srQt1NAHYC0" target="_blank">Functional design patterns</a></li>
+              <li><a href="http://" target="_blank" rel="noopener noreferrer"></a></li>
+            </ul>
           </section>
         </section>
         <section>
