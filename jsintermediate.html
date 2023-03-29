@@ -105,9 +105,82 @@
               <li class="fragment">constructor</li>
               <li class="fragment">prototype</li>
               <li class="fragment">__proto__</li>
+              <li class="fragment">new</li>
             </ul>
             <h2 class="fragment">???</h2>
             <aside class="notes">Argomento lungo e complicato...da approfondire</aside>
+          </section>
+          <section>
+            <h2>Ogni elemento in js ha un constructor</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                new Number(1)
+                new String("hello")
+                new Function('a', 'b', 'return a + b');
+                new Boolean(true);
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const num = 1;
+                const str = 'Hello'
+                console.log(num.constructor) // function Number
+                console.log(str.constructor) // function String
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function Pokemon() {
+
+                }
+                const p = new Pokemn()
+                console.log(p.constructor) // function Pokemon
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>__proto__</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function Pokemon() { }
+                Pokemon.prototype.power = 10;
+                const p = new Pokemn()
+                console.log(p.power) // 10
+                console.log(p.__proto__.power) // 10
+              </code>
+            </pre>
+            <aside class="notes">__proto__ keyword speciale riferimento al prototype del constructor. se qualcosa non viene trovato si guarda dentro __proto__. prototype = oggetto proprieta' dei constructor per creare __proto__</aside>
+          </section>
+          <section>
+            <h2>new - constructor call</h2>
+            <ul>
+              <li>collega this all'oggetto construito</li>
+              <li>crea __proto__ a partire dal campo prototype</li>
+            </ul>
+            
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                function Pokemon(name, power, lifepoints) {
+                  this._name = name;
+                  this.power = power;
+                  this.lifepoints = lifepoints;
+                }
+                
+                Pokemon.prototype.attack = function(pokemon) {
+                  pokemon.lifepoints -= this.power;
+                }
+
+                const pikachu = new Pokemon('Pikachu', 100, 500);
+              </code>
+            </pre>
+            <aside class="notes">proprieta' collegate tramite this e metodi tramite prototype perche dentro __proto__</aside>
+          </section>
+          <section>
+            <h2>prototype chain</h2>
           </section>
           <section><h1>DEMO TIME</h1></section>
         </section>
