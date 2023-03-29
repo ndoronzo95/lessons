@@ -1056,26 +1056,6 @@
             <aside class="notes">quelli che chiamiamo oggetti in js vengono chiamati anche i.e. record types, dictionaries, maps, key value pairs</aside>
           </section>
           <section>
-            <h2>Tutto (o quasi) in JS è in realtà un oggetto</h2>
-            <pre class="language-js">
-              <code data-trim data-line-numbers>
-                ('Hello').split('')
-                (1).toString();
-                (function myFn() { }).name 
-              </code>
-            </pre>
-          </section>
-          <section>
-            <h2>Dietro le quinte</h2>
-            <pre class="language-js">
-              <code data-trim data-line-numbers>
-                String('Hello').split('')
-                Number(1).toString();
-                Function(function myFn() { }).name 
-              </code>
-            </pre>
-          </section>
-          <section>
             <h2>Creare un oggetto</h2>
             <pre class="language-js">
               <code data-trim data-line-numbers>
@@ -1268,6 +1248,26 @@
                 //  field3: 'my value',
                 //  field4: 'value4', 
                 // }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Tutto (o quasi) in JS è in realtà un oggetto</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                ('Hello').split('')
+                (1).toString();
+                (function myFn() { }).name 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Dietro le quinte</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                String('Hello').split('')
+                Number(1).toString();
+                Function(function myFn() { }).name 
               </code>
             </pre>
           </section>
