@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>About React</title>
+    <title>About HTTP</title>
 
     <link rel="stylesheet" href="./dist/reset.css" />
     <link rel="stylesheet" href="./dist/reveal.css" />
@@ -24,16 +24,19 @@
       src="https://kit.fontawesome.com/492dfbd8db.js"
       crossorigin="anonymous"
     ></script>
-    <style>
-      /* TIMELINE */
-    </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
         <section>
-          <i style="font-size: 10rem" class="fa-solid fa-computer"></i>
-          <i style="font-size: 10rem" class="fa-solid fa-server"></i>
+          <div style="display: flex; gap: 1em; width: 100%; justify-content: center;">
+            <i style="font-size: 10rem; color: red" class="fa-solid fa-computer"></i>
+            <div style="display: flex; flex-direction: column">
+              <i style="font-size: 5rem; transform: rotate(90deg);" class="fa-solid fa-arrow-up"></i>
+              <i style="font-size: 5rem; transform: rotate(-90deg);" class="fa-solid fa-arrow-up"></i>
+            </div>
+            <i style="font-size: 10rem; color: aqua;" class="fa-solid fa-server"></i>
+          </div>
           <p class="r-fit-text">
             <span style="color: aqua">H</span>yper<span style="color: aqua"
               >T</span
@@ -43,38 +46,174 @@
         </section>
 
         <section>
-          Architettura client server
+          <h2>Architettura client server</h2>
+          <div style="display: flex; gap: 1em; width: 100%; justify-content: center; align-items: center;">
+            
+            <div style="color:white; background-color:red; width: 10rem; height: 10rem; line-height: 10rem;">
+              Client
+            </div>
+            
+            <div style="display: flex; flex-direction: column">
+              <div class="img-label">
+                <i style="font-size: 5rem; transform: rotate(90deg);" class="fa-solid fa-arrow-up"></i>
+                <label>Can you do this for me?</label>
+              </div>
+              <div class="img-label">
+                <i style="font-size: 5rem; transform: rotate(-90deg);" class="fa-solid fa-arrow-up"></i>
+                <label>Yes, sure!</label>
+              </div>
+            </div>
+
+            <div style="width: 10rem; height: 10rem; background-color: aqua; color: white; line-height: 10rem;">Server</div>
+          </div>
         </section>
 
         <section>
-          Architettura client server su internet (Internet protocol suite overview)
+          <h3>
+            Client server su internet <br>(Internet protocol suite overview)
+          </h3>
+          <img class="r-fit-text" src="https://www.dummies.com/wp-content/uploads/288315.image0.jpg" alt="">
+
         </section>
 
         <section>
-          Http
-          request and response
+
         </section>
 
         <section>
-          Una request
+          <h3>
+            TCP/IP
+          </h3>
+          <img src="https://www.engineersgarage.com/wp-content/uploads/2019/07/Representational-Image-TCP-IP-Protocol.jpg" alt="">
+          <aside class="notes">come i computer riescono a trovarsi e come comunicano, l'ip definisce l'indirizzo, tcp la porta</aside>
         </section>
 
         <section>
-          Una response
+          <h2>DNS</h2>
+          <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200822065029/UntitledDiagram.png">
         </section>
 
         <section>
-          Server http - in ascolto di request
+          <section>
+            <h2>Application layer</h2>
+          </section>
+          <section>
+            <h2>SSH</h2>
+            <img src="https://assets.website-files.com/5ff66329429d880392f6cba2/61c1b963247368113bbeef17_Secure%20Shell%20work.png">
+            <h6 align="right">port: 22</h6>
+          </section>
+          <section>
+            <h2>FTP</h2>
+            <img src="https://www.filestash.app/img/posts/2021-07-27-getting-started-with-a-ftp-server_0.png" style="width: 70%">
+            <h6 align="right">port: 21</h6>
+          </section>
+          <section>
+            <h3>
+              SMTP - IMAP/POP3
+            </h3>
+            <img class="r-fit-text" src="https://serversmtp.com/wp-content/uploads/2018/03/what-is-smtp_0.png">
+            <h6 align="right">ports: 587 - 993/110</h6>
+
+          </section>
+        </section>
+        
+        <section>
+          <section>
+            <h2>HTTP(S)</h2>
+          </section>
+          <section>
+            <h2>S? Secure! - TLS</h2>
+            <img src="https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/images/tls13handshakeestablishpsk.png">
+            <h6 align="right">port: 443</h6>
+          </section>
+          <section>
+            <div style="display: flex; gap: 1em; width: 100%; justify-content: center; align-items: center;">
+            
+              <div class="img-label">
+                <i style="font-size: 10rem; color: red" class="fa-solid fa-computer"></i>
+                <label>
+                  HTTP Client
+                </label>
+              </div>
+              
+              <div style="display: flex; flex-direction: column">
+                <div class="img-label">
+                  <i style="font-size: 5rem; transform: rotate(90deg);" class="fa-solid fa-arrow-up"></i>
+                  <label>Request</label>
+                </div>
+                <div class="img-label">
+                  <i style="font-size: 5rem; transform: rotate(-90deg);" class="fa-solid fa-arrow-up"></i>
+                  <label>Response</label>
+                </div>
+              </div>
+  
+              
+              <div class="img-label">
+                <i style="font-size: 10rem; color: aqua" class="fa-solid fa-server"></i>
+                <label>
+                  HTTP Server
+                </label>
+              </div>
+            </div>
+          </section>
+  
+          <section>
+            <h3><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">http verbs</a> </h3>
+            <ul>
+              <li>GET</li>
+              <li>POST</li>
+              <li>PUT</li>
+              <li>DELETE</li>
+              <li>OPTIONS</li>
+              <li>CONNECT</li>
+              <li>PATCH</li>
+              <li>HEAD</li>
+              <li>TRACE</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3><a href="https://i.pinimg.com/originals/6a/bc/7c/6abc7caedc66d8863f2f9d3a5a671fdd.jpg" target="_blank">http status code</a> </h3>
+            <img src="https://allprowebdesigns.com/blog/wp-content/uploads/2019/10/status-codes-638x445.jpg" alt="">
+          </section>
+
+          <section>
+            <h3>Request</h3>
+            <img src="https://www3.ntu.edu.sg/home/ehchua/programming/webprogramming/images/HTTP_RequestMessageExample.png">
+          </section>
+  
+          <section>
+            <h3>Response</h3>
+            <img src="https://www3.ntu.edu.sg/home/ehchua/programming/webprogramming/images/HTTP_ResponseMessageExample.png">
+          </section>
+  
+          <section>
+            <h2>che cosa fa un http server?</h2>
+            <ul>
+              <li>è in ascolto di richieste</li>
+              <li>scompone e analizza la http request</li>
+              <li>produce e invia una http response</li>
+            </ul>
+            <aside class="notes">ascolto su una porta o default 443  / 80</aside>
+          </section>
+  
+          <section>
+            <h2>
+              <a href="https://it.wikipedia.org/wiki/Representational_state_transfer" target="_blank">
+                rest (?)
+              </a>
+            </h2>
+          </section>
         </section>
 
-        <section>
-          Client http - crea, invia, aspetta la response, la usa
-        </section>
 
         <section>
           <h1>Approfondimenti</h1>
           <ul>
-            <li>Eli the computer guy</li>
+            <li><a href="https://www.youtube.com/watch?v=8JOD1AQGqEg" target="_blank">The web that never was</a></li>
+            <li><a href="https://www.youtube.com/watch?v=g8E1B7rTZBI" target="_blank">The rest of REST</a></li>
+            <li><a href="https://www.youtube.com/@elithecomputerguy" target="_blank">Eli the computer guy</a></li>
+            <li><a href="https://www.youtube.com/@davidbombal" target="_blank">David Bombal</a></li>
           </ul>
         </section>
       </div>
