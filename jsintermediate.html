@@ -442,9 +442,11 @@
           </section>
           <section class="fragmented">
             <h2>2009 - Node - npm</h2>
-            <img class="fragment" src="https://cdn-images-1.medium.com/v2/resize:fit:1200/0*BZBzaxGcax4Lk794.jpg">
-            <img class="fragment" src="https://www.mindrops.com/images/nodejs-image.png">
-            <img class="fragment" src="https://www.logolynx.com/images/logolynx/7f/7fb976a537620fed310872d533cd161c.png">
+            <div style="display: flex; justify-content: space-around;">
+              <img style="width: 400px" class="fragment r-fit-text" src="https://cdn-images-1.medium.com/v2/resize:fit:1200/0*BZBzaxGcax4Lk794.jpg">
+              <img style="width: 400px" class="fragment r-fit-text" src="https://www.mindrops.com/images/nodejs-image.png">
+              <img style="width: 400px" class="fragment r-fit-text" src="https://www.logolynx.com/images/logolynx/7f/7fb976a537620fed310872d533cd161c.png">
+            </div>
             <aside class="notes">npm cresce anno dopo anno</aside>
           </section>
           <section>
@@ -467,7 +469,7 @@
           </section>
           <section>
             <h2>2013 - <a href="https://browserify.org/" target="_blank">Browserify</a></h2>
-            <img src="https://nolanwlawson.files.wordpress.com/2017/02/2017-02-23-16_40_10-browserify.png">
+            <img src="https://nolanwlawson.files.wordpress.com/2017/02/2017-02-23-16_40_10-browserify.png" style="width: 500px">
           </section>
           <section class="fragmented">
             <div class="fragment">
@@ -545,6 +547,11 @@
                 console.log(sum(1, 3)) // 4
               </code>
             </pre>
+            
+            <aside class="notes">first-level, non possono stare in un blocco</aside>
+          </section>
+          <section>
+            <h2>namespace import</h2>
             <pre class="language-js fragment">
               <code data-trim data-line-numbers>
                 // main.js
@@ -552,7 +559,6 @@
                 console.log(math.sub(3,1)) // 2
               </code>
             </pre>
-            <aside class="notes">first-level, non possono stare in un blocco</aside>
           </section>
           <section class="fragmented">
             <h2>rinominare gli export (as)</h2>
