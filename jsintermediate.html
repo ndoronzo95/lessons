@@ -620,6 +620,63 @@
             </h2>
           </section>
           <section>
+            <h2><a href="https://devhints.io/npm" target="_blank">npm</a></h2>
+            <pre>
+              <code data-trim>
+                npm init
+                npm install (-g) (--save/--save-dev) &lt;PACKAGE_NAME&gt;@&lt;VERSION&gt;
+                npm uninstall (-g) &lt;PACKAGE_NAME&gt;@version
+                npm run &lt;SCRIPT_NAME&gt; (-- &lt;FLAGS&gt;) 
+                ...many more...
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>package.json</h2>
+            <pre class="language-json">
+              <code data-trim>
+                {
+                  "name": "My awesome project",
+                  "version": "4.4.0",
+                  "scripts": {
+                    "test": "jest",
+                    "start": "webpack serve",
+                    "build": "webpack build"
+                  },
+                  "dependencies": {
+                    "three": "0.149.1"
+                  }
+                  "devDependencies": {
+                    "webpack": "^5.0.3",
+                  },
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2><a href="https://semver.org/" target="_blank">semantic versioning</a></h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Semver.jpg" alt="">
+            <aside class="notes">menziona package-lock.json</aside>
+          </section>
+          <section>
+            <pre class="language-json">
+              <code data-trim>
+                {
+                  "dependencies": {
+                    "three": "0.149.1" //exact
+                    "react": "~7.0.0", //latest patch
+                  }
+                  "devDependencies": {
+                    "webpack": "^5.0.3", //latest minor
+                  },
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <img src="https://blog.npmjs.org/media/126588929320_0.png" alt="">
+          </section>
+          <section>
             <h2>demo time</h2>
             <ul>
               <li>scripts</li>
@@ -644,7 +701,6 @@
           <section>
             <ul>
               <li><a href="https://www.youtube.com/watch?v=srQt1NAHYC0" target="_blank">Functional design patterns</a></li>
-              <li><a href="http://" target="_blank" rel="noopener noreferrer"></a></li>
             </ul>
           </section>
         </section>
@@ -653,7 +709,7 @@
           <section>
             <ul>
               <li>Creare un'applicazione che contatta https://jsonplaceholder.typicode.com/ e logga il risultato in console</li>
-              <li>Crea una scena con <a href="https://threejs.org/" target="_blank">Three js</a></li>
+              <li>Creare una scena con <a href="https://threejs.org/" target="_blank">Three js</a></li>
             </ul>
           </section>
         </section>

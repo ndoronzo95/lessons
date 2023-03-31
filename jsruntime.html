@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>About CSS</title>
+    <title>About Js Runtimes</title>
 
     <link rel="stylesheet" href="./dist/reset.css" />
     <link rel="stylesheet" href="./dist/reveal.css" />
@@ -70,14 +70,35 @@
             <img src="https://www.epineda.net/content/images/2022/01/CH02_F06_pineda.png" class="r-fit-text">
           </section>
           <section>
-            <h2>nodejs runtime</h2>
-            <img src="https://www.simform.com/wp-content/uploads/2020/04/node.js-architecture.png" class="r-fit-text">
+            <h2>node.js runtime</h2>
+            <img src="https://litslink.com/wp-content/uploads/2021/07/Node.js-Architecture-Chart-2048x1170.png" class="r-fit-text">
           </section>
+          <section><h1>global object</h1></section>
         </section>
         <section>
           <section><h1>Js nel browser</h1></section>
-          <section>Window</section>
-          <section>More web apis</section>
+          <section>
+            <h3>Window - browser global object</h3>
+            <pre class="language-javascript fragment">
+              <code data-trim data-line-numbers>
+                Math.random()
+                setTimeout(() => console.log('async'),0)
+                fetch('http://mywebserver:8080')
+              </code>
+            </pre>
+            <pre class="language-js fragment">
+              <code data-trim data-line-numbers>
+                window.Math.random()
+                window.setTimeout(() => console.log('async'),0)
+                window.fetch('http://mywebserver:8080')
+              </code>
+            </pre>
+            <aside class="notes">tutto quello che puoi usare sul browser è nell'oggetto window. sottointeso</aside>
+          </section>
+          <section>
+            <video id="my-video" style="border: 3px dashed whitesmoke"></video>
+            <aside class="notes">navigator.mediaDevices.getUserMedia({ video: true })</aside>
+          </section>
         </section>
         <section>
           <section>
@@ -87,75 +108,218 @@
               <span style="color: yellow">M</span>odel
             </h1>
           </section>
-          <section>La rappresentazione della tua pagina html in js</section>
-          <section>Document</section>
           <section>
-            querySelector(All): selezionare elementi. Menzione speciale per i
-            vari getElementBy...
+            <h3>La rappresentazione della pagina html in js</h3>
+            <pre>
+              <code data-trim >
+                <p> <!-- PARENT ELEMENT --> 
+                  Hello <!-- 1st CHILD ELEMENT (text)-->
+                  <strong> <!-- 2nd CHILD ELEMENT (html)-->
+                     world 
+                  </strong>
+                </p> 
+              </code>
+            </pre>
+            <div class="tree">
+              <div
+                class="node element"
+                data-node-label="HTML Paragraph Element (&lt;p&gt;)"
+              >
+                <div
+                  class="node text"
+                  data-node-label="Text Content (Hello)"
+                ></div>
+                <div
+                  class="node element"
+                  data-node-label="HTML Strong Element (&lt;strong&gt;)"
+                >
+                  <div
+                    class="node text"
+                    data-node-label="Text Content (world)"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </section>
-          <section>HTMLElement (e sottoclassi) overview</section>
-          <section>document.createElement: creare elementi in js</section>
-          <section>append / appendChild: aggiungere elementi</section>
-          <section>remove: rimuovere elementi</section>
-          <section>eventi: reagire alle azioni dell'utente</section>
-          <section>DEMO TIME</section>
+          <section>
+            <h2>
+              document
+            </h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                console.log(document) // Document
+                console.log(document.body) // HTMLBodyElement
+              </code>
+            </pre>
+            <aside class="notes">document ha metodi e proprietà</aside>
+          </section>
+          <section>
+            <h2>HTML Element</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers="1-3|4-5|6-7|8|9">
+                console.log(document.body) // HTMLBodyElement
+                console.log(document.body.children[0]) // HTMLCollection(n)
+                const myElement = document.body.children[0];
+                myElement.textContent = 'Hey'
+                myElement.innerHTML = '<p>Injected html</p>'
+                myElement.style.color = 'blue'
+                myElement.style.display = 'none';
+                myElement.classList.add('active')
+                myElement.remove()
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Selezionare uno o più elementi HTML dal DOM</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers="1-3|4|5|6">
+                const firstInput = document.querySelector('input')
+                const elWithClass = document.querySelector('.my-element-with-class')
+                const elWithId = document.querySelector('#my-element-with-id')
+                const allParagraphs = document.querySelectorAll('p')
+                const sameAsTwoAbove = document.getElementById('my-element-with-id');
+                const thatElement = document.querySelector('p.my-class > a[href="#"] img')
+              </code>
+            </pre>
+            <aside class="notes">querySelectorAll ritorna una NodeList, non proprio un array. </aside>
+          </section>
+          <section>
+            <h3>Creare elementi</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const anInput = document.createElement('input');
+                const aDiv = document.createElement('div'); 
+                const aParagraph = document.createElement('p'); 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>append / appendChild: aggiungere elementi</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const aDiv = document.createElement('div');
+                const aParagraph = document.createElement('p');
+                aParagraph.textContent = 'Lorem ipsum!'
+                aDiv.appendChild(aParagraph);
+                document.body.append(aDiv);
+              </code>
+            </pre>
+            <aside class="notes">inserisce alla fine della lista dei figli</aside>
+          </section>
+          <section>
+            <h3>eventi: reagire alle azioni dell'utente</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const myAwesomeButton = document.querySelector('#awesome-btn');
+                myAwesomeButton.addEventListener('click', (event) => {
+                  console.log("I've been clicked")
+                  console.log(event) // MouseEvent
+                })
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                document.addEventListener('keydown', (event) => {
+                  console.log(event) // KeyboardEvent
+                  if(event.key === 'Enter') {
+                    console.log('user pressed Enter')
+                  } else if (event.key === 'ArrowUp') {
+                    doOtherStuff()
+                  }
+                })
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>DEMO TIME</h3>
+            <h4>a todolist app</h4>
+          </section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>JS nel sistema operativo. Node js</h1></section>
           <section>Un po' di storia</section>
           <section>A cosa serve</section>
           <section>npm</section>
+          <section>package.json</section>
+          <section>npx</section>
           <section>Un web server</section>
-          <section>DEMO TIME</section>
-        </section>
-
-        <section>
           <section>
-            <h1>Recap</h1>
-          </section>
-          <section>
+            <h2>DEMO TIME</h2>
             <ul>
-              <li>Runtimes</li>
-              <li>
-                JS nel Browser
-                <ul>
-                  <li>Window</li>
-                  <li>More apis</li>
-                </ul>
-              </li>
-              <li>
-                DOM
-                <ul>
-                  <li>struttura ad albero</li>
-                  <li>Document overview</li>
-                  <li>selezionare elementi</li>
-                  <li>HTMLElement overview</li>
-                  <li>creare un elemento</li>
-                  <li>aggiungere un elemento al DOM</li>
-                  <li>rimuovere un elemento al dom</li>
-                  <li>eventi: reagire alle azioni dell'utente</li>
-                </ul>
-              </li>
-              <li>Node JS</li>
+              <li>node webapp</li>
+              <li>chiamare la webapp da un frontend</li>
             </ul>
           </section>
         </section>
 
         <section>
-          <section>Approfondimenti</section>
+          <section><h2>Approfondimenti</h2></section>
           <section>
-            <a href="https://youtu.be/ztspvPYybIY">Node js presentation</a>
-            <a href="https://youtu.be/M3BM9TB-8yA">10 Things I regret about Node</a>
+            <ul>
+              <li>
+                <a href="https://youtu.be/ztspvPYybIY" target="_blank">Node js presentation</a>
+              </li>
+              <li>
+                <a href="https://youtu.be/M3BM9TB-8yA" target="_blank">10 Things I regret about Node</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ" target="_blank">What the heck is the event loop anyway?</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=cCOL7MC4Pl0" target="_blank" style="color: gold">Jake Archibald on the web browser event loop, setTimeout, micro tasks, requestAnimationFrame</a>
+              </li>
+            </ul>
           </section>
         </section>
 
         <section>
-          <section>Esercizi</section>
+          <section><h2>Esercizi</h2></section>
           <section>
+            <h3>App - lista della spesa</h3>
             <ul>
-              <li>App - Lista della spesa</li>
+              <li>Form di input e button per aggiungere elementi nella lista</li>
+              <li>L'elemento creato viene aggiunto infondo alla lista</li>
+              <li>Gli elementi della lista possono essere "completati" cliccandoci sopra</li>
+              <li>Gli elementi della lista possono essere rimossi cliccandoci sopra due volte</li>
             </ul>
+          </section>
+          <section>
+            <h3>App - tabella utenti</h3>
+            <ul>
+              <li>Creare una tabella di utenti recuperati da <a href="https://jsonplaceholder.typicode.com/users" target="_blank">https://jsonplaceholder.typicode.com/users</a></li>
+              <li>le colonne della tabella sono: name, username, email, phone</li>
+              <li>la tabella deve essere creata interamente via js</li>
+            </ul>
+          </section>
+          <section>
+            <h4>hard mode - aggiungere utente</h4>
+            <ul>
+              <li>è possibile aggiungere utenti con un form dove si inseriscono le informazioni</li>
+              <li>per aggiungere un utente bisogna inviare un json con i dati del form con una chiamata http POST allo stesso endpoint (dati nel body)</li>
+              <li>solo in seguito alla risposta del server si può procedere ad aggiungere l'utente alla tabella</li>
+            </ul>
+          </section>
+          <section>
+            <h4>super hard mode - rimuovere utente</h4>
+            <ul>
+              <li>è possibile rimuovere utenti in qualche modo...</li>
+              <li>per rimuovere un utente bisogna inviare eseguire una chiamata http DELETE allo stesso endpoint passando l'id dell'utente</li>
+              <li>solo in seguito alla risposta del server si può procedere ad aggiornare la tabella rimuovendo l'utente</li>
+            </ul>
+          </section>
+          <section>
+            <h4>super crazy hard mode - aggiornare utente</h4>
+            <ul>
+              <li>è possibile modificare le informazioni dell'utente in qualche modo...</li>
+              <li>per confermare l'aggiornamento dei dati bisogna inviare un json con i nuovi dati con una chiamata http PUT allo stesso endpoint (dati nel body)</li>
+              <li>solo in seguito alla risposta del server si può procedere ad aggiornare la tabella</li>
+            </ul>
+          </section>
+          <section>
+            <h3><a href="https://jsonplaceholder.typicode.com/guide/" target="_blank">jsonplaceholder fetch guide</a></h3>
           </section>
         </section>
       </div>
