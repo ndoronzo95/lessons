@@ -53,9 +53,11 @@
         <section>
           <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*4rRj6gVz3rGA9IDs_0JiyQ.png">
         </section>
+
         <section>
-          <h2>SPA | MPA</h2>
+          <h2>SPA vs MPA</h2>
           <img width="600" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fasperbrothers.com%2Fwp-content%2Fuploads%2F2019%2F11%2Fspa-mpa-feature.jpg&f=1&nofb=1&ipt=3dae3d595ada54a876cfb5bff106ebc2fea08df6f7633ab536904c8ba03644c0&ipo=images" alt="">
+          <aside class="notes">Questi frameworks nascono per SPA</aside>
         </section>
         
         <section class="fragmented">
@@ -82,26 +84,6 @@
         <section>
           <section><h2>Dichiaratività (vs imperatività)</h2></section>
           <section>
-            <h4>Vanilla js</h4>
-            <pre>
-              <code data-trim data-line-numbers>
-                const button = document.createElement('button');
-                button.textContent = 'Change value'
-
-                const p = document.createElement('p');
-                p.textContent = 'Initial value';
-                
-                button.addEventListener('click', () => {
-                  p.textContent = 'New value'
-                })
-
-                document.body.append(button)
-                document.body.append(p)
-              </code>
-            </pre>
-          </section>
-          <section>
-            <h4>React</h4>
             <pre>
               <code data-trim data-line-numbers>
                 function App() {
@@ -120,7 +102,6 @@
             </pre>
           </section>
           <section>
-            <h4>Angular</h4>
             <pre class="language-javascript">
               <code data-trim data-line-numbers>
                 @Component({
@@ -138,6 +119,24 @@
             </pre>
           </section>
           <section>
+            <pre>
+              <code data-trim data-line-numbers>
+                const button = document.createElement('button');
+                button.textContent = 'Change value'
+
+                const p = document.createElement('p');
+                p.textContent = 'Initial value';
+                
+                button.addEventListener('click', () => {
+                  p.textContent = 'New value'
+                })
+
+                document.body.append(button)
+                document.body.append(p)
+              </code>
+            </pre>
+          </section>
+          <section>
             <h2>Codice reattivo al cambiamento</h2>
           </section>
           <section><h2>Dichiarativo = Leggibile <br> Leggibile = Buono</h2></section>
@@ -145,7 +144,11 @@
 
         <section>
           <section>
-            <h2>Componenti</h2>
+            <h1>
+              Componenti
+            </h1>
+          </section>
+          <section>
             <img src="https://media.makeameme.org/created/components-components-everywhere-ae9907eb73.jpg">
           </section>
           <section>
@@ -157,35 +160,36 @@
           <section>
             <div class="r-stack">
               <img src="https://images2.minutemediacdn.com/image/upload/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/shape/cover/sport/legos-hero-0eaaf09e995d184255040705b42f46f4.jpg" alt="">
-              <img class="fragment" src="https://i.ytimg.com/vi/kTddSaqWJi8/maxresdefault.jpg" alt="">
+              <img class="fragment" src="https://indecisivetraveler.com/wp-content/uploads/2013/01/IMG_1624-682x1024.jpg" alt="">
             </div>
           </section>
           <section>
             <h3>
               Gerarchia di componenti
             </h3>
-            <img src="https://media.licdn.com/dms/image/C4D12AQFxpSKk5vS7JQ/article-cover_image-shrink_720_1280/0/1615358923451?e=2147483647&v=beta&t=is1JdBvDEUqdzggj2oDHxswQtsE2eJ4MjUvHE2uBBA4" alt="">
+            <img width="500" src="https://media.licdn.com/dms/image/C4D12AQFxpSKk5vS7JQ/article-cover_image-shrink_720_1280/0/1615358923451?e=2147483647&v=beta&t=is1JdBvDEUqdzggj2oDHxswQtsE2eJ4MjUvHE2uBBA4" alt="">
           </section>
           <section>
             <h3>Modularità - Incapsulamento</h3>
             <aside class="notes">I componenti sono un mondo che comunica in modo ben definito. Entita' ragionabili</aside>  
           </section>
           <section>
-            <h3>Comunicazione tra componenti (input - events)</h3>
-            <img src="./img/components-communication.jpg">
+            <h4>Comunicazione tra componenti (input - events)</h4>
+            <img width="450" src="./img/components-communication.jpg">
           </section>
           <section>
             <h3>stato dei componenti</h3>
             <div style="color: whitesmoke; display: inline-block; margin: auto; border-radius: 5px; border: 3px solid whitesmoke; padding: 3rem">
-              <p>...logica...</p>
               <i class="fa-solid fa-gear" style="font-size: 4rem"></i>
-              <p>UserMenu</p>
+              <i class="fa-solid fa-gear" style="font-size: 2rem"></i>
+              <p style="font-size: 1rem">isDisabled = false; <br> userIsClicking = true <br> clicksCounter++</p>
+              <p>Button</p>
             </div>
-            <aside class="notes">Un componente mostra in output il risultato del suo stato e dei suoi input</aside>
+            <aside class="notes">Cosa si intende per stato? Un componente mostra in output il risultato del suo stato e dei suoi input</aside>
           </section>
           <section>
             <h3>Ciclo di vita dei componenti</h3>
-            <img src="./img/lifecycle.jpg" alt="">
+            <img width="500" src="./img/lifecycle.jpg" alt="">
             <aside class="notes">possiamo agganciarci a questi momenti per far scattare degli effetti</aside>
           </section>
           <section>
@@ -200,14 +204,36 @@
           </section>
         </section>
         <section>
-          <section><h1>Più pagine senza cambiare .html - SPAs</h1></section>
-          <section>Sistema di routing</section>
-          <section>Sistema di protezione delle rotte</section>
-          <section>Redirect etc.</section>
+          <section><h1>Più pagine senza cambiare pagina html</h1> <aside class="notes">anchor tag + pagine html</aside></section>
+          <section>
+            <img src="./img/dashboard.png" alt="">
+          </section>
+          <section>
+            <h2>Routing</h2>
+            <img width="700" src="./img/routing.jpg" alt="">
+            <aside class="notes">navigare con l'url</aside>
+          </section>
+          <section>
+            <h2>
+              Protezione delle rotte / redirect
+            </h2>
+            <img width="700" src="./img/routing-protected.jpg" alt="">
+          </section>
+          <section>
+            <h2><span style="color: aqua">path params</span> - <span style="color: greenyellow">query params</span></h2>
+            <p style="margin-bottom: 30px">/users/<span style="color: aqua">103241</span>?<span style="color: greenyellow">token=poyrew123snbv</span></p>
+            <p>/user/:id -> <span style="border-radius: 5px; border: 3px solid whitesmoke; padding: 1rem">UserComponent</span></p>
+          </section>
         </section>
-        <section>
-          <a href="./angular.html">Angular</a>
-          <a href="./react.html">React</a>
+        <section data-visibility="hidden">
+          <ul>
+            <li>
+              <a href="./react.html">React</a>
+            </li>
+            <li>
+              <a href="./angular.html">Angular</a>
+            </li>
+          </ul>
         </section>
       </div>
     </div>
