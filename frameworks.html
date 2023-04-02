@@ -31,58 +31,173 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
-          <i style="font-size: 2rem" class="fa-brands fa-angular"></i>
-          <i style="font-size: 2rem" class="fa-brands fa-react"></i>
-          <i style="font-size: 2rem" class="fa-brands fa-vue"></i>
-          <i style="font-size: 2rem" class="fa-brands fa-svelte"></i>
-          <i style="font-size: 2rem" class="fa-brands fa-solidity"></i>
-          <p class="r-fit-text">Modern Javascript Frameworks</p>
+        <section class="fragmented">
+          <div class="r-stack">
+            <h1 >Modern Javascript Frameworks</h1>
+            <img class="fragment" width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png">
+            <img class="fragment" width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" alt="">
+            <img class="fragment" width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" alt="">
+            <img class="fragment" width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Svelte_Logo.svg/1200px-Svelte_Logo.svg.png" alt="">
+            <img class="fragment" width="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" alt="">
+            <img class="fragment" width="400" src="https://www.fermicoding.com/sites/default/files/styles/blogs_mobile_x_1_475px_/public/2021-08/G%20js.png?itok=TE81jrh0">
+            <img class="fragment" width="400" src="https://avatars.githubusercontent.com/u/44914786?s=280&v=4">
+            <img class="fragment" width="400" src="https://remix.run/img/og.1.jpg">
+            <img class="fragment" width="400" src="https://repository-images.githubusercontent.com/130884470/ad63fd00-7ab2-11ea-9c57-6c114391183a" alt="">
+            <img class="fragment" width="400" src="https://img.devrant.com/devrant/rant/r_1998678_CNhKB.jpg" alt="">
+          </div>
         </section>
         <section>
-          Ce ne sono tanti e ne escono sempre nuovi. Framework
-          dipendenza...imparatene uno bene ma non vi legate troppo ad esso. Non
-          dovete diventare degli angular developer o react developer...dovete
-          diventare bravi programmatori
-        </section>
-        <section>SPA | MPA</section>
-        <section>
-          <section><h1>I vantaggi di un framework</h1></section>
-          <section>Dichiaratività</section>
-          <section>Componenti</section>
-          <section>Ecosistema</section>
-          <section>Compatibilità</section>
+          <img width="500" src="https://tsh.io/wp-content/uploads/2019/10/new-javascript-framework_.png" alt="">
+          <aside class="notes">the new shiny hammer</aside>
         </section>
         <section>
-          <section><h1>Gli svantaggi di un framework</h1></section>
-          <section>Coupling totale col progetto</section>
-          <section>Stare dietro alle versioni</section>
-          <section>Peso e performance*</section>
-          <section>SEO*</section>
+          <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*4rRj6gVz3rGA9IDs_0JiyQ.png">
         </section>
         <section>
-          <section><h1>Compatibilità</h1></section>
-          <section>Set di tecnologie per supplire alle incompatibilità dei browser (css escluso)</section>
-          <section>Supplisce alle incompatibilità</section>
+          <h2>SPA | MPA</h2>
+          <img width="600" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fasperbrothers.com%2Fwp-content%2Fuploads%2F2019%2F11%2Fspa-mpa-feature.jpg&f=1&nofb=1&ipt=3dae3d595ada54a876cfb5bff106ebc2fea08df6f7633ab536904c8ba03644c0&ipo=images" alt="">
         </section>
-        <section>
-          <section><h1>Dichiaratività</h1></section>
-          <section>Codice reattivo!</section>
-          <section>c'era una volta jquery</section>
-          <section>Confronto di una funzionalità in JS e con un framework</section>
-          <section>Dichiarativo = Leggibile e Leggibile = Buon codice</section>
+        
+        <section class="fragmented">
+          <h2>Gli svantaggi di un framework</h2>
+          <ul>
+            <li class="fragment">Coupling totale col progetto</li>
+            <li class="fragment">Stare dietro alle versioni</li>
+            <li class="fragment">Peso e performance*</li>
+            <li class="fragment">SEO*</li>
+          </ul>
         </section>
+        
         <section>
-          <section><h1>Componenti</h1></section>
-          <section>Cambiare il modo di guardare un applicazione</section>
-          <section>Suddividiamo tutto in componenti</section>
-          <section>I componenti si compongono come i lego</section>
-          <section>Padri e figli</section>
-          <section>I componenti sono un mondo che comunica in modo ben definito - Modularità - Incapsulamento di logica e stile</section>
-          <section>Input / Output</section>
-          <section>Stato dei componenti</section>
-          <section>Ciclo di vita dei componenti</section>
-          <section>Librerie di componenti</section>
+          <h2>bundler preconfigurato (webpack)</h2>
+          <ul>
+            <li class="fragment">supporto per typescript</li>
+            <li class="fragment">traspilazione a js compatibile con i browser indicati</li>
+            <li class="fragment">dev server</li>
+            <li class="fragment">script di build ottimizzati</li>
+            <li class="fragment">configurabile</li>
+          </ul>
+        </section>
+
+        <section>
+          <section><h2>Dichiaratività (vs imperatività)</h2></section>
+          <section>
+            <h4>Vanilla js</h4>
+            <pre>
+              <code data-trim data-line-numbers>
+                const button = document.createElement('button');
+                button.textContent = 'Change value'
+
+                const p = document.createElement('p');
+                p.textContent = 'Initial value';
+                
+                button.addEventListener('click', () => {
+                  p.textContent = 'New value'
+                })
+
+                document.body.append(button)
+                document.body.append(p)
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>React</h4>
+            <pre>
+              <code data-trim data-line-numbers>
+                function App() {
+                  const [content, setContent] = useState('Initial value');
+  
+                  return (
+                    &lt;&gt;
+                      &lt;button onClick={() => setContent('New value')}&gt;
+                        Change value
+                      &lt;/button&gt;
+                      &lt;p&gt;{ content }&lt;/p&gt;
+                    &lt;&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Angular</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  template: `
+                    &lt;button (click)="content = 'New value'"&gt;
+                      Change value
+                    &lt;/button&gt;
+                    &lt;p&gt;{{ content }}&lt;/p&gt;
+                  `
+                })
+                class AppComponent {
+                  content = 'Initial value'
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Codice reattivo al cambiamento</h2>
+          </section>
+          <section><h2>Dichiarativo = Leggibile <br> Leggibile = Buono</h2></section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Componenti</h2>
+            <img src="https://media.makeameme.org/created/components-components-everywhere-ae9907eb73.jpg">
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="./img/dashboard.png" alt="">
+              <img class="fragment" src="./img/dashboard-first-level-named.jpg" alt="">
+            </div>
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="https://images2.minutemediacdn.com/image/upload/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/shape/cover/sport/legos-hero-0eaaf09e995d184255040705b42f46f4.jpg" alt="">
+              <img class="fragment" src="https://i.ytimg.com/vi/kTddSaqWJi8/maxresdefault.jpg" alt="">
+            </div>
+          </section>
+          <section>
+            <h3>
+              Gerarchia di componenti
+            </h3>
+            <img src="https://media.licdn.com/dms/image/C4D12AQFxpSKk5vS7JQ/article-cover_image-shrink_720_1280/0/1615358923451?e=2147483647&v=beta&t=is1JdBvDEUqdzggj2oDHxswQtsE2eJ4MjUvHE2uBBA4" alt="">
+          </section>
+          <section>
+            <h3>Modularità - Incapsulamento</h3>
+            <aside class="notes">I componenti sono un mondo che comunica in modo ben definito. Entita' ragionabili</aside>  
+          </section>
+          <section>
+            <h3>Comunicazione tra componenti (input - events)</h3>
+            <img src="./img/components-communication.jpg">
+          </section>
+          <section>
+            <h3>stato dei componenti</h3>
+            <div style="color: whitesmoke; display: inline-block; margin: auto; border-radius: 5px; border: 3px solid whitesmoke; padding: 3rem">
+              <p>...logica...</p>
+              <i class="fa-solid fa-gear" style="font-size: 4rem"></i>
+              <p>UserMenu</p>
+            </div>
+            <aside class="notes">Un componente mostra in output il risultato del suo stato e dei suoi input</aside>
+          </section>
+          <section>
+            <h3>Ciclo di vita dei componenti</h3>
+            <img src="./img/lifecycle.jpg" alt="">
+            <aside class="notes">possiamo agganciarci a questi momenti per far scattare degli effetti</aside>
+          </section>
+          <section>
+            <h3>Librerie di componenti</h3>
+            <ul>
+              <li><a href="https://mui.com/" target="_blank">React Material UI</a></li>
+              <li><a href="https://ng-bootstrap.github.io/#/home" target="_blank">Angular Bootstrap</a></li>
+              <li><a href="https://primeng.org/" target="_blank">PrimeNG</a></li>
+              <li><a href="https://chakra-ui.com/" target="_blank">Chakra UI</a></li>
+              <li>etc.</li>
+            </ul>
+          </section>
         </section>
         <section>
           <section><h1>Più pagine senza cambiare .html - SPAs</h1></section>
