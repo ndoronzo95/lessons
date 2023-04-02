@@ -32,31 +32,258 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <i
-            style="font-size: 20rem; color: lightblue"
-            class="fa-brands fa-react"
-          ></i>
-          <p class="r-fit-text">React</p>
+          <section>
+            <i
+              style="font-size: 20rem; color: lightblue"
+              class="fa-brands fa-react"
+            ></i>
+            <h2>React</h2>
+          </section>
+          <section>
+            <img width="600" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcompanieslogo.com%2Fimg%2Forig%2FMETA-4767da84.png%3Ft%3D1654568366&f=1&nofb=1&ipt=c917a8195de24f220dc697ea22ca58c81ed3f5547e24e12f28d0e03016677cf6&ipo=images" alt="">
+          </section>
+          <section>
+            <div class="img-label">
+              <img width="400" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthediffpodcast.com%2Fimg%2Fjordan.jpg&f=1&nofb=1&ipt=197d942926abc89749bbf763d0561498a872088e366e09fc6f0b6b598c46093d&ipo=images" alt="">
+              <label>Jordan Walke</label>
+            </div>
+          </section>
+          <section><h2>Framework o Libreria?</h2></section>
+          <section>
+            <h2>Environment agnostic</h2>
+            <ul>
+              <li class="fragment">ReactDOM</li>
+              <li class="fragment">ReactNative</li>
+              <li class="fragment">ReactVR</li>
+              <li class="fragment">ReactPDF</li>
+            </ul>
+          </section>
+          <section><h2>Solo componenti</h2></section>
+          <section>
+            <h2>unidirectional data flow</h2>
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdzone.com%2Fstorage%2Ftemp%2F8081542-react-data-flow.png&f=1&nofb=1&ipt=c118fcd57b39ad24610ff02fc999363dd216a46e74286f35d8941ed765c5294f&ipo=images" alt="">
+          </section>
+          <section><h2>Minimale...</h2></section>
         </section>
+
         <section>
-          <section>Un po' di storia</section>
-          <section>Framework vs Libreria</section>
-          <section>Environment agnostic - ReactDOM - ReactNative - ReactVR :D</section>
-          <section>Solo componenti</section>
-          <section>Minimale, forse anche troppo...</section>
-        </section>
-        <section>
-          <section>After CRA</section>
-          <section>Struttura dopo setup</section>
-        </section>
-        <section>
-          <section><h1>Componente</h1></section>
-          <section>Funzioni e classi</section>
-          <section>Funzione che ritorna degli elementi</section>
-          <section>JSX</section>
-          <section>Input - Props</section>
-          <section>Output - callbacks</section>
-          <section>State</section>
+          <section><h1>Componenti</h1></section>
+          <section>
+            <h2>Funzioni e classi</h2>
+          </section>
+          <section>
+            <div class="three-screen-example">
+              <pre>
+                <code data-trim data-line-numbers>
+                  import React from 'react';
+  
+                  export const MyTitle = () => {
+                    return (
+                      &lt;h1&gt;
+                        My first component
+                      &lt;/h1&gt;
+                    )
+                  }
+                </code>
+              </pre>
+              <pre>
+                <code data-trim data-line-numbers>
+                  import React from 'react';
+  
+                  export function MyList() {
+                    return (
+                      &lt;ul&gt;
+                        &lt;li&gt;Item 1&lt;/li&gt;
+                        &lt;li&gt;Item 2&lt;/li&gt;
+                        &lt;li&gt;Item 3&lt;/li&gt;
+                      &lt;/ul&gt;  
+                    )
+                  }
+                </code>
+              </pre>
+              <pre>
+                <code data-trim data-line-numbers>
+                  import React from 'react';
+                  import { MyList } from 'MyList.jsx';
+                  import { MyTitle } from 'MyTitle.jsx';
+
+                  const MyPage = () => (
+                    &lt;div&gt;
+                      &lt;MyTitle /&gt;
+                      &lt;MyList /&gt;
+                    &lt;/div&gt;
+                  ) 
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+
+                class MyPage extends React.Component {
+
+                  render() {
+                    return (
+                      &lt;h1&gt;
+                        My first component
+                      &lt;/h1&gt;
+                    )
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>JSX elements</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+
+                const element = (
+                  &lt;h1 className="greeting"&gt;
+                    Hello, world!
+                  &lt;/h1&gt;
+                );
+              </code>
+            </pre>
+            
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+
+                const element = React.createElement(
+                  'h1',
+                  {className: 'greeting'},
+                  'Hello, world!'
+                );
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>inserire espressioni js</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+                const title = "Hello, world!" 
+                const element = (
+                  &lt;h1 className="greeting"&gt;
+                    { title }
+                  &lt;/h1&gt;
+                );
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Input - Props</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+
+                const MyTitle = (props) => (
+                  &lt;h1&gt;
+                    { props.title }
+                  &lt;/h1&gt;
+                )
+
+                export { MyTitle };
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+                import { MyTitle } from 'MyTitle.jsx';
+
+                const MyPage = () => (
+                  &lt;div&gt;
+                    &lt;MyTitle title="Hello world"/&gt;
+                  &lt;/div&gt;
+                ) 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>destrutturare i props</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+
+                const MyTitle = ({ title }) => (
+                  &lt;h1&gt;
+                    { title }
+                  &lt;/h1&gt;
+                )
+
+                export { MyTitle };
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import React from 'react';
+                const log = () => console.log('Hello world')
+                const LogButton = () => (
+                  &lt;button onClick={log} &gt;
+                    Log stuff
+                  &lt;/button&gt;
+                )
+
+                export { LogButton };
+              </code>
+            </pre>
+            <aside class="notes">menziona gli svariati tipi eventi</aside>
+          </section>
+          <section>
+            <h2>callbacks</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const PlusButton = ({ clickHandler }) => (
+                  &lt;button onClick={clickHandler} &gt;
+                    +
+                  &lt;/button&gt;
+                )
+
+                export { PlusButton };
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { PlusButton } from 'PlusButton.jsx'
+
+                const App = () => {
+                  const [count, setCounter] = useState(0)
+                  return (
+                    &lt;div&gt;
+                      &lt;p&gt;{ count }&lt;/p&gt;
+                      &lt;PlusButton clickHandler={() => setCounter(count + 1)} /&gt;
+                    &lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>State</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { MyButton } from 'MyButton.jsx'
+
+                const App = () => {
+                  const [count, setCounter] = useState(0)
+                  return (
+                    &lt;div&gt;
+                      &lt;p&gt;{ count }&lt;/p&gt;
+                      &lt;MyButton clickHandler={() => setCounter(count + 1)} /&gt;
+                    &lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+            <aside class="notes"></aside>
+          </section>
           <section>Effects</section>
           <section>children prop</section>
         </section>
