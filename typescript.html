@@ -406,7 +406,7 @@
             <pre class="language-typescript fragment">
               <code data-trim data-line-numbers>
                 class Game implements CanUpdate {
-                  entities: Array<T extends CanUpdate>
+                  entities: Array&lt;T extends CanUpdate&gt;
                   update() {
                     for (const entity of this.entities) {
                       entity.update()
@@ -450,19 +450,9 @@
           <section>
             <h2>built-in utility types</h2>
           </section>
-
+          
           <section>
-            <pre class="language-typescript">
-              <code data-trim data-line-numbers>
-                enum PaymentMethod {
-                  Cash = 'CASH',
-                  CreditCard = 'CREDITCARD',
-                  PayPal = 'PAYPAL',
-                }
-                const p: PaymentMethod = PaymentMethod.Cash
-                console.log(p) // 'CASH'
-              </code>
-            </pre>
+            TODO
           </section>
         </section>
 
