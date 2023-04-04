@@ -308,7 +308,6 @@
                     &lt;Centered&gt;
                       &lt;div&gt;Item 1&lt;/div&gt;
                       &lt;div&gt;Item 2&lt;/div&gt;
-                      &lt;div&gt;Item 3&lt;/div&gt;
                     &lt;/Centered&gt;
                   )
                 }
@@ -321,6 +320,7 @@
           <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
+                import { useState } from 'react';
                 import { MyButton } from 'MyButton.jsx'
 
                 const App = () => {
@@ -339,6 +339,7 @@
           <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
+                import { useState } from 'react';
                 import { MyButton } from 'MyButton.jsx'
 
                 const App = () => {
@@ -363,7 +364,7 @@
           <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
-                import { MyButton } from 'MyButton.jsx'
+                import { useEffect } from 'react';
 
                 const App = () => {
                   useEffect(() => {
@@ -383,6 +384,7 @@
           <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
+                import { useState, useEffect } from 'react';
                 import { MyButton } from 'MyButton.jsx'
 
                 const App = () => {
@@ -409,6 +411,8 @@
           <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
+                import { useState, useEffect } from 'react';
+
                 const useCounter = (initialValue) => {
                   const [count, setCounter] = useState(initialValue)
                   useEffect(() => {
@@ -428,6 +432,8 @@
 
                   return { up, down }
                 }
+
+                export { useCounter }
               </code>
             </pre>
             <aside class="notes">useSth obbligatorio</aside>
@@ -435,6 +441,8 @@
           <section>
             <pre>
               <code data-trim data-line-numbers>
+                import { useCounter } from 'wherever-i-put-it.js';
+
                 const App = () => {
                   const { up, down } = useCounter(0);
                   return (
@@ -540,6 +548,7 @@
                   >styled components</a
                 >
               </li>
+              <li>etc...</li>
             </ul>
           </section>
         </section>
@@ -565,7 +574,7 @@
                 React router
               </a>
             </li>
-            <li>Meccanismi interni</li>
+            <li class="fragment">Meccanismi interni</li>
           </ul>
         </section>
         <section>
