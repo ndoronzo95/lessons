@@ -565,7 +565,7 @@
                   const [disabled, setDisabled] = useState(false);
                   return (
                     &lt;ul&gt;
-                      { elements.map((text, i) => (&lt;li key={i}&gt;{ text }&lt;/li&gt;)) }
+                      { elements.map(text => (&lt;li key={text}&gt;{ text }&lt;/li&gt;)) }
                     &lt;/ul&gt;
                   )
                 }
