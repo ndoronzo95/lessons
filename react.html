@@ -70,6 +70,7 @@
           <section><h1>Componenti</h1></section>
           <section>
             <h2>Funzioni e classi</h2>
+            <aside class="notes">lifecycle methods vs lifecycle hooks</aside>
           </section>
           <section>
             <div class="three-screen-example">
@@ -265,8 +266,43 @@
               </code>
             </pre>
           </section>
+
           <section>
-            <h2>State</h2>
+            <h2>children prop</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                export const Centered = ({ children }) => (
+                  &lt;div 
+                    style={{ 
+                      display: flex; 
+                      justifyContent: 'center' 
+                    }}
+                  &gt;
+                    { children }
+                  &lt;/div&gt;
+                )
+              </code>
+            </pre>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { Centered } from 'layout.jsx'
+
+                const App = () => {
+                  return (
+                    &lt;Centered&gt;
+                      &lt;div&gt;Item 1&lt;/div&gt;
+                      &lt;div&gt;Item 2&lt;/div&gt;
+                      &lt;div&gt;Item 3&lt;/div&gt;
+                    &lt;/Centered&gt;
+                  )
+                }
+              </code>
+            </pre>
+            <aside class="notes">utile per layout ma non solo</aside>
+          </section>
+
+          <section><h2>State</h2></section>
+          <section>
             <pre class="language-js">
               <code data-trim data-line-numbers>
                 import { MyButton } from 'MyButton.jsx'
@@ -282,10 +318,130 @@
                 }
               </code>
             </pre>
-            <aside class="notes"></aside>
+            <aside class="notes">Perche si chiamano hooks</aside>
           </section>
-          <section>Effects</section>
-          <section>children prop</section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { MyButton } from 'MyButton.jsx'
+
+                const App = () => {
+                  const [count, setCounter] = useState(0)
+                  return (
+                    &lt;div&gt;
+                      &lt;p&gt;{ count }&lt;/p&gt;
+                      &lt;MyButton clickHandler={
+                        () => setCounter(state => state + 1)
+                      } 
+                    /&gt;
+                    &lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+            <aside class="notes">Perche si chiamano hooks</aside>
+          </section>
+          <section>
+            <h2>Effects</h2>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { MyButton } from 'MyButton.jsx'
+
+                const App = () => {
+                  useEffect(() => {
+                    /* do something every time dependencies change */
+                    return () => {
+                      /* cleanup when destroyed */
+                    }
+                  }, [/* dependencies */])
+                  
+                  return (
+                    &lt;div&gt;&lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                import { MyButton } from 'MyButton.jsx'
+
+                const App = () => {
+                  const [count, setCounter] = useState(0)
+                  useEffect(() => {
+                    console.log('Count is changed')
+                    return () => {
+                      console.log('Final count is: ' + count)
+                    }
+                  }, [count])
+                  return (
+                    &lt;div&gt;
+                      &lt;p&gt;{ count }&lt;/p&gt;
+                      &lt;MyButton clickHandler={() => setCounter(count + 1)} /&gt;
+                    &lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>custom hooks</h2>
+          </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                const useCounter = (initialValue) => {
+                  const [count, setCounter] = useState(initialValue)
+                  useEffect(() => {
+                    console.log('Count is changed')
+                    return () => {
+                      console.log('Final count is: ' + count)
+                    }
+                  }, [count])
+
+                  const up = () => {
+                    setCounter((state) => state + 1)
+                  }
+
+                  const down = () => {
+                    setCounter(state => state - 1)
+                  }
+
+                  return { up, down }
+                }
+              </code>
+            </pre>
+            <aside class="notes">useSth obbligatorio</aside>
+          </section>
+          <section>
+            <pre>
+              <code data-trim data-line-numbers>
+                const App = () => {
+                  const { up, down } = useCounter(0);
+                  return (
+                    &lt;div&gt;
+                      &lt;p&gt;{ count }&lt;/p&gt;
+                      &lt;button onClick={() => up()}&gt;+&lt;/button&gt;
+                      &lt;button onClick={() => down()}&gt;-&lt;/button&gt;
+                    &lt;/div&gt;
+                  )
+                }
+              </code>
+            </pre>
+            <aside class="notes">astrarre logica e meccanismi legati ai componenti</aside>
+          </section>
+          <section>
+            <h2><a href="https://hy.reactjs.org/docs/hooks-rules.html" target="_blank">the rules of hooks</a></h2>
+            <p>Gli hooks possono essere chiamati esclusivamente</p>
+            <ul>
+              <li>nei componenti</li>
+              <li>a top level (non nei blocchi es. if, cicli, funzioni)</li>
+              <li>eccezione: all'interno di custom hooks</li>
+            </ul>
+          </section>
         </section>
         <section>
           <section>Stile</section>
@@ -319,14 +475,18 @@
           <section>Material UI</section>
         </section>
         <section>
-          <section><h1>Approfondimenti</h1></section>
-          <section></section>
+          <section>
+            <h1>Approfondimenti</h1>
+          </section>
+          <section>
+            <ul>
+              <li><a href="https://www.youtube.com/watch?v=bGzanfKVFeU" target="_blank">Goodbye, useEffect - David Khourshid</a></li>
+            </ul>
+          </section>
         </section>
         <section>
           <section><h1>Esercizi</h1></section>
-          <section>Create a react app</section>
-          <section>Lista della spesa</section>
-          <section>Tabella di utenti CRUD</section>
+          <section>Counter app</section>
         </section>
       </div>
     </div>
