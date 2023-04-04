@@ -555,9 +555,46 @@
 
         <section>
           <section><h1>Strategie comuni</h1></section>
-          <section>Come gestire una lista di elementi - CRUD</section>
-          <section>Come gestire una chiamata http</section>
-          <section></section>
+          <section>
+            <h2>Come gestire una lista di elementi</h2>
+            <pre>
+              <code data-trim data-line-numbers>
+                const elements = ['el-1', 'el-2', 'el-3'];
+                
+                const MyList = () => {
+                  const [disabled, setDisabled] = useState(false);
+                  return (
+                    &lt;ul&gt;
+                      { elements.map((text, i) => (&lt;li key={i}&gt;{ text }&lt;/li&gt;)) }
+                    &lt;/ul&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Come gestire una chiamata http - basic</h2>
+            <pre>
+              <code data-trim data-line-numbers>
+                import styles from 'my-button.css';
+                
+                const App = ({ clickHandler, text }) => {
+                  const [users, setUsers] = useState([]);
+                  useEffect(() => {
+                    fetch('/api/users')
+                      .then(res => res.json())
+                      .then((data) => setUsers(data))
+                  }, [])
+
+                  return (
+                    &lt;ul&gt;
+                      { users.map((user) => (&lt;User data={user} key={user.id} /&gt;)) }
+                    &lt;/ul&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
         </section>
         <section>
           <h2>Cosa abbiamo omesso</h2>
