@@ -40,11 +40,19 @@
             <h2>React</h2>
           </section>
           <section>
-            <img width="600" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcompanieslogo.com%2Fimg%2Forig%2FMETA-4767da84.png%3Ft%3D1654568366&f=1&nofb=1&ipt=c917a8195de24f220dc697ea22ca58c81ed3f5547e24e12f28d0e03016677cf6&ipo=images" alt="">
+            <img
+              width="600"
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcompanieslogo.com%2Fimg%2Forig%2FMETA-4767da84.png%3Ft%3D1654568366&f=1&nofb=1&ipt=c917a8195de24f220dc697ea22ca58c81ed3f5547e24e12f28d0e03016677cf6&ipo=images"
+              alt=""
+            />
           </section>
           <section>
             <div class="img-label">
-              <img width="400" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthediffpodcast.com%2Fimg%2Fjordan.jpg&f=1&nofb=1&ipt=197d942926abc89749bbf763d0561498a872088e366e09fc6f0b6b598c46093d&ipo=images" alt="">
+              <img
+                width="400"
+                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthediffpodcast.com%2Fimg%2Fjordan.jpg&f=1&nofb=1&ipt=197d942926abc89749bbf763d0561498a872088e366e09fc6f0b6b598c46093d&ipo=images"
+                alt=""
+              />
               <label>Jordan Walke</label>
             </div>
           </section>
@@ -61,9 +69,17 @@
           <section><h2>Solo componenti</h2></section>
           <section>
             <h2>unidirectional data flow</h2>
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdzone.com%2Fstorage%2Ftemp%2F8081542-react-data-flow.png&f=1&nofb=1&ipt=c118fcd57b39ad24610ff02fc999363dd216a46e74286f35d8941ed765c5294f&ipo=images" alt="">
+            <img
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdzone.com%2Fstorage%2Ftemp%2F8081542-react-data-flow.png&f=1&nofb=1&ipt=c118fcd57b39ad24610ff02fc999363dd216a46e74286f35d8941ed765c5294f&ipo=images"
+              alt=""
+            />
           </section>
-          <section><h2>Minimale...</h2></section>
+          <section>
+            <h2>Minimale...</h2>
+            <aside class="notes">
+              dipendenzde da terze parti. Setup con poco niente
+            </aside>
+          </section>
         </section>
 
         <section>
@@ -149,7 +165,7 @@
                 );
               </code>
             </pre>
-            
+
             <pre class="language-js">
               <code data-trim data-line-numbers>
                 import React from 'react';
@@ -431,10 +447,18 @@
                 }
               </code>
             </pre>
-            <aside class="notes">astrarre logica e meccanismi legati ai componenti</aside>
+            <aside class="notes">
+              astrarre logica e meccanismi legati ai componenti
+            </aside>
           </section>
           <section>
-            <h2><a href="https://hy.reactjs.org/docs/hooks-rules.html" target="_blank">the rules of hooks</a></h2>
+            <h2>
+              <a
+                href="https://hy.reactjs.org/docs/hooks-rules.html"
+                target="_blank"
+                >the rules of hooks</a
+              >
+            </h2>
             <p>Gli hooks possono essere chiamati esclusivamente</p>
             <ul>
               <li>nei componenti</li>
@@ -444,10 +468,82 @@
           </section>
         </section>
         <section>
-          <section>Stile</section>
-          <section>css modules</section>
-          <section>Librerie per gestire lo stile</section>
+          <section><h2>Stile</h2></section>
+          <section>
+            <h3>style attribute</h3>
+            <pre>
+              <code data-trim data-line-numbers>
+                const buttonStyles = {
+                  color: 'white',
+                  backgroundColor: 'green',
+                }
+                const MyButton = ({ clickHandler, text }) => (
+                  &lt;button 
+                    onClick={() => clickHandler()}
+                    style={buttonStyles}
+                    &gt;
+                    { text }
+                  &lt;/button&gt;
+                )
+              </code>
+            </pre>
+            <aside class="notes">
+              quick solution, non super performante. Notare come camelCase su
+              regole css
+            </aside>
+          </section>
+          <section>
+            <h2>css modules</h2>
+            <pre>
+              <code data-trim data-line-numbers>
+                import 'my-button.css';
+                
+                const MyButton = ({ clickHandler, text }) => {
+                  const [disabled, setDisabled] = useState(false);
+                  return (
+                    &lt;button 
+                      onClick={() => clickHandler()}
+                      className={'button' + (disabled ? ' button-disabled' : '')}
+                    &gt;
+                      { text }
+                    &lt;/button&gt;
+                  )
+                }
+              </code>
+            </pre>
+            <aside class="notes">Potere di webpack</aside>
+          </section>
+          <section>
+            <pre>
+              <code data-trim data-line-numbers>
+                import styles from 'my-button.css';
+                
+                const MyButton = ({ clickHandler, text }) => {
+                  const [disabled, setDisabled] = useState(false);
+                  return (
+                    &lt;button 
+                      onClick={() => clickHandler()}
+                      className={`${styles.button} ${(disabled ? styles.disabled : '')}`}
+                    &gt;
+                      { text }
+                    &lt;/button&gt;
+                  )
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <ul>
+              <li>Tailwind</li>
+              <li>
+                <a href="https://styled-components.com/" target="_blank"
+                  >styled components</a
+                >
+              </li>
+            </ul>
+          </section>
         </section>
+
         <section>
           <section><h1>Strategie comuni</h1></section>
           <section>Come gestire una lista di elementi - CRUD</section>
@@ -455,24 +551,22 @@
           <section></section>
         </section>
         <section>
-          <h1>DEMO TIME</h1>
-        </section>
-        <section>
-          <section><h1>Context API</h1></section>
-          <section>Prop drilling </section>
-          <section>Provider - Consumer</section>
-        </section>
-        <section>
-          <section><h1>React router</h1></section>
-        </section>
-        <section>
-          <section><h1>React - Under the hood</h1></section>
-          <section>vdom</section>
-          <section>useState - useEffect fanno triggerare un ricalcolo</section>
-        </section>
-        <section>
-          <section>Librerie di componenti</section>
-          <section>Material UI</section>
+          <h2>Cosa abbiamo omesso</h2>
+          <ul>
+            <li class="fragment">
+              <a
+                href="https://react.dev/learn/passing-data-deeply-with-context"
+                target="_blank"
+              ></a>
+              Context API
+            </li>
+            <li class="fragment">
+              <a href="https://reactrouter.com/en/main" target="_blank">
+                React router
+              </a>
+            </li>
+            <li>Meccanismi interni</li>
+          </ul>
         </section>
         <section>
           <section>
@@ -480,13 +574,31 @@
           </section>
           <section>
             <ul>
-              <li><a href="https://www.youtube.com/watch?v=bGzanfKVFeU" target="_blank">Goodbye, useEffect - David Khourshid</a></li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=7YhdqIR2Yzo&ab_channel=PhilipFabianek"
+                  target="_blank"
+                >
+                  How Does React Actually Work? React.js Deep Dive #1
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=bGzanfKVFeU"
+                  target="_blank"
+                  >Goodbye, useEffect - David Khourshid</a
+                >
+              </li>
             </ul>
           </section>
         </section>
         <section>
-          <section><h1>Esercizi</h1></section>
-          <section>Counter app</section>
+          <section>
+            <h2>Esercizi</h2>
+            <ul>
+              <li>Counter app</li>
+            </ul>
+          </section>
         </section>
       </div>
     </div>
