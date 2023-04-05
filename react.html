@@ -556,7 +556,34 @@
         <section>
           <section><h1>Strategie comuni</h1></section>
           <section>
-            <h2>Come gestire una lista di elementi</h2>
+            <h2>Mostrare una cosa piuttosto che un'altra</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                const MyPage = () => {
+                  const [isVisible, setVisibility] = useState(false);
+                  useEffect(() => {
+                    setTimeout(() => setVisibility(true), 3000)
+                  }, [])
+
+                  if (isVisible) {
+                    return (
+                      &lt;div&gt;
+                        Now i am visible
+                      &lt;/div&gt;
+                    )
+                  } else {
+                    return (
+                      &lt;div&gt;
+                        Wait three more seconds...
+                      &lt;/div&gt;
+                    )
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Lista di elementi</h2>
             <pre>
               <code data-trim data-line-numbers>
                 const elements = ['el-1', 'el-2', 'el-3'];
@@ -573,7 +600,7 @@
             </pre>
           </section>
           <section>
-            <h2>Come gestire una chiamata http - basic</h2>
+            <h2>Chiamata http - basic</h2>
             <pre>
               <code data-trim data-line-numbers>
                 import User from 'user.js';
