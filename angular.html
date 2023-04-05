@@ -32,107 +32,860 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <i
-            style="font-size: 20rem; color: red"
-            class="fa-brands fa-angular"
-          ></i>
-          <p class="r-fit-text"><span style="color: red">A</span>ngular</p>
-        </section>
-
-        <section>
-          <section>Un po' di storia</section>
-          <section>Angular è complicato...</section>
-          <section>Angular è compilato...Decorators</section>
           <section>
-            Angular è cambiato...una delle ultime versioni ha introdotto un game
-            changer
+            <i
+              style="font-size: 20rem; color: red"
+              class="fa-brands fa-angular"
+            ></i>
+            <h2><span style="color: red">A</span>ngular</h2>
           </section>
           <section>
-            Non solo componenti. Components, Services, Directives, Pipes,
-            Modules
+            <img
+              src="https://www.metaltoad.com/sites/default/files/styles/large_personal_photo_870x500_/public/2020-05/angularjs-logo-blog-header_0.jpg?itok=CUBxFqam"
+            />
           </section>
-          <section>Angular CLI</section>
+          <section><h2>Angular 2+</h2></section>
+          <section>
+            <h2>Angular è complicato...</h2>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Architecture_of_an_Angular_2_application.png"
+            />
+          </section>
+          <section>
+            <h2>Angular è compilato</h2>
+            <aside class="notes">
+              Mentre quello che scriviamo in react è proprio javascript, quello
+              che scriviamo in angular è codice angular/ts che viene compilato
+              in js. + velocità, + complessità
+            </aside>
+          </section>
+          <section>
+            <h2>Non solo componenti</h2>
+            <ul>
+              <li class="fragment">Components</li>
+              <li class="fragment">Services</li>
+              <li class="fragment">Directives</li>
+              <li class="fragment">Pipes</li>
+              <li class="fragment">Modules</li>
+            </ul>
+          </section>
+          <section>
+            <h2>
+              <a href="https://angular.io/cli" target="_blank">Angular CLI</a>
+            </h2>
+            <ul>
+              <li class="fragment">creare un applicazione angular</li>
+              <li class="fragment">generare elementi di angular</li>
+              <li class="fragment">aggiungere dipendenze</li>
+              <li class="fragment">update dipendenze</li>
+              <li class="fragment">
+                scripts di sviluppo (dev-server, build, test, etc.)
+              </li>
+              <li class="fragment">etc...</li>
+            </ul>
+          </section>
           <section><a href="./typescript.html">TypeScript</a></section>
-          <section>Dependency injection</section>
+          <section><h2>Dependency injection</h2></section>
           <section>
-            Reactive eXtensions for JavaScript - un nuovo modo di vedere la
-            programmazione asincrona
+            <h2>css preprocessors integrati</h2>
+            <ul>
+              <li>css</li>
+              <li>sass (scss)</li>
+              <li>sass</li>
+              <li>less</li>
+            </ul>
           </section>
+          <section>
+            <p>
+              <span style="color: violet">R</span>eactive e<span
+                style="color: violet"
+                >X</span
+              >tensions for <span style="color: violet">J</span>ava<span
+                style="color: violet"
+                >S</span
+              >cript
+            </p>
+            <img
+              width="300"
+              src="https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png"
+              alt=""
+            />
+          </section>
+
+          <section>
+            <h2>strutturato</h2>
+          </section>
+
+          <section>
+            <h2>Grandi novità dalla versione 14</h2>
+          </section>
+
         </section>
 
         <section>
-          <section>Angular CLI</section>
-          <section>ng new ...</section>
+          <section><h2>Angular CLI</h2></section>
+          <section>ng new PROJECT_NAME</section>
           <section>
-            ng g<span style="opacity: 0.7">enereate</span> c<span
-              style="opacity: 0.7"
-              >omponent</span
-            >
+            <h2><a href="https://angular.io/cli/generate">Generate</a></h2>
+            <p>ng g<span style="opacity: 0.7">enerate</span></p>
+            <ul>
+              <li>c<span style="opacity: 0.7">omponent</span></li>
+              <li>s<span style="opacity: 0.7">ervice</span></li>
+              <li>m<span style="opacity: 0.7">odule</span></li>
+              <li>d<span style="opacity: 0.7">irective</span></li>
+              <li>p<span style="opacity: 0.7">ipe</span></li>
+              <li><span style="opacity: 0.7">etc.</span></li>
+            </ul>
           </section>
-          <section>ng add ...</section>
+          <section>ng add DEPENDENCY_NAME</section>
           <section>ng update</section>
         </section>
 
         <section>
-          <section><h1>Modules</h1></section>
-          <section>un pacchetto importabile di elementi</section>
-          <section>declarations - imports - exports</section>
           <section>
-            Componenti Direttive e Pipes devono essere dichiarati in un modulo
+            <h1>Modules</h1>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-height: unset;">
+                import { NgModule } from '@angular/core';
+                import { CommonModule } from '@angular/common';
+                @NgModule({
+                  declarations: [
+                    TitleComponent,
+                    HighlightDirective,
+                    CurrencyPipe
+                  ],
+                  imports: [
+                    CommonModule
+                  ],
+                  exports: [
+                    TitleComponent,
+                    CurrencyPipe
+                  ]
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+            <aside class="notes">
+              declarations: elementi che vengono creati nel contesto di questo
+              modulo. Hanno accesso agli altri elementi dichiarati ed a quello
+              importati nel modulo. exports rende pubblici questi componenti a
+              chi importa questo modulo. Il resto sono privati al modulo. Alcuni
+              imports sono stati omessi
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-height: unset;">
+                import { SomeModule } from 'some-module.module'
+                @NgModule({
+                  declarations: [
+                    SomeOtherComponent,
+                    SomeOtherPipe,
+                  ],
+                  imports: [
+                    CommonModule,
+                    SomeModule
+                  ],
+                  exports: [
+                    SomeOtherComponent
+                  ]
+                })
+                export class SomeOtherModule {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              Componenti, Direttive, e Pipes appartengono ad uno ed un solo
+              modulo
+            </h2>
+          </section>
+          <section>
+            <h2>A cosa servono i moduli?</h2>
+            <ul>
+              <li class="fragment">modularità e separazione</li>
+              <li class="fragment">organizzazione del codice</li>
+              <li class="fragment">dependency injection</li>
+            </ul>
+            <aside class="notes">unità maggiore di composizione.</aside>
           </section>
         </section>
 
         <section>
-          <section><h1>Components</h1></section>
-          <section>file ts - file html - file scss</section>
-          <section>@Component decorator</section>
-          <section>@Input</section>
-          <section>@Output</section>
-          <section>ngOnInit - ngOnDestroy</section>
-          <section>ng-content</section>
-          <section>standalone mode</section>
+          <section>
+            <h1>Components</h1>
+          </section>
+          <section>
+            <p>ng g c my-title</p>
+            <ul>
+              <li>my-title.component.ts</li>
+              <li>my-title.component.html</li>
+              <li>my-title.component.css</li>
+              <li>my-title.component.spec.ts</li>
+            </ul>
+          </section>
+          <section>
+            <h2>@Component decorator</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { Component } from '@angular/core';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1&gt;My title&lt;/h1&gt;
+                  `,
+                  styles: ['h1 { color: red; font-size: 3rem }']
+                })
+                export class MyTitleComponent {} 
+              </code>
+            </pre>
+            <aside class="notes">
+              selector è un css selector con cui utilizzare il componente.
+              Spesso omettero gli import. Menziona la view encapsulation
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'my-title',
+                  templateUrl: 'my-title.component.html',
+                  styleUrls: ['my-title.component.scss']
+                })
+                export class MyTitleComponent {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>interazione tra template e classe - data binding</h2>
+            <aside class="notes">2 modi</aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,6">
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;{{ myAwesomeTitle }}&lt;/h1&gt;',
+                })
+                export class MyTitleComponent {
+                  myAwesomeTitle = 'Hello, world!'
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              è possibile inserire quasi qualsiasi espressione ts
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,6">
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1 [textContent]="myAwesomeTitle"&gt;&lt;/h1&gt;',
+                })
+                export class MyTitleComponent {
+                  myAwesomeTitle = 'Hello, world!'
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              Il template reagisce al cambiamento dei dati collegati ad esso
+            </h2>
+          </section>
+          <section>
+            <h2>collegare funzionalità agli eventi - event binding</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,6-8">
+                @Component({
+                  selector: 'my-button',
+                  template: '&lt;button (click)="doSomething()"&gt;&lt;/button&gt;',
+                })
+                export class MyButtonComponent {
+                  doSomething() {
+                    console.log('Hello world!')
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,6-8">
+                @Component({
+                  selector: 'my-button',
+                  template: '&lt;button (click)="logEvent($event)"&gt;&lt;/button&gt;',
+                })
+                export class MyButtonComponent {
+                  logEvent(e: MouseEvent) {
+                    console.log(e)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>usare un componente</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3-6">
+                @Component({
+                  template: `
+                    &lt;my-title&gt;&lt;/my-title&gt;
+                    &lt;my-button&gt;&lt;/my-button&gt;
+                  `,
+                })
+                export class AppComponent {} 
+              </code>
+            </pre>
+            <aside class="notes">
+              per poter utilizzare un componente in un template di un'altro
+              componente, o dichiarati nello stesso modulo o il componente è
+              esportato in un modulo che viene importato dal modulo che contiene
+              il componente che lo usa. Quando dichiariamo un componente in un
+              modulo, a compile time, angular registra il componente come fosse
+              un elemento html custom, che lo ospita. è un elemento html
+              qualunque che può reagire agli eventi, avere stile etc. Il suo
+              contenuto è ciò che dichiaro nel template Questo elemento html è
+              l'host: Un elemento html generico che lo ospita
+            </aside>
+          </section>
+          <section>
+            <h2>comunicazione tra componenti</h2>
+          </section>
+          <section>
+            <h2>@Input decorator</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="6">
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;{{ title }}&lt;/h1&gt;',
+                })
+                export class MyTitleComponent {
+                  @Input() title = 'Default title';
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3-6">
+                @Component({
+                  template: `
+                    &lt;my-title 
+                      title="My awesome app!"
+                    &gt;
+                    &lt;/my-title&gt;
+                  `,
+                  stylesUrl: ['app.component.scss']
+                })
+                export class AppComponent {} 
+              </code>
+            </pre>
+            <aside class="notes">
+              per poter utilizzare un componente in un template di un'altro
+              componente, o dichiarati nello stesso modulo o il componente è
+              esportato in un modulo che viene importato dal modulo che contiene
+              il componente che lo usa. Un elemento utilizzato
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3-6,11">
+                @Component({
+                  template: `
+                    &lt;my-title 
+                      [title]="appTitle"
+                    &gt;
+                    &lt;/my-title&gt;
+                  `,
+                  stylesUrl: ['app.component.scss']
+                })
+                export class AppComponent {
+                  appTitle = 'My awesome app!'
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>@Output decorator</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1,5-8,12">
+                import { Component, EventEmitter, Output } from '@angular/core';
+                @Component({
+                  selector: 'my-button',
+                  template: `
+                  &lt;button 
+                    (click)="buttonClicked.emit("i got clicked!!")"
+                    &gt;
+                  &lt;/button&gt;
+                  `,
+                })
+                export class MyButtonComponent {
+                  @Output() buttonClicked = new EventEmitter&lt;string&gt;();
+                } 
+              </code>
+            </pre>
+            <aside class="notes">posso emettere anche void</aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="13-16">
+                import { Component, EventEmitter, Output } from '@angular/core';
+                @Component({
+                  selector: 'my-button',
+                  template: `
+                  &lt;button 
+                    (click)="buttonClicked.emit("i got clicked!!")"
+                    &gt;
+                  &lt;/button&gt;
+                  `,
+                })
+                export class MyButtonComponent {
+                  @Output() buttonClicked = new EventEmitter&lt;string&gt;();
+                  @Output() someOtherEvent = new EventEmitter();
+                  constructor() {
+                    setTimeout(() => this.someOtherEvent.emit('Hey!'), 3000)   
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3-6,10-16" style="max-height: unset;">
+                @Component({
+                  template: `
+                    &lt;my-button 
+                      (buttonClicked)="doSomething($event)"
+                      (someOtherEvent)="doSomethingElse($event)"
+                    &gt;
+                    &lt;/my-button&gt;
+                  `,
+                })
+                export class AppComponent {
+                  doSomething(e) {
+                    console.log(e) // 'i got clicked!!'
+                  }
+                  doSomethingElse(e) {
+                    e.split('') // ['H', 'e', 'y', '!']
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">posso emettere anche void</aside>
+          </section>
+          <section>
+            <h2>lifecycle hooks</h2>
+            <div class="r-stack">
+              <img
+                width="400"
+                src="https://codecraft.tv/courses/angular/components/lifecycle-hooks/images/lifecycle-hooks.png"
+                alt=""
+              />
+              <img
+                class="fragment"
+                width="400"
+                src="./img/lifecycle-hooks-unfocused.png"
+                alt=""
+              />
+            </div>
+          </section>
+          <section>
+            <h4>constructor - quando il componente viene instanziato</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="8-10" style="max-height: unset;">
+                @Component({
+                  template: `
+                    &lt;my-title title="My App!"&gt;&lt;/my-title&gt;
+                    &lt;my-button&gt;&lt;/my-button&gt;
+                  `,
+                })
+                export class MyPageComponent {
+                  constructor() {
+                    console.log('MyPageComponent instance created!')
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p style="font-size: 5rem">ngOnChanges</p>
+            <p>quando gli input cambiano valore</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-height: unset;">
+                @Component({
+                  template: `
+                    &lt;my-title [title]="pageTitle"&gt;&lt;/my-title&gt;
+                    &lt;my-button (buttonClicked)="pageTitle = 'New Value!'"&gt;&lt;/my-button&gt;
+                  `,
+                })
+                export class MyPageComponent {
+                  pageTitle = 'My App!';
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { OnChanges, SimpleChanges } from '@angular/core';
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;{{ title }}&lt;/h1&gt;',
+                })
+                export class MyTitleComponent implements OnChanges {
+                  @Input() title = 'Default title';
+
+                  ngOnChanges(changes: SimpleChanges) {
+                    console.log(changes)  
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                // Simple Changes - 1
+                {
+                  title: {
+                    previousValue: undefined
+                    currentValue: "My App!"
+                    firstChange: true
+                  }
+                }
+                // Simple Changes - 2
+                {
+                  title: {
+                    previousValue: "My App!"
+                    currentValue: "New Value!"
+                    firstChange: false
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;{{ _title }}&lt;/h1&gt;',
+                })
+                export class MyTitleComponent {
+                  _title = 'Default title';
+                  @Input() set title(v: string) {
+                    this._title = v;
+                    console.log('New input set!')
+                  };
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>ngOnInit - dopo il setting dei primi input</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { OnInit } from '@angular/core';
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;My Title&lt;/h1&gt;',
+                })
+                export class MyTitleComponent implements OnInit {
+                  ngOnInit() {
+                    console.log('some initial logic on the state...')
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>ngOnDestroy - quando il componente viene rimosso dal DOM</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { OnDestroy } from '@angular/core';
+                @Component({
+                  selector: 'my-title',
+                  template: '&lt;h1&gt;My Title&lt;/h1&gt;',
+                })
+                export class MyTitleComponent implements OnDestroy {
+                  ngOnDestroy() {
+                    console.log('some cleanup logic...')
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section><h2>Content projection</h2></section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="4-6">
+                @Component({
+                  selector: 'centered-layout',
+                  template: `
+                    &lt;div style="display: flex; justify-content: 'center'"&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/div&gt;
+                  `,
+                })
+                export class CenteredLayoutComponent {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  template: `
+                    &lt;centered-layout&gt;
+                      &lt;div&gt;Item 1&lt;/div&gt;
+                      &lt;div&gt;Item 2&lt;/div&gt;
+                    &lt;/centered-layout&gt;
+                  `,
+                })
+                export class AppComponent { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>standalone mode (v14+)</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-width: unset;">
+                @Component({
+                  standalone: true,
+                  imports: [
+                    MyTitleComponent, 
+                    MyButtonComponent, 
+                    CommonModule
+                  ],
+                  template: `
+                    &lt;my-title title="My Page"&gt;&lt;/my-title&gt;
+                    &lt;my-button&gt;&lt;/my-button&gt;
+                  `,
+                })
+                export class MyPageComponent { } 
+              </code>
+            </pre>
+            <aside class="notes">
+              in questo esempio assumiamo che tutti i componenti sono standalone
+            </aside>
+          </section>
         </section>
 
         <section>
-          <section><h1>Pipes</h1></section>
-          <section>file ts</section>
-          <section>input - output with args</section>
-          <section>impure pipes</section>
+          <section>
+            <h1>Pipes</h1>
+            <aside class="notes">Funzionalità reperibili sul template</aside>
+          </section>
+          <section>
+            <p>ng g p reverse</p>
+            <ul>
+              <li>reverse.pipe.ts</li>
+              <li>reverse.pipe.spec.ts</li>
+            </ul>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { Pipe, PipeTransform } from '@angular/core';
+
+                @Pipe({ name: 'reverse' })
+                export class ReversePipe implements PipeTransform { 
+
+                  transform(value: string) {
+                    return value.split('').reverse().join('');
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3">
+                @Component({ 
+                  template: `
+                    &lt;div&gt;{{ '!dlrow ,olleH' | reverse }}&lt;/div&gt;
+                  `
+                })
+                export class AppComponent { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3">
+                @Component({ 
+                  template: `
+                    &lt;div&gt;{{ '!dlrow ,olleH' | reverse | uppercase | slice:0:4 }}&lt;/div&gt;
+                  `
+                })
+                export class AppComponent { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Pipe({ name: 'slice' })
+                export class SlicePipe implements PipeTransform { 
+
+                  transform(value: string, start: number, end: number) {
+                    return value.slice(start, end);
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
+          <section><h2>funzioni pure</h2></section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1">
+                @Pipe({ name: 'slice', pure: false })
+                export class SlicePipe implements PipeTransform { 
+
+                  transform(value: string, start: number, end: number) {
+                    return value.slice(start, end);
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
         </section>
 
         <section>
           <section><h1>Directives</h1></section>
-          <section>un componente senza template... un parassita</section>
-          <section>@Input @Output etc. + @HostBinding, @HostListener</section>
+          <section>
+            <h2>un componente...senza template</h2>
+          </section>
+          <section data-auto-animate>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1|4-7">
+                @Directive({ selector: 'input[logUserInput]' })
+                export class LogUserInputDirective { 
+
+                  @HostListener('keydown', ['$event'])
+                  onKeyDown(e: KeyboardEvent) {
+                    console.log('User has pressed key: ', e.key)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section data-auto-animate>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Directive({ selector: 'input[logUserInput]' })
+                export class LogUserInputDirective { 
+
+                  @HostListener('keydown', ['$event'])
+                  onKeyDown(e: KeyboardEvent) {
+                    console.log('User has pressed key: ', e.key)
+                  }
+                } 
+              </code>
+            </pre>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({ template: '&lt;input logUserInput&gt;' })
+                export class AppComponent { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1|4-7">
+                @Directive({ selector: 'button' })
+                export class LogUserInputDirective { 
+                  user = { ... }
+                  @HostBinding('disabled')
+                  get userNotAllowed() {
+                    return !this.user.canDoStuff
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              le direttive supportano tutto ciò che supportano i componenti.
+              Input Output, lifecycle methods, etc.
+            </aside>
+          </section>
+          <section><h2>Direttive strutturali</h2></section>
+          <section>
+            <p>*ngIf</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="2|2,6-10">
+                @Component({ template: `
+                  &lt;button *ngIf="buttonIsVisible"&gt;
+                    Click me if you can
+                  &lt;/button&gt;
+                ` })
+                export class AppComponent { 
+                  buttonIsVisible = true;
+                  constructor() {
+                    setTimeout(() => this.buttonIsVisible = false, 10000)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>*ngFor</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,9|1-20">
+                @Component({ template: `
+                  &lt;ul&gt;
+                    &lt;li *ngFor="let user of listOfUsers"&gt;
+                      {{ user.name }} {{ user.surname }}
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                ` })
+                export class AppComponent { 
+                  listOfUsers = [{...},{...},{...}];
+                } 
+              </code>
+            </pre>
+          </section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>Services</h1></section>
           <section>Una classe Injectable</section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>Dependency Injection</h1></section>
-          <section>Accedere ai dati semplicemente richiedendoli - constructor injection, inject (a 14 +)</section>
+          <section>
+            Accedere ai dati semplicemente richiedendoli - constructor
+            injection, inject (a 14 +)
+          </section>
           <section>Da dove vengono questi dati? - providers</section>
           <section>Puoi iniettare tutto...</section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>Routing</h1></section>
         </section>
-        
-        <section>
+
+        <section data-visibility="hidden">
           <section>no promises - observables</section>
 
           <section>Subjects</section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>Approfondimenti</h1></section>
           <section></section>
         </section>
-        <section>
+        <section data-visibility="hidden">
           <section><h1>Esercizi</h1></section>
           <section>Create an angular app</section>
           <section>Lista della spesa</section>
