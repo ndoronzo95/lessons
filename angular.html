@@ -119,7 +119,6 @@
           <section>
             <h2>Grandi novità dalla versione 14</h2>
           </section>
-
         </section>
 
         <section>
@@ -765,6 +764,16 @@
           <section><h1>Directives</h1></section>
           <section>
             <h2>un componente...senza template</h2>
+            <aside class="notes">
+              In realtà Component decorator è una sottoclasse di Directive
+            </aside>
+          </section>
+          <section>
+            <p>ng g d log-user-input</p>
+            <ul>
+              <li>log-user-input.directive.ts</li>
+              <li>log-user-input.directive.spec.ts</li>
+            </ul>
           </section>
           <section data-auto-animate>
             <pre class="language-javascript">
@@ -804,7 +813,7 @@
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1|4-7">
                 @Directive({ selector: 'button' })
-                export class LogUserInputDirective { 
+                export class UserNotAllowedDirective { 
                   user = { ... }
                   @HostBinding('disabled')
                   get userNotAllowed() {
@@ -838,6 +847,27 @@
             </pre>
           </section>
           <section>
+            <p>*ngIf - else</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="2|2,6-10">
+                @Component({ template: `
+                  &lt;button *ngIf="buttonIsVisible; else buttonIsDisappeared"&gt;
+                    Click me if you can
+                  &lt;/button&gt;
+                  &lt;ng-template #buttonIsDisappeared&gt;
+                    &lt;p&gt;Sorry...you missed your chance&lt;/p&gt;
+                  &lt;/ng-template&gt;
+                ` })
+                export class AppComponent { 
+                  buttonIsVisible = true;
+                  constructor() {
+                    setTimeout(() => this.buttonIsVisible = false, 10000)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
             <p>*ngFor</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="3,9|1-20">
@@ -854,21 +884,331 @@
               </code>
             </pre>
           </section>
-        </section>
-
-        <section data-visibility="hidden">
-          <section><h1>Services</h1></section>
-          <section>Una classe Injectable</section>
-        </section>
-
-        <section data-visibility="hidden">
-          <section><h1>Dependency Injection</h1></section>
           <section>
-            Accedere ai dati semplicemente richiedendoli - constructor
-            injection, inject (a 14 +)
+            <p>*ngFor - more info...</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="3,9|1-20">
+                @Component({ template: `
+                  &lt;ul&gt;
+                    &lt;li *ngFor="let user of listOfUsers; let i = index;"&gt;
+                      {{ user.name }} {{ user.surname }}
+                    &lt;/li&gt;
+                  &lt;/ul&gt;
+                ` })
+                export class AppComponent { 
+                  listOfUsers = [{...},{...},{...}];
+                } 
+              </code>
+            </pre>
+            <aside class="notes">menziona altri dati reperibili</aside>
           </section>
-          <section>Da dove vengono questi dati? - providers</section>
-          <section>Puoi iniettare tutto...</section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Services</h1>
+            <aside class="notes">
+              Classe richiedibile dagli elementi angular.
+            </aside>
+          </section>
+          <section>
+            <p>ng g s user</p>
+            <ul>
+              <li>user.service.ts</li>
+              <li>user.service.spec.ts</li>
+            </ul>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Injectable({ providedIn: 'root' })
+                export class UserService { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Injectable({ providedIn: 'root' })
+                export class UserService {
+                  private loggedUser = {..., name: 'Gianluca' } 
+                  isLoggedIn = true;
+                  canDoStuff = false;
+
+                  getUserName() {
+                    return this.loggedUser.name
+                  }
+
+                  isAdmin() {
+                    ...
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">lo riempiamo di logica...</aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { UserService } from 'user.service';
+
+                @Component({ template: `
+                  &lt;p *ngIf="isAdmin; else commonUser"&gt;
+                    Dear {{ userName }}, you have access to a lot of stuff!
+                  &lt;/p&gt;
+                  &lt;ng-template #commonUser&gt;
+                  Dear {{ userName }}, you can do less than you think...
+                  &lt;/ng-template&gt;
+                  ` 
+                })
+                export class MyPageComponent {
+                  userName = this.userService.getUserName();
+                  isAdmin = this.userService.isAdmin();
+
+                  constructor(private userService: UserService) { }
+                  
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              inciso...ricorda: dichiarare accessor in constructor su ts
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({ template: `
+                  &lt;p *ngIf="userService.isLoggedIn; else loginForm"&gt;
+                    Welcome {{ userService.getUserName() }}!
+                  &lt;/p&gt;
+                  &lt;ng-template #loginForm&gt;
+                    &lt;form&gt;
+                      &lt;input name="username"&gt;
+                      &lt;input name="password" type="password"&gt;
+                    &lt;/form&gt;
+                  &lt;/ng-template&gt;
+                  ` 
+                })
+                export class HomePageComponent {
+                  
+                  constructor(public userService: UserService) { }
+                  
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              inciso...ricorda: dichiarare accessor in constructor su ts
+            </aside>
+          </section>
+          <section>
+            <h2>Come arriva questo oggetto nel vostro componente?</h2>
+          </section>
+        </section>
+
+        <section data-visibility="hidden">
+          <section>
+            <h1>Dependency Injection</h1>
+            <aside class="notes">
+              Ci sono due modi per reperire dati in un componente in angular.
+              Inputs e DI.
+            </aside>
+          </section>
+          <section>
+            <h4>Accedere ai dati semplicemente richiedendoli</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({ template: `
+                  &lt;p *ngIf="userService.isLoggedIn; else loginForm"&gt;
+                    Welcome {{ userService.getUserName() }}!
+                  &lt;/p&gt;
+                  ` 
+                })
+                export class HomePageComponent {
+                  
+                  constructor(public userService: UserService) { }
+                  
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>v14+</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({ template: `
+                  &lt;p *ngIf="userService.isLoggedIn"&gt;
+                    Welcome {{ userService.getUserName() }}!
+                  &lt;/p&gt;
+                  ` 
+                })
+                export class HomePageComponent {
+                  userService = inject(UserService);
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Da dove vengono questi dati?</h2>
+            <ul>
+              <li>module providers</li>
+              <li>element providers</li>
+            </ul>
+          </section>
+          <section>
+            <h4>module providers</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  declarations: [
+                    MyPageComponent,
+                    HomePageComponent,
+                    ReversePipe
+                  ],
+                  providers: [
+                    UserService
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+            <aside class="notes">
+              Stessa istanza del service per questo modulo!
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  declarations: [
+                    OtherPageComponent
+                  ],
+                  providers: [
+                    UserService
+                  ]
+                  ...
+                })
+                export class SomeOtherModule {} 
+              </code>
+            </pre>
+            <aside class="notes">Altra istanza del service</aside>
+          </section>
+          <section>
+            <h2>i providers di un modulo vengono esportati</h2>
+          </section>
+          <section>
+            <h2>element providers</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  providers: [UserService],
+                  template: `
+                    &lt;p *ngIf="userService.isLoggedIn; else loginForm"&gt;
+                      Welcome {{ userService.getUserName() }}!
+                    &lt;/p&gt;
+                  ` 
+                })
+                export class HomePageComponent {
+                  
+                  constructor(public userService: UserService) { }
+                  
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              prop providers per Components e Directives. Lo user service sara'
+              disponibile per il componente
+            </aside>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  providers: [UserService],
+                  template: `
+                    &lt;my-title&gt;&lt;/my-title&gt;
+                  ` 
+                })
+                export class HomePageComponent { }
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { UserService } from 'user.service';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1&gt;Welcome {{ userName }}!&lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  userName = inject(UserService).getUserName()
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1">
+                @Injectable({ providedIn: 'root' })
+                export class UserService {
+                  ...
+                } 
+              </code>
+            </pre>
+            <aside class="notes">significa AppModule</aside>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1">
+                @Injectable()
+                export class UserService {
+                  ...
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1">
+                @Injectable({ providedIn: 'any' })
+                export class UserService {
+                  ...
+                } 
+              </code>
+            </pre>
+            <aside class="notes">significa ogni modulo del mio progetto</aside>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1">
+                @Injectable({ providedIn: 'platform' })
+                export class UserService {
+                  ...
+                } 
+              </code>
+            </pre>
+            <aside class="notes">significa booooh??</aside>
+          </section>
+          <section>
+            Rappresentazione dell'albero delle dipendenze
+          </section>
+          <section>Puoi iniettare tutto...useValue, useClass, useFactory</section>
+          <section>
+            Modificatori della richiesta delle dipendenze
+          </section>
+          <section>
+            <h2>Chi li crea?</h2>
+          </section>
         </section>
 
         <section data-visibility="hidden">
