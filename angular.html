@@ -1005,7 +1005,7 @@
           </section>
         </section>
 
-        <section data-visibility="hidden">
+        <section>
           <section>
             <h1>Dependency Injection</h1>
             <aside class="notes">
@@ -1199,15 +1199,564 @@
             </pre>
             <aside class="notes">significa booooh??</aside>
           </section>
+          <section>Rappresentazione dell'albero delle dipendenze</section>
           <section>
-            Rappresentazione dell'albero delle dipendenze
+            Puoi iniettare tutto...useValue, useClass, useFactory
           </section>
-          <section>Puoi iniettare tutto...useValue, useClass, useFactory</section>
-          <section>
-            Modificatori della richiesta delle dipendenze
-          </section>
+          <section>Modificatori della richiesta delle dipendenze</section>
           <section>
             <h2>Chi li crea?</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>HTTP e RXJS</h2>
+            <img
+              width="300"
+              src="https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png"
+              alt=""
+            />
+          </section>
+          <section><img src="./img/promises-observables.jpg" /></section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { HttpClientModule } from '@angular/common/http';
+                @NgModule({
+                  ...,
+                  imports: [
+                    HttpClientModule
+                  ]
+                  ...
+                })
+                export class AppModule {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|11|10,13-18|6" style="max-height: unset;">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user"&gt;Welcome {{ user.name }}!&lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get&lt;User&gt;('myApi.com/users/1')
+                      .subscribe((user) => {
+                        this.user = user;
+                      })
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              mentre fetch restituisce una promise, i metodi dell'http client di
+              angular restituiscono un observable. Observable = fonte di dati,
+              asincrona, che potrebbero arrivare in qualsiasi momento. Subscribe
+              significa "fornisci i dati da questa fonte a questa funzione che
+              passo". La funzione viene chiamata observer.
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12-14|6-8">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user$ | async as user"&gt;
+                        Welcome {{ user.name }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  user$: Observable&lt;User&gt; = 
+                    this.httpClient.get('myApi.com/users/1');
+                  constructor(private httpClient: HttpClient) {}
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              async pipe fa in modo che questi dati arrivino direttamente al
+              template, senza passare da un campo del template. il $ è una
+              convenzione.
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|13-19" style="max-height: unset;">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user"&gt;Welcome {{ user.name }}!&lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get('myApi.com/users/1')
+                      .toPromise()
+                      .then((user) => {
+                        this.user = user;
+                      })
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12-13|6-8" style="max-height: unset;">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user$ | async as user"&gt;
+                        Welcome {{ user.name }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  user$: Promise&lt;User&gt; = 
+                    this.httpClient.get('myApi.com/users/1').toPromise();
+                  constructor(private httpClient: HttpClient) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Gestire errori</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|13-23">
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user$ | async as user"&gt;
+                        Welcome {{ user.name }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get&lt;User&gt;('myApi.com/users/1')
+                      .subscribe(
+                        (user) => {
+                          this.user = user;
+                        },
+                        (error) => {
+                          console.error('Something bad happened')
+                        }
+                      )
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|14-22">
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user$ | async as user"&gt;
+                        Welcome {{ user.name }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get&lt;User&gt;('myApi.com/users/1')
+                      .subscribe({
+                        next: (user) => {
+                          this.user = user;
+                        },
+                        error: (error) => {
+                          console.error('Something bad happened')
+                        },
+                      })
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-height: unset;">
+                @Injectable({ providedIn: 'root' })
+                export class UserService {
+                  private readonly userEndpoint = 'myApi.com/users';
+                  constructor(private httpClient: HttpClient) {}
+
+                  getAllUsers() {
+                    return this.httpClient.get&lt;User[]&gt;(this.userEndpoint)
+                  }
+
+                  getUserById(id: string) {
+                    return this.httpClient.get&lt;User&gt;(`${this.userEndpoint}/id`)
+                  }
+                  
+                  addUser(user: User) {
+                    return this.httpClient.post&lt;string&gt;(this.userEndpoint, user);
+                  }
+
+                  removeUserById(id: string) {
+                    return this.httpClient.delete(`${this.userEndpoint}/id`);
+                  }
+
+                  updateUser(user: User) {
+                    return this.httpClient.put&lt;User&gt;(this.userEndpoint, user);
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers style="max-height: unset;">
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user$ | async as user"&gt;
+                        Welcome {{ user.name }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user$ = this.userService.getUserById('1');
+                  constructor(private userService: UserService) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>DEMO TIME</h2>
+            <h3>User table</h3>
+          </section>
+          <section>
+            <h3>Promises vs Observables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Promises</th>
+                  <th>Observables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Eager</td>
+                  <td>Lazy</td>
+                </tr>
+                <tr>
+                  <td>Emette un solo valore</td>
+                  <td>Può emettere più valori</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Operatori</td>
+                </tr>
+                <tr>
+                  <td>Non cancellabile</td>
+                  <td>Cancellabile</td>
+                </tr>
+                <tr>
+                  <td>minore complessità</td>
+                  <td>maggiore complessità</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <h2>pipe</h2>
+            <img
+              src="https://hazelcast.com/wp-content/uploads/2021/12/24_DataPipleline-1.png"
+            />
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="10-12" style="max-height: unset;">
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="userName$ | async as userName"&gt;
+                        Welcome {{ userName }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  userName$ = this.userService.getUserById('1').pipe(
+
+                  );
+                  constructor(private userService: UserService) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>pipe operators</h3>
+            <ul>
+              <li class="fragment">map</li>
+              <li class="fragment">filter</li>
+              <li class="fragment">switchMap</li>
+              <li class="fragment">catchError</li>
+              <li class="fragment">of<span style="opacity: 0.5">*</span></li>
+            </ul>
+          </section>
+          <section>
+            <p>map</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1|13|12|13|6" style="max-height: unset;">
+                import { map } from 'rxjs/operators';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="userName$ | async as userName"&gt;
+                        Welcome {{ userName }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  userName$ = this.userService.getUserById('1').pipe(
+                    map((user) => user.name)
+                  );
+                  constructor(private userService: UserService) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="12-16" style="max-height: unset;">
+                import { map } from 'rxjs/operators';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="userName$ | async as userName"&gt;
+                        Welcome {{ userName }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  userName$ = this.userService.getUserById('1').pipe(
+                    map(user => user.name),
+                    map(name => name.toUpperCase())
+                  );
+                  constructor(private userService: UserService) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>filter</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1|12-13|14|15|6" style="max-height: unset;">
+                import { map, filter } from 'rxjs/operators';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="userNameNoMario$ | async as userNameNoMario"&gt;
+                        Welcome {{ userNameNoMario }}!
+                      &lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  userNameNoMario$ = this.userService.getUserById('1')
+                    .pipe(
+                      map(user => user.name),
+                      filter(name => name !== 'Mario')
+                    );
+                  constructor(private userService: UserService) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>
+              mostrare tutti i post scritti dal primo utente che si chiama Mario
+            </h3>
+            <ul>
+              <li>GET /users</li>
+              <li>GET /posts</li>
+            </ul>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|11,18-23|4-7|18-23">
+                @Component({
+                  selector: 'mario-posts',
+                  template: `
+                      &lt;user-post 
+                        *ngFor="let post of marioPosts"
+                        [data]="post"
+                      &gt;&lt;/user-post&gt;
+                  `,
+                })
+                export class MarioPostsComponent implements OnInit {
+                  marioPosts: Post[] = [];
+                  constructor(
+                    private userService: UserService, 
+                    private postService: PostService
+                  ) {}
+
+                  ngOnInit() {
+                    this.userService.getUsers().subscribe(users => {
+                      const mario = users.find(u => u.name === 'Mario')
+                      this.userService.getPostsByUserId(mario.id).subscribe((posts) => {
+                        this.marioPosts = posts
+                      })
+                    })
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>switchMap</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1|13,20,23-25|21|22|23-25|6-9">
+                import { map, filter, switchMap } from 'rxjs/operators';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;user-post 
+                        *ngFor="let post of marioPosts"
+                        [data]="post"
+                      &gt;&lt;/user-post&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  marioPosts: Post[] = [];
+                  constructor(
+                    private userService: UserService, 
+                    private postService: PostService
+                  ) {}
+
+                  ngOnInit() {
+                    this.userService.getUsers().pipe(
+                      map(users => users.find(u => u.name === 'Mario')),
+                      switchMap(mario => this.postService.getPostsByUserId(mario.id))
+                    ).subscribe((posts) => {
+                      this.marioPosts = posts;
+                    });
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">
+              switchMap => sostituisci la fonte che stai osservando con una
+              nuova fonte. Notare che io sto dando per scontato che avrò un
+              mario in lista
+            </aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|13-16|6-9|7">
+                import { map, filter, switchMap } from 'rxjs/operators';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;user-post 
+                        *ngFor="let post of (marioPosts$ | async) || []"
+                        [data]="post"
+                      &gt;&lt;/user-post&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  marioPosts$ = this.userService.getUsers().pipe(
+                    map(users => users.find(u => u.name === 'Mario')),
+                    switchMap(mario => this.postService.getPostsByUserId(mario.id))
+                  );
+                  constructor(
+                    private userService: UserService, 
+                    private postService: PostService
+                  ) {}
+
+                  
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>catchError - of</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1|2|14-21|17-20">
+                import { map, filter, switchMap, catchError } from 'rxjs/operators';
+                import { of } from 'rxjs';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;user-post 
+                        *ngFor="let post of (marioPosts$ | async) || []"
+                        [data]="post"
+                      &gt;&lt;/user-post&gt;
+                  `,
+                })
+                export class MyTitleComponent {
+                  marioPosts$ = this.userService.getUsers().pipe(
+                    map(users => users.find(u => u.name === 'Mario')),
+                    switchMap(mario => this.postService.getPostsByUserId(mario.id)),
+                    catchError(error => {
+                      console.error('Something bad happened: ', error);
+                      return of([])
+                    })
+                  );
+                  constructor(
+                    private userService: UserService, 
+                    private postService: PostService
+                  ) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              <a href="https://www.openapis.org/" target="_blank"
+                >Open API / swagger</a
+              >
+            </h2>
+          </section>
+          <section>
+            <h2>Observer pattern</h2>
+            <aside class="notes">una fonte di cui possiamo osservare i cambiamenti codificati sotto forma di eventi</aside>
+          </section>
+        </section>
+
+        <section data-visibility="hidden">
+          <section><h2>forms</h2></section>
+        </section>
+
+        <section data-visibility="hidden">
+          <section><h2>Subjects</h2></section>
+          <section><h2>cold vs hot</h2></section>
+          <section><h2>marble diagrams</h2></section>
+          <section>
+            <h3>More operators</h3>
           </section>
         </section>
 
@@ -1215,15 +1764,42 @@
           <section><h1>Routing</h1></section>
         </section>
 
-        <section data-visibility="hidden">
-          <section>no promises - observables</section>
-
-          <section>Subjects</section>
+        <section>
+          <section><h1>template</h1></section>
         </section>
 
-        <section data-visibility="hidden">
+        <section>
           <section><h1>Approfondimenti</h1></section>
-          <section></section>
+          <section>
+            <h3>reactive programming</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=fdol03pcvMA&ab_channel=UphillConf"
+                  target="_blank"
+                  >André Staltz: Two Fundamental Abstractions - Uphill Conf
+                  2018</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=uQ1zhJHclvs&t=862s&ab_channel=ng-europe"
+                  target="_blank"
+                  >André Staltz: How rxjs works</a
+                >
+              </li>
+              <li hidden>
+                <a href="https://www.youtube.com/watch?v=3LKMwkuK0ZE&ab_channel=AngularConnect" target="_blank">
+                  RxJS 5 Thinking Reactively | Ben Lesh
+                </a>
+              </li>
+              <li hidden>
+                <a href="https://www.youtube.com/watch?v=KOOT7BArVHQ&ab_channel=AngularConnect" target="_blank">
+                  RxJS In-Depth – Ben Lesh
+                </a>
+              </li>
+            </ul>
+          </section>
         </section>
         <section data-visibility="hidden">
           <section><h1>Esercizi</h1></section>
