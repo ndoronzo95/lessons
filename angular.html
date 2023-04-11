@@ -1267,6 +1267,34 @@
             </aside>
           </section>
           <section>
+            <h5>http options</h5>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="14-16" style="max-height: unset;">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user"&gt;Welcome {{ user.name }}!&lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get&lt;User&gt;('myApi.com/users/1', {
+                      ...
+                    })
+                      .subscribe((user) => {
+                        this.user = user;
+                      })
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|12-14|6-8">
                 import { HttpClient } from '@angular/common/http';
@@ -1640,7 +1668,7 @@
                 import { map, filter, switchMap } from 'rxjs/operators';
 
                 @Component({
-                  selector: 'my-title',
+                  selector: 'mario-posts',
                   template: `
                       &lt;user-post 
                         *ngFor="let post of marioPosts"
@@ -1648,7 +1676,7 @@
                       &gt;&lt;/user-post&gt;
                   `,
                 })
-                export class MyTitleComponent {
+                export class MarioPostsComponent {
                   marioPosts: Post[] = [];
                   constructor(
                     private userService: UserService, 
@@ -1678,7 +1706,7 @@
                 import { map, filter, switchMap } from 'rxjs/operators';
 
                 @Component({
-                  selector: 'my-title',
+                  selector: 'mario-posts',
                   template: `
                       &lt;user-post 
                         *ngFor="let post of (marioPosts$ | async) || []"
@@ -1686,7 +1714,7 @@
                       &gt;&lt;/user-post&gt;
                   `,
                 })
-                export class MyTitleComponent {
+                export class MarioPostsComponent {
                   marioPosts$ = this.userService.getUsers().pipe(
                     map(users => users.find(u => u.name === 'Mario')),
                     switchMap(mario => this.postService.getPostsByUserId(mario.id))
@@ -1709,7 +1737,7 @@
                 import { of } from 'rxjs';
 
                 @Component({
-                  selector: 'my-title',
+                  selector: 'mario-posts',
                   template: `
                       &lt;user-post 
                         *ngFor="let post of (marioPosts$ | async) || []"
@@ -1717,7 +1745,7 @@
                       &gt;&lt;/user-post&gt;
                   `,
                 })
-                export class MyTitleComponent {
+                export class MarioPostsComponent {
                   marioPosts$ = this.userService.getUsers().pipe(
                     map(users => users.find(u => u.name === 'Mario')),
                     switchMap(mario => this.postService.getPostsByUserId(mario.id)),
@@ -1743,18 +1771,507 @@
           </section>
           <section>
             <h2>Observer pattern</h2>
-            <aside class="notes">una fonte di cui possiamo osservare i cambiamenti codificati sotto forma di eventi</aside>
+            <aside class="notes">
+              una fonte di cui possiamo osservare i cambiamenti codificati sotto
+              forma di eventi
+            </aside>
           </section>
         </section>
 
-        <section data-visibility="hidden">
-          <section><h2>forms</h2></section>
+        <section>
+          <section><h1>forms</h1></section>
+          <section><h3>gestire diversi livelli di complessità</h3></section>
+          <section>
+            <p>Livello 0</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6|12-15|11">
+                @Component({
+                  selector: 'simple-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        (input)="handleUsername($event)"
+                      &gt;
+                  `,
+                })
+                export class SimpleFormComponent {
+                  username = '';
+                  handleUsername(e: Event) {
+                    const input = e.target as HTMLInputElement;
+                    this.username = input.value;
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">name non obbligatorio</aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12|6|7|13-16|12|6">
+                @Component({
+                  selector: 'simple-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [value]="username"
+                        (input)="handleUsername($event)"
+                      &gt;
+                  `,
+                })
+                export class SimpleFormComponent {
+                  username = 'Nicola';
+                  handleUsername(e: Event) {
+                    const input = e.target as HTMLInputElement;
+                    this.username = input.value;
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="4-14|18-27">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [value]="username"
+                        (input)="handleUsername($event)"
+                      &gt;
+                      &lt;input
+                        name="password"
+                        type="password"
+                        [value]="password"
+                        (input)="handlePassword($event)"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  password = '';
+                  handleUsername(e: Event) {
+                    const input = (e.target as HTMLInputElement);
+                    this.username = input.value;
+                  }
+                  handlePassword(e: Event) {
+                    const input = (e.target as HTMLInputElement);
+                    this.password = input.value;
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Livello 1</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { FormsModule } from '@angular/forms';
+                @NgModule({
+                  declarations: [
+                    ...,
+                    SimpleLoginFormComponent
+                  ],
+                  imports: [
+                  ...,
+                    FormsModule
+                  ],
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>ngModel</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6,11|16,17">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                      &gt;
+                      &lt;input
+                        name="password"
+                        type="password"
+                        [(ngModel)]="password"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  password = '';
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>[()] - two way binding shorthand</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="6,7,12">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [ngModel]="username"
+                        (ngModelChange)="username = $event"
+                      &gt;
+                      &lt;input
+                        name="password"
+                        type="password"
+                        [(ngModel)]="password"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  password = '';
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { ReactiveFormsModule } from '@angular/forms';
+                @NgModule({
+                  declarations: [
+                    ...,
+                    SimpleLoginFormComponent
+                  ],
+                  imports: [
+                  ...,
+                    ReactiveFormsModule
+                  ],
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>formControl</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1|8,13|18,19">
+                import { FormControl } from '@angular/forms'
+
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                      &lt;input
+                        name="password"
+                        type="password"
+                        [formControl]="passwordControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl('Nicola');
+                  passwordControl = new FormControl('');
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>typed formControl - v14+</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="18,19">
+                import { FormControl } from '@angular/forms'
+
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                      &lt;input
+                        name="password"
+                        type="password"
+                        [formControl]="passwordControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl&lt;string&gt;('Nicola');
+                  passwordControl = new FormControl&lt;string&gt;('');
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>template-driven forms (ngModel) <br>vs<br> reactive/model-driven forms (formControl)</h3>
+          </section>
+          <section>
+            <p>Disabilitare un input - template-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|7">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                        [disabled]="true"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Disabilitare un input - model-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|11-14">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl({ 
+                    value: 'Nicola', 
+                    disabled: true 
+                  });
+                } 
+              </code>
+            </pre>
+            <aside class="notes">se provi ad usare disabled funziona ma lancia warning</aside>
+          </section>
+          <section>
+            <p>leggere e modificare il valore - template-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|13|14-16">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  constructor() {
+                    console.log(this.username);
+                    setTimeout(() => {
+                      this.username = 'Mario';
+                    }, 3000)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>leggere e modificare il valore - model-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|13|14-16">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl({ value: 'Nicola' });
+                  constructor() {
+                    console.log(this.usernameControl.value);
+                    setTimeout(() => {
+                      this.usernameControl.setValue('Mario');
+                    }, 3000)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>side-effects al cambiamento del valore - template-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|7|13-15">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                        (ngModelChange)="logValue($event)"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  logValue(newValue: string) {
+                    console.log(newValue);
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>side-effects al cambiamento del valore - model-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|11,13-15">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl({ value: 'Nicola' });
+                  constructor() {
+                    this.usernameControl.valueChanges.subscribe(newValue => {
+                      console.log(newValue);
+                    })
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>validazione - template-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|7-10">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                        [required]="true"
+                        [minLength]="3"
+                        [maxLength]="30"
+                        pattern="[a-zA-Z]"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>validazione - model-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12-17">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl('Nicola', [
+                    Validators.required,
+                    Validators.minLength(3),
+                    Validators.maxLength(30),
+                    Validators.pattern(/[a-zA-Z]/)
+                  ]);
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>usare la validazione - template-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|11|15">
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [(ngModel)]="username"
+                        [required]="true"
+                        [minLength]="3"
+                        [maxLength]="30"
+                        pattern="[a-zA-Z]"
+                        #usernameControl="ngModel"
+                      &gt;
+                      &lt;button 
+                        (click)="submitUsername()"
+                        [disabled]="usernameControl.invalid"
+                        &gt;
+                        Submit
+                      &lt;/button&gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  username = 'Nicola';
+                  submitUsername() {
+                    ...
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">estrarre il formControl nascosto dentro ngModel</aside>
+          </section>
+          <section>
+            <p>usare la validazione - model-driven</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12-17">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'simple-login-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [formControl]="usernameControl"
+                      &gt;
+                      &lt;button 
+                        (click)="submitUsername()"
+                        [disabled]="usernameControl.invalid"
+                        &gt;
+                        Submit
+                      &lt;/button&gt;
+                  `,
+                })
+                export class SimpleLoginFormComponent {
+                  usernameControl = new FormControl('Nicola', [
+                    Validators.required,
+                    Validators.minLength(3),
+                    Validators.maxLength(30),
+                    Validators.pattern(/[a-zA-Z]/)
+                  ]);
+                  submitUsername() {
+                    ...
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
         </section>
 
         <section data-visibility="hidden">
           <section><h2>Subjects</h2></section>
           <section><h2>cold vs hot</h2></section>
           <section><h2>marble diagrams</h2></section>
+          <section><h2>cancellare una subscription</h2></section>
           <section>
             <h3>More operators</h3>
           </section>
@@ -1764,7 +2281,7 @@
           <section><h1>Routing</h1></section>
         </section>
 
-        <section>
+        <section data-visibility="hidden">
           <section><h1>template</h1></section>
         </section>
 
@@ -1789,12 +2306,18 @@
                 >
               </li>
               <li hidden>
-                <a href="https://www.youtube.com/watch?v=3LKMwkuK0ZE&ab_channel=AngularConnect" target="_blank">
+                <a
+                  href="https://www.youtube.com/watch?v=3LKMwkuK0ZE&ab_channel=AngularConnect"
+                  target="_blank"
+                >
                   RxJS 5 Thinking Reactively | Ben Lesh
                 </a>
               </li>
               <li hidden>
-                <a href="https://www.youtube.com/watch?v=KOOT7BArVHQ&ab_channel=AngularConnect" target="_blank">
+                <a
+                  href="https://www.youtube.com/watch?v=KOOT7BArVHQ&ab_channel=AngularConnect"
+                  target="_blank"
+                >
                   RxJS In-Depth – Ben Lesh
                 </a>
               </li>
