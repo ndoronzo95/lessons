@@ -1731,13 +1731,16 @@
             </pre>
           </section>
           <section>
-            <h3>pipe operators</h3>
+            <h4 class="fragment">pipe operators</h4>
             <ul>
               <li class="fragment">map</li>
               <li class="fragment">filter</li>
               <li class="fragment">switchMap</li>
               <li class="fragment">catchError</li>
-              <li class="fragment">of<span style="opacity: 0.5">*</span></li>
+            </ul>
+            <h4 class="fragment">observable creator</h4>
+            <ul>
+              <li class="fragment">of</li>
             </ul>
           </section>
           <section>
@@ -1822,7 +1825,7 @@
           </section>
           <section>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers="1-100|11,18-23|4-7|18-23">
+              <code data-trim data-line-numbers="1-100|11,18-25|18,19|20|21,22|23,11|4-7|18-25">
                 @Component({
                   selector: 'mario-posts',
                   template: `
@@ -1840,12 +1843,14 @@
                   ) {}
 
                   ngOnInit() {
-                    this.userService.getUsers().subscribe(users => {
-                      const mario = users.find(u => u.name === 'Mario')
-                      this.userService.getPostsByUserId(mario.id).subscribe((posts) => {
-                        this.marioPosts = posts
+                    this.userService.getUsers()
+                      .subscribe(users => {
+                        const mario = users.find(u => u.name === 'Mario')
+                        this.userService.getPostsByUserId(mario.id)
+                          .subscribe((posts) => {
+                            this.marioPosts = posts
+                          })
                       })
-                    })
                   }
                 } 
               </code>
