@@ -1457,34 +1457,6 @@
             </aside>
           </section>
           <section>
-            <h5>http options</h5>
-            <pre class="language-javascript">
-              <code data-trim data-line-numbers="14-16" style="max-height: unset;">
-                import { HttpClient } from '@angular/common/http';
-
-                @Component({
-                  selector: 'my-title',
-                  template: `
-                      &lt;h1 *ngIf="user"&gt;Welcome {{ user.name }}!&lt;/h1&gt;
-                  `,
-                })
-                export class MyTitleComponent implements OnInit {
-                  user: User | null = null;
-                  constructor(private httpClient: HttpClient) {}
-
-                  ngOnInit() {
-                    this.httpClient.get&lt;User&gt;('myApi.com/users/1', {
-                      ...
-                    })
-                      .subscribe((user) => {
-                        this.user = user;
-                      })
-                  }
-                } 
-              </code>
-            </pre>
-          </section>
-          <section>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|12-14|6-8">
                 import { HttpClient } from '@angular/common/http';
@@ -1553,6 +1525,34 @@
                   user$: Promise&lt;User&gt; = 
                     this.httpClient.get('myApi.com/users/1').toPromise();
                   constructor(private httpClient: HttpClient) {}
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>http options</h4>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="14-16" style="max-height: unset;">
+                import { HttpClient } from '@angular/common/http';
+
+                @Component({
+                  selector: 'my-title',
+                  template: `
+                      &lt;h1 *ngIf="user"&gt;Welcome {{ user.name }}!&lt;/h1&gt;
+                  `,
+                })
+                export class MyTitleComponent implements OnInit {
+                  user: User | null = null;
+                  constructor(private httpClient: HttpClient) {}
+
+                  ngOnInit() {
+                    this.httpClient.get&lt;User&gt;('myApi.com/users/1', {
+                      ...
+                    })
+                      .subscribe((user) => {
+                        this.user = user;
+                      })
+                  }
                 } 
               </code>
             </pre>
