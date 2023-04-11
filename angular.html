@@ -906,6 +906,31 @@
 
         <section>
           <section>
+            <h1>quiz time!</h1>
+          </section>
+          <section>
+            <p class="fragment">Come si crea un componente? Come si usa?</p>
+            <p class="fragment">Cos'è un pipe? Come si usa?</p>
+            <p class="fragment">Cos'è una direttiva? Come si usa?</p>
+          </section>
+          
+          <section>
+            <p class="fragment">Come si fa a passare dati da un componente padre a un componente figlio?</p>
+            <p class="fragment">E da un componente figlio a un componente padre?</p>
+            <p class="fragment">A cosa serve ngOnChanges?</p>
+            <p class="fragment">A cosa serve ngOnInit?</p>
+            <p class="fragment">A cosa serve ngOnDestroy?</p>
+            <p class="fragment">Come funziona la content projection?</p>
+          </section>
+
+          <section>
+            <p class="fragment">Come si fa ad aggiungere o rimuovere un componente/elemento html sulla base di una condizione?</p>
+            <p class="fragment">Come si fa a generare, a partire da una lista di dati, una lista di componenti/elementi html?</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
             <h1>Services</h1>
             <aside class="notes">
               Classe richiedibile dagli elementi angular.
@@ -949,7 +974,7 @@
           </section>
           <section>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers>
+              <code data-trim data-line-numbers="1-30|16">
                 import { UserService } from 'user.service';
 
                 @Component({ template: `
@@ -989,7 +1014,7 @@
                   &lt;/ng-template&gt;
                   ` 
                 })
-                export class HomePageComponent {
+                export class HomeComponent {
                   
                   constructor(public userService: UserService) { }
                   
@@ -1162,7 +1187,16 @@
                 } 
               </code>
             </pre>
-            <aside class="notes">significa AppModule</aside>
+            <pre class="fragment language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({ 
+                  ...
+                  providers: [UserService]
+                  ...
+                })
+                export class AppModule { } 
+              </code>
+            </pre>
           </section>
 
           <section>
@@ -1179,18 +1213,6 @@
           <section>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1">
-                @Injectable({ providedIn: 'any' })
-                export class UserService {
-                  ...
-                } 
-              </code>
-            </pre>
-            <aside class="notes">significa ogni modulo del mio progetto</aside>
-          </section>
-
-          <section>
-            <pre class="language-javascript">
-              <code data-trim data-line-numbers="1">
                 @Injectable({ providedIn: 'platform' })
                 export class UserService {
                   ...
@@ -1199,13 +1221,181 @@
             </pre>
             <aside class="notes">significa booooh??</aside>
           </section>
+
+          <section>
+            <div class="r-stack">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1">
+                  @Injectable({ providedIn: 'any' })
+                  export class UserService {
+                    ...
+                  } 
+                </code>
+              </pre>
+              <h2 class="fragment">deprecated!</h2>
+            </div>
+            <aside class="notes">significa ogni modulo del mio progetto</aside>
+          </section>
+
+          <section>
+            <h2>configurare i providers</h2>
+            <div style="display: flex; justify-content: space-around;">
+              <div>
+                <h3 class="fragment">provide</h3>
+                <ul class="fragment">
+                  <li>class</li>
+                  <li>injection tokens</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="fragment">use</h3>
+                <ul class="fragment">
+                  <li>class</li>
+                  <li>value</li>
+                  <li>existing</li>
+                  <li>factory</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  ...
+                  providers: [
+                    UserService
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
           <section>Rappresentazione dell'albero delle dipendenze</section>
           <section>
-            Puoi iniettare tutto...useValue, useClass, useFactory
+            <p>useClass</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  ...
+                  providers: [
+                    {
+                      provide: UserService,
+                      useClass: UserService
+                    }
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>useValue</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  ...
+                  providers: [
+                    {
+                      provide: UserService,
+                      useValue: 'Hello!'
+                    }
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
           </section>
           <section>Modificatori della richiesta delle dipendenze</section>
           <section>
-            <h2>Chi li crea?</h2>
+            <p>useExisting</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @NgModule({
+                  ...
+                  providers: [
+                    {
+                      provide: UserService,
+                      useExisting: AnotherService
+                    }
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <p>useFactory</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                function userFactory() {
+                  if(Math.random() >0.5) {
+                    return new UserService()
+                  } else {
+                    return new AnotherService()
+                  }
+                }
+
+                @NgModule({
+                  ...
+                  providers: [
+                    {
+                      provide: UserService,
+                      useFactory: userFactory
+                    }
+                  ]
+                  ...
+                })
+                export class SomeModule {} 
+              </code>
+            </pre>
+          </section>
+
+          <section><h2>stesso token, più providers</h2></section>
+
+          <section>
+            <h2>Chi crea gli oggetti?</h2>
+            <h2 class="fragment">Injector</h2>
+          </section>
+
+          <section>
+            <img src="./img/DI-tree.jpg">
+          </section>
+
+          <section>
+            <h4>Cosa succede se provi a richiedere qualcosa che non è nell'albero delle dipendenze?</h4>
+            <h2 class="fragment">Null Injector Error</h2>
+          </section>
+
+          <section>
+            <h2>quiz time!</h2>
+          </section>
+          
+          <section>
+            <p class="fragment">Cosa fa @Injectable({ providedIn: 'root' })?</p>
+            <p class="fragment">Come si ottengono le istanze dei service ad es. in un componente?</p>
+            <p class="fragment">Cos'è l'injector?</p>
+            <p class="fragment">Cosa sono i providers?</p>
+            <p class="fragment">Cos'è un service?</p>
+          </section>
+        </section>
+        
+        <section data-visibility="hidden">
+          <section>
+            <h2>D.I Bonus</h2>
+          </section>
+
+          <section>
+            injection tokens
+          </section>
+          <section>
+            Modificatori della richiesta delle dipendenze
           </section>
         </section>
 
