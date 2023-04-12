@@ -913,10 +913,15 @@
             <p class="fragment">Cos'è un pipe? Come si usa?</p>
             <p class="fragment">Cos'è una direttiva? Come si usa?</p>
           </section>
-          
+
           <section>
-            <p class="fragment">Come si fa a passare dati da un componente padre a un componente figlio?</p>
-            <p class="fragment">E da un componente figlio a un componente padre?</p>
+            <p class="fragment">
+              Come si fa a passare dati da un componente padre a un componente
+              figlio?
+            </p>
+            <p class="fragment">
+              E da un componente figlio a un componente padre?
+            </p>
             <p class="fragment">A cosa serve ngOnChanges?</p>
             <p class="fragment">A cosa serve ngOnInit?</p>
             <p class="fragment">A cosa serve ngOnDestroy?</p>
@@ -924,8 +929,14 @@
           </section>
 
           <section>
-            <p class="fragment">Come si fa ad aggiungere o rimuovere un componente/elemento html sulla base di una condizione?</p>
-            <p class="fragment">Come si fa a generare, a partire da una lista di dati, una lista di componenti/elementi html?</p>
+            <p class="fragment">
+              Come si fa ad aggiungere o rimuovere un componente/elemento html
+              sulla base di una condizione?
+            </p>
+            <p class="fragment">
+              Come si fa a generare, a partire da una lista di dati, una lista
+              di componenti/elementi html?
+            </p>
           </section>
         </section>
 
@@ -1239,7 +1250,7 @@
 
           <section>
             <h2>configurare i providers</h2>
-            <div style="display: flex; justify-content: space-around;">
+            <div style="display: flex; justify-content: space-around">
               <div>
                 <h3 class="fragment">provide</h3>
                 <ul class="fragment">
@@ -1365,38 +1376,39 @@
           </section>
 
           <section>
-            <img src="./img/DI-tree.jpg">
+            <img src="./img/DI-tree.jpg" />
           </section>
 
           <section>
-            <h4>Cosa succede se provi a richiedere qualcosa che non è nell'albero delle dipendenze?</h4>
+            <h4>
+              Cosa succede se provi a richiedere qualcosa che non è nell'albero
+              delle dipendenze?
+            </h4>
             <h2 class="fragment">Null Injector Error</h2>
           </section>
 
           <section>
             <h2>quiz time!</h2>
           </section>
-          
+
           <section>
             <p class="fragment">Cosa fa @Injectable({ providedIn: 'root' })?</p>
-            <p class="fragment">Come si ottengono le istanze dei service ad es. in un componente?</p>
+            <p class="fragment">
+              Come si ottengono le istanze dei service ad es. in un componente?
+            </p>
             <p class="fragment">Cos'è l'injector?</p>
             <p class="fragment">Cosa sono i providers?</p>
             <p class="fragment">Cos'è un service?</p>
           </section>
         </section>
-        
+
         <section data-visibility="hidden">
           <section>
             <h2>D.I Bonus</h2>
           </section>
 
-          <section>
-            injection tokens
-          </section>
-          <section>
-            Modificatori della richiesta delle dipendenze
-          </section>
+          <section>injection tokens</section>
+          <section>Modificatori della richiesta delle dipendenze</section>
         </section>
 
         <section>
@@ -1669,7 +1681,6 @@
           </section>
           <section>
             <h2>DEMO TIME</h2>
-            <h3>User table</h3>
           </section>
           <section>
             <h3>Promises vs Observables</h3>
@@ -2026,7 +2037,7 @@
           <section>
             <p>validazione</p>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers="1-100|8|15-19|13,16-17|14,18|7">
+              <code data-trim data-line-numbers="1-100|8|15-19|13,16-17|14,18|7|11">
                 @Component({
                   selector: 'simple-form',
                   template: `
@@ -2037,6 +2048,7 @@
                         (input)="handleUsername($event)"
                       &gt;
                   `,
+                  styles: ['input.has-error { border-color: red }']
                 })
                 export class SimpleFormComponent {
                   username = 'Nicola';
@@ -2235,11 +2247,14 @@
             </pre>
           </section>
           <section>
-            <h3>template-driven forms (ngModel) <br>vs<br> reactive/model-driven forms (formControl)</h3>
+            <h3>
+              template-driven forms (ngModel) <br />vs<br />
+              reactive forms (formControl)
+            </h3>
           </section>
           <section>
             <p>Disabilitare un input</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|7">
                 @Component({
@@ -2260,7 +2275,7 @@
           </section>
           <section>
             <p>Disabilitare un input</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11-14">
                 @Component({
@@ -2280,11 +2295,13 @@
                 } 
               </code>
             </pre>
-            <aside class="notes">se provi ad usare disabled funziona ma lancia warning</aside>
+            <aside class="notes">
+              se provi ad usare disabled funziona ma lancia warning
+            </aside>
           </section>
           <section>
             <p>leggere e modificare il valore</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11,13|11,14-16">
                 @Component({
@@ -2310,7 +2327,7 @@
           </section>
           <section>
             <p>leggere e modificare il valore</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11,13|11,14-16">
                 @Component({
@@ -2336,7 +2353,7 @@
           </section>
           <section>
             <p>side-effects al cambiamento del valore</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|7|13-15">
                 @Component({
@@ -2360,7 +2377,7 @@
           </section>
           <section>
             <p>side-effects al cambiamento del valore</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11,13-15">
                 @Component({
@@ -2385,7 +2402,7 @@
           </section>
           <section>
             <p>validazione (con validatori preesistenti)</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|7-10">
                 @Component({
@@ -2409,7 +2426,7 @@
           </section>
           <section>
             <p>validazione (con validatori preesistenti)</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|1|12-17">
                 import { Validators, FormControl } from '@angular/forms'
@@ -2435,7 +2452,7 @@
           </section>
           <section>
             <p>control status (VALID | INVALID)</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11|15">
                 @Component({
@@ -2466,11 +2483,13 @@
                 } 
               </code>
             </pre>
-            <aside class="notes">estrarre il formControl nascosto dentro ngModel</aside>
+            <aside class="notes">
+              estrarre il formControl nascosto dentro ngModel
+            </aside>
           </section>
           <section>
             <p>control status (VALID | INVALID)</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|9-14|11">
                 import { Validators, FormControl } from '@angular/forms'
@@ -2504,7 +2523,13 @@
             </pre>
           </section>
           <section>
-            <h2><a href="https://angular.io/api/forms/Validators" target="_blank">Validatori</a></h2>
+            <h2>
+              <a href="https://angular.io/guide/form-validation">Validazione</a>
+              e
+              <a href="https://angular.io/api/forms/Validators" target="_blank"
+                >Validatori</a
+              >
+            </h2>
           </section>
           <section>
             <pre class="language-javascript">
@@ -2517,7 +2542,9 @@
                 }
               </code>
             </pre>
-            <aside class="notes">ValidationErrors è un alias per un qualsiasi tipo di oggetto</aside>
+            <aside class="notes">
+              ValidationErrors è un alias per un qualsiasi tipo di oggetto
+            </aside>
           </section>
           <section>
             <pre class="language-javascript">
@@ -2537,7 +2564,13 @@
             </pre>
           </section>
           <section>
-            <h3><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank">regular expressions</a></h3>
+            <h3>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions"
+                target="_blank"
+                >regular expressions</a
+              >
+            </h3>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1|1-3|4|4-6">
                 const onlyLetters = /^[a-zA-Z]+$/
@@ -2568,7 +2601,7 @@
           </section>
           <section>
             <p>errori di validazione</p>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|11|11,13-19">
                 @Component({
@@ -2606,11 +2639,13 @@
                 } 
               </code>
             </pre>
-            <aside class="notes">estrarre il formControl nascosto dentro ngModel</aside>
+            <aside class="notes">
+              estrarre il formControl nascosto dentro ngModel
+            </aside>
           </section>
           <section>
             <p>errori di validazione</p>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|9-15">
                 import { Validators, FormControl } from '@angular/forms'
@@ -2693,7 +2728,7 @@
             </pre>
           </section>
           <section>
-            <p style="font-size: 1.5rem">model-driven</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|2|23-25|7-17|9,11,16">
                 import { Validators, FormControl } from '@angular/forms'
@@ -2752,7 +2787,7 @@
             </pre>
           </section>
           <section>
-            <p style="font-size: 1.5rem">template-driven</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|5-10|8|9,11,16">
                 import { Validators, FormControl } from '@angular/forms'
@@ -2783,6 +2818,308 @@
                 } 
               </code>
             </pre>
+          </section>
+          <section>
+            <h3>stato del form-control e css</h3>
+            <ul>
+              <li>.ng-valid</li>
+              <li>.ng-invalid</li>
+              <li>.ng-pending</li>
+              <li>.ng-pristine</li>
+              <li>.ng-dirty</li>
+              <li>.ng-untouched</li>
+              <li>.ng-touched</li>
+              <li>.ng-submitted</li>
+            </ul>
+          </section>
+          <section>
+            <p style="font-size: 1.5rem">reactive forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|30-32|7,11,15|19-23">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;input
+                        name="name"
+                        [formControl]="nameControl"
+                      &gt;
+                      &lt;input
+                        name="surname"
+                        [formControl]="surnameControl"
+                      &gt;
+                      &lt;input
+                        name="cf"
+                        [formControl]="cfControl"
+                      &gt;
+                      &lt;button 
+                        (click)="submitCf()"
+                        [disabled]="
+                          nameControl.invalid || 
+                          surnameControl.invalid || 
+                          cfControl.invalid
+                        "
+                      &gt;
+                        Submit
+                      &lt;/button&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  nameControl = new FormControl('', [Validators.required, Validators.minLength(3)])
+                  nameControl = new FormControl('', [Validators.required, Validators.minLength(3)])
+                  nameControl = new FormControl('', [Validators.required, codiceFiscaleValidator])
+                  submitCf() {
+                    ...
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p style="font-size: 1.5rem">template-driven forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|10|17|24|28-32">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;input
+                        name="name"
+                        ngModel
+                        required
+                        [minLength]="3"
+                        #nameControl="ngModel"
+                      &gt;
+                      &lt;input
+                        name="surname"
+                        ngModel
+                        required
+                        [minLength]="3"
+                        #surnameControl="ngModel"
+                      &gt;
+                      &lt;input
+                        name="cf"
+                        ngModel
+                        required
+                        codiceFiscale
+                        #cfControl="ngModel"
+                      &gt;
+                      &lt;button 
+                        (click)="submitCf()"
+                        [disabled]="
+                          nameControl.invalid || 
+                          surnameControl.invalid || 
+                          cfControl.invalid
+                        "
+                      &gt;
+                        Submit
+                      &lt;/button&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  submitCf() {
+                    ...
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>livello 2 - form complessi</p>
+          </section>
+          <section>
+            <p style="font-size: 1.5rem">reactive forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|19-23|5,15|6-8|9-12|24-26">
+                import { Validators, FormControl, FormGroup } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form [formGroup]="myForm" (ngSubmit)="submitCf()"&gt;
+                        &lt;input formControlName="name"&gt;
+                        &lt;input formControlName="surname"&gt;
+                        &lt;input formControlName="cf"&gt;
+                        &lt;button
+                          type="submit"
+                          [disabled]="myForm.invalid"
+                        &gt;
+                          Submit
+                        &lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  myForm = new FormGroup({
+                    name: new FormControl('', [Validators.required, Validators.minLength(3)])
+                    surname: new FormControl('', [Validators.required, Validators.minLength(3)])
+                    cf: new FormControl('', [codiceFiscaleValidator)
+                  })
+                  submitCf() {
+                    console.log(this.myForm.value) // { name: '', surname: '', cf: '' }
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p style="font-size: 1.5rem">template-driven forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5-8|10|16|22|27-30|37-39">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form 
+                        #myForm="ngForm" 
+                        (ngSubmit)="submitCf(myForm.value)"
+                      &gt;
+                        &lt;input
+                          name="name"
+                          ngModel
+                          required
+                          [minLength]="3"
+                        &gt;
+                        &lt;input
+                          name="surname"
+                          ngModel
+                          required
+                          [minLength]="3"
+                        &gt;
+                        &lt;input
+                          name="cf"
+                          ngModel
+                          required
+                          codiceFiscale
+                        &gt;
+                        &lt;button
+                          type="submit"
+                          [disabled]="myForm.invalid"
+                        &gt;
+                          Submit
+                        &lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  submitCf(v: any) {
+                    console.log(v) // { name, surname, cf }
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Gruppi di controlli</p>
+            <p style="font-size: 1.5rem">reactive forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|29-39|6-14|15-18|40-55">
+                import { Validators, FormControl, FormGroup } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form [formGroup]="myForm" (ngSubmit)="submitCf()"&gt;
+                        &lt;div formGroupName="user"&gt;
+                          &lt;input formControlName="name"&gt;
+                          &lt;input formControlName="surname"&gt;
+                          &lt;select formControlName="gender"&gt;
+                            &lt;option value="M"&gt;Male&lt;/option&gt;
+                            &lt;option value="F"&gt;Female&lt;/option&gt;
+                            &lt;option value="O"&gt;Other&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+                        &lt;div formGroupName="address"&gt;
+                          &lt;input formControlName="city"&gt;
+                          &lt;input formControlName="street" type="number"&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                          type="submit"
+                          [disabled]="myForm.invalid"
+                        &gt;
+                          Submit
+                        &lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  myForm = new FormGroup({
+                    user: new FormGroup({
+                      name: new FormControl('', [Validators.required, Validators.minLength(3)])
+                      surname: new FormControl('', [Validators.required, Validators.minLength(3)])
+                      gender: new FormControl(null)
+                    }),
+                    address: new FormGroup({
+                      city: new FormControl('')
+                      street: new FormControl(0)
+                    })
+                  })
+                  submitCf() {
+                    console.log(this.myForm.value) 
+                    /* { 
+                      user: {
+                        name: '',
+                        surname: '',
+                        gender: null,
+                      },
+                      address: {
+                        city: '',
+                        street: 0
+                      }
+                    } */
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Gruppi di controlli</p>
+            <p style="font-size: 1.5rem">template-driven forms</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5-13|14-17|28-41">
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form #myForm="ngForm" (ngSubmit)="submitCf(myForm.value)"&gt;
+                        &lt;div ngModelGroup="user"&gt;
+                          &lt;input ngModel name="name" required [minLength]="3"&gt;
+                          &lt;input ngModel name="surname" required [minLength]="3"&gt;
+                          &lt;select ngModel name="gender"&gt;
+                            &lt;option value="M"&gt;Male&lt;/option&gt;
+                            &lt;option value="F"&gt;Female&lt;/option&gt;
+                            &lt;option value="O"&gt;Other&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+                        &lt;div ngModelGroup="address"&gt;
+                          &lt;input ngModel name="city"&gt;
+                          &lt;input ngModel name="street" type="number"&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                          type="submit"
+                          [disabled]="myForm.invalid"
+                        &gt;
+                          Submit
+                        &lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  submitCf(formValue: any) {
+                    console.log(formValue) 
+                    /* { 
+                      user: {
+                        name: undefined,
+                        surname: undefined,
+                        gender: undefined,
+                      },
+                      address: {
+                        city: undefined,
+                        street: 0
+                      }
+                    } */
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">piccola licenza poetica, undefined</aside>
           </section>
         </section>
 
