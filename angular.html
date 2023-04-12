@@ -2024,20 +2024,49 @@
             </pre>
           </section>
           <section>
+            <p>validazione</p>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers="4-14|18-27">
+              <code data-trim data-line-numbers="1-100|8|15-19|13,16-17|14,18|7">
+                @Component({
+                  selector: 'simple-form',
+                  template: `
+                      &lt;input
+                        name="username"
+                        [value]="username"
+                        [class.has-error]="usernameError"
+                        (input)="handleUsername($event)"
+                      &gt;
+                  `,
+                })
+                export class SimpleFormComponent {
+                  username = 'Nicola';
+                  usernameError = false;
+                  handleUsername(e: Event) {
+                    const input = e.target as HTMLInputElement;
+                    this.username = input.value;
+                    this.usernameError = !input.value || input.value < 3 || input.value > 30;
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|4-9|10-16|20-33">
                 @Component({
                   selector: 'simple-login-form',
                   template: `
                       &lt;input
                         name="username"
                         [value]="username"
+                        [class.has-error]="usernameError"
                         (input)="handleUsername($event)"
                       &gt;
                       &lt;input
                         name="password"
                         type="password"
                         [value]="password"
+                        [class.has-error]="passwordError"
                         (input)="handlePassword($event)"
                       &gt;
                   `,
@@ -2045,12 +2074,16 @@
                 export class SimpleLoginFormComponent {
                   username = 'Nicola';
                   password = '';
+                  usernameError = false;
+                  passwordError = false;
                   handleUsername(e: Event) {
                     const input = (e.target as HTMLInputElement);
+                    this.usernameError = !input.value || input.value < 3 || input.value > 30;
                     this.username = input.value;
                   }
                   handlePassword(e: Event) {
                     const input = (e.target as HTMLInputElement);
+                    this.passwordError = !input.value || input.value < 8 || input.value > 10;
                     this.password = input.value;
                   }
                 } 
