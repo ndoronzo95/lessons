@@ -2687,10 +2687,22 @@
           </section>
           <section>
             <h2>template driven validators</h2>
-
+            <h3>
+              <a href="https://angular.io/api/forms/Validator" target="_blank"
+                >Validator</a
+              >
+              interface e
+              <a
+                href="https://angular.io/api/forms/NG_VALIDATORS"
+                target="_blank"
+                >NG_VALIDATORS</a
+              >
+            </h3>
+          </section>
+          <section>
             <pre class="language-javascript">
               <code data-trim data-line-numbers="1-100|3|1,4-10|12,13|13-16">
-                import { NG_VALIDATORS } from '@angular/forms';
+                import { NG_VALIDATORS, Validator } from '@angular/forms';
                 @Directive({ 
                   selector: 'input[ngModel][required]',
                   providers: [
@@ -3121,9 +3133,414 @@
             </pre>
             <aside class="notes">piccola licenza poetica, undefined</aside>
           </section>
-          <section data-visibility="hidden">
+          <section>
             <h2>Custom form component</h2>
+            <aside class="notes">
+              componenti non esistenti tra quelli base, estendere il potere di
+              ngModel/formControl ad altri componenti
+            </aside>
           </section>
+          <section>
+            <img
+              src="https://docs.appian.com/suite/help/20.2/images/ux_pages/card_selection_example.png"
+            />
+          </section>
+          <section>
+            <h2>
+              <a href="https://angular.io/api/forms/ControlValueAccessor"
+                >control value accessor</a
+              >
+              e
+              <a href="https://angular.io/api/forms/NG_VALUE_ACCESSOR"
+                >NG_VALUE_ACCESSOR</a
+              >
+            </h2>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|24|5-14|1|15-21|23|30-41|25,30-32|26,33-35|27,36-38|28,39-41|8|7|43-47">
+                import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+
+                @Component({ 
+                  selector: 'card-selection',
+                  template: `
+                    &lt;button *ngFor="let option of options" 
+                      (click)="select(option.value)"
+                      [disabled]="disabled"
+                      [class.selected]="option.value === selectedValue"
+                    &gt;
+                      {{ option.description }}
+                    &lt;/button&gt;
+                  `,
+                  styles: ['.selected { border-color: blue }, button { ... }'],
+                  providers: [
+                    {
+                      provide: NG_VALUE_ACCESSOR,
+                      useExisting: forwardRef(() => CardSelectionComponent),
+                      multi: true
+                    }
+                  ] 
+                })
+                export class CardSelectionComponent implements ControlValueAccessor {
+                  @Input() options: Option[] = [];
+                  selectedValue: any = null;
+                  onChange!: Function;
+                  onTouched!: Function;
+                  disabled = false;
+                  
+                  writeValue(obj: any): void {
+                    this.selectedValue = obj;
+                  }
+                  registerOnChange(fn: any): void {
+                    this.onChange = fn;
+                  }
+                  registerOnTouched(fn: any): void {
+                    this.onTouched = fn;
+                  }
+                  setDisabledState(isDisabled: boolean)?: void {
+                    this.disabled = isDisabled;
+                  }
+
+                  select(value: any) {
+                    this.selectedValue = value;
+                    this.onChange(value);
+                    this.onTouched()
+                  }
+                  
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|8-12,18-22">
+                import { Validators, FormControl } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form (ngSubmit)="submitCf(myForm.value)"&gt;
+                        &lt;input name="name" ngModel&gt;
+                        &lt;input name="surname" ngModel&gt;
+                        &lt;card-selection
+                          name="protection"
+                          [ngModel]="protectionOptions[0].value"
+                          [options]="protectionOptions"
+                        &gt;&lt;/card-selection&gt;
+                        &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SomeFormComponent {
+                  protectionOptions = [
+                    { description: 'Home', value: 'H' },
+                    { description: 'Car', value: 'C' },
+                    { description: 'Pet', value: 'P' },
+                  ]
+                  submitCf(v: any) { ... }
+                } 
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section><h1>Routing</h1></section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { path: 'first-page', component: FirstComponent },
+                  { path: 'second-page', component: SecondComponent },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                import { AppRoutingModule } from './somewhere';
+
+                @NgModule({
+                  declarations: [
+                    AppComponent,
+                    ...
+                  ],
+                  imports: [
+                    ...
+                    AppRoutingModule
+                    ...
+                  ]
+                })
+                export class AppModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  template: `
+                    &lt;h1&gt;My wonderful App&lt;/h1&gt;
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `
+                })
+                export class AppComponent { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>http://localhost:4200/first-page</p>
+            <p>http://localhost:4200/second-page</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5-20|16,26">
+                @Component({
+                  template: `
+                    &lt;nav&gt;
+                      &lt;ul&gt;
+                        &lt;li&gt;
+                          &lt;a 
+                            routerLink="/first-page" 
+                            routerLinkActive="link-active"
+                          &gt;
+                            First Page
+                          &lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                          &lt;a 
+                            routerLink="/second-page" 
+                            routerLinkActive="link-active"
+                          &gt;
+                            Second Page
+                          &lt;/a&gt;
+                        &lt;/li&gt;
+                      &lt;/ul&gt;
+                    &lt;/nav&gt;
+                    &lt;h1&gt;My wonderful App&lt;/h1&gt;
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `,
+                  styles: ['a {color: black}, a.link-active { color: blue}']
+                })
+                export class AppComponent { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="11-18">
+                import { Router } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;h1&gt;My wonderful App&lt;/h1&gt;
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `
+                })
+                export class AppComponent {
+
+                  constructor(private router: Router) {}
+
+                  goToFirstPage() {
+                    this.router.navigate(['first-page'])
+                  }
+                  goToSecondPage() {
+                    this.router.navigate(['second-page'])
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>** wildcard</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { path: 'first-page', component: FirstComponent },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>redirectTo</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|7,4">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { path: 'first-page', component: FirstComponent },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Innestare Rotte - children</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    children: [
+                      {
+                        path: 'first-sub-page'
+                        component: FirstSubComponent
+                      },
+                      {
+                        path: 'second-sub-page'
+                        component: SecondSubComponent
+                      },
+                    ]
+                  },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>Innestare Rotte - children</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                <p>http://localhost:4200/first-page/first-sub-page</p>
+                <p>http://localhost:4200/first-page/second-sub-page</p>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>pathMatch</p>
+            <ul>
+              <li>"prefix" (default)</li>
+              <li>"full"</li>
+            </ul>
+            <aside class="notes">
+              come il router fa il matching delle rotte: di base prende l'url e
+              lo spezza e poi progressivamente cerca di fare il match cercando
+              nei children. Con full invece il confronto deve essere sull'intero
+              url
+            </aside>
+          </section>
+          <section>
+            <h2>protezione rotte</h2>
+            <h3>guards</h3>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6|8-14|9,10|11|7,12-14">
+                import { Injectable } from '@angular/core';
+                import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+                import { Observable } from 'rxjs';
+
+                @Injectable({ providedIn: 'root' })
+                export class LoginGuard implements CanActivate {
+                  userHasLoggedIn = false;
+                  canActivate(
+                    next: ActivatedRouteSnapshot,
+                    state: RouterStateSnapshot): 
+                      Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree 
+                    {
+                      return this.userHasLoggedIn;
+                    }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="8,13-19">
+                import { Injectable } from '@angular/core';
+                import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+                import { Observable } from 'rxjs';
+
+                @Injectable({ providedIn: 'root' })
+                export class LoginGuard implements CanActivate {
+                  userHasLoggedIn = false;
+                  constructor(privare router: Router) {}
+                  canActivate(
+                    next: ActivatedRouteSnapshot,
+                    state: RouterStateSnapshot): 
+                      Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree 
+                    {
+                      if (this.userHasLoggedIn) {
+                        return true
+                      } else {
+                        return this.router.createUrlTree(['/login'])
+                      }
+                    }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>ottenere dati dalle rotte</h2>
+          </section>
+        </section>
+
+        <section data-visibility="hidden">
+          <section><h2>template</h2></section>
+          <section>
+            <img
+              width="400"
+              src="https://codecraft.tv/courses/angular/components/lifecycle-hooks/images/lifecycle-hooks.png"
+              alt=""
+            />
+          </section>
+          <section><h2>content</h2></section>
+          <section>
+            <p>ngAfterContentInit - ngAfterContentChecked</p>
+          </section>
+          <section>
+            <p>ContentChild - ContentChildren</p>
+          </section>
+          <section><h2>view</h2></section>
+          <section>
+            <p>ngAfterViewInit - ngAfterViewChecked</p>
+          </section>
+          <section>
+            <p>ViewChild - ViewChildren</p>
+          </section>
+          <section>
+            <h2>template ref</h2>
+          </section>
+          <section>
+            <p>la verità sulle direttive strutturali</p>
+          </section>
+          <section></section>
         </section>
 
         <section data-visibility="hidden">
@@ -3134,14 +3551,6 @@
           <section>
             <h3>More operators</h3>
           </section>
-        </section>
-
-        <section data-visibility="hidden">
-          <section><h1>template</h1></section>
-        </section>
-
-        <section data-visibility="hidden">
-          <section><h1>Routing</h1></section>
         </section>
 
         <section>
@@ -3203,6 +3612,15 @@
                   target="_blank"
                   >Angular material</a
                 >
+              </li>
+              <li>
+                <a
+                  href="https://youtu.be/kVbLSN0AW-Y"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  The Control Value Accessor | Jennifer Wadella
+                </a>
               </li>
             </ul>
           </section>
