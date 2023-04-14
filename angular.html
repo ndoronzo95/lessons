@@ -3403,7 +3403,7 @@
           <section>
             <p>Innestare Rotte - children</p>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers="1-100">
+              <code data-trim data-line-numbers="1-100|6-15">
                 import { Routes, RouterModule } from '@angular/router';
 
                 const routes: Routes = [
@@ -3451,67 +3451,70 @@
             </aside>
           </section>
           <section>
-            <h2>proteggere le rotte</h2>
-            <h3>guards</h3>
-          </section>
-          <section>
+            <p>path params</p>
             <pre class="language-javascript">
-              <code data-trim data-line-numbers="1-100|6|8-14|9,10|11|7,12-14">
-                import { Injectable } from '@angular/core';
-                import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-                import { Observable } from 'rxjs';
-
-                @Injectable({ providedIn: 'root' })
-                export class LoginGuard implements CanActivate {
-                  userHasLoggedIn = false;
-                  canActivate(
-                    next: ActivatedRouteSnapshot,
-                    state: RouterStateSnapshot): 
-                      Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree 
-                    {
-                      return this.userHasLoggedIn;
-                    }
-                }
-              </code>
-            </pre>
-          </section>
-          <section>
-            <pre class="language-javascript">
-              <code data-trim data-line-numbers="8,13-19">
-                import { Injectable } from '@angular/core';
-                import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-                import { Observable } from 'rxjs';
-
-                @Injectable({ providedIn: 'root' })
-                export class LoginGuard implements CanActivate {
-                  userHasLoggedIn = false;
-                  constructor(privare router: Router) {}
-                  canActivate(
-                    next: ActivatedRouteSnapshot,
-                    state: RouterStateSnapshot): 
-                      Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree 
-                    {
-                      if (this.userHasLoggedIn) {
-                        return true
-                      } else {
-                        return this.router.createUrlTree(['/login'])
-                      }
-                    }
-                }
-              </code>
-            </pre>
-          </section>
-          <section>
-            <pre class="language-javascript">
-              <code data-trim data-line-numbers="1-100|1,5-9">
-                import { LoginGuard } from '../somewhere'; 
+              <code data-trim data-line-numbers="1-100|7-10">
                 import { Routes, RouterModule } from '@angular/router';
 
                 const routes: Routes = [
                   { 
                     path: 'first-page', 
-                    component: FirstComponent, 
-                    canActivate: [LoginGuard] 
+                    children: [
+                      {
+                        path: ':some-param'
+                        component: FirstSubComponent
+                      },
+                      {
+                        path: 'second-sub-page'
+                        component: SecondSubComponent
+                      },
+                    ]
+                  },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+            <aside class="notes">
+              come wildcard...qualsiasi path fa il match, però quel path dopo i
+              : può essere usato come riferimento per accedere al dato passato
+            </aside>
+          </section>
+          <section>
+            <p>http://localhost:4200/first-page/whatever-works</p>
+            <p class="fragment">http://localhost:4200/user/13152</p>
+          </section>
+          <section>
+            <h2>ottenere informazioni dalle rotte</h2>
+          </section>
+          <section>
+            <p>path params / query params</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|7-10">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    children: [
+                      {
+                        path: ':some-param'
+                        component: FirstSubComponent
+                      },
+                      {
+                        path: 'second-sub-page'
+                        component: SecondSubComponent
+                      },
+                    ]
                   },
                   { path: 'second-page', component: SecondComponent },
                   { path: '**', component: PageNotFoundComponent },
@@ -3526,8 +3529,724 @@
               </code>
             </pre>
           </section>
-          <section data-visibility="hidden">
-            <h2>ottenere dati dalle rotte</h2>
+          <section>
+            <p>http://localhost:4200/first-page/my-awesome-value</p>
+          </section>
+          <section>
+            <p style="font-size: 1rem">
+              http://localhost:4200/first-page/my-awesome-value
+            </p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1,10|11|12">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;h1&gt;The path parameter is {{ pathParam }}&lt;/h1&gt;
+                  `,
+                })
+                export class FirstSubComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.pathParam = this.activatedRoute.snapshot.params['some-param'];
+                    console.log(this.pathParam) // "my-awesome-value"
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              RouterState in costante mutamento. snapshot è lo stato del router
+              in un particolare momento, nella fattispecie quando la rotta c'è
+              un match e il componente è creato di conseguenza. Snapshot dello
+              stato
+            </aside>
+          </section>
+          <section>
+            <p>
+              http://localhost:4200/first-page/my-awesome-value?some-key="12345"
+            </p>
+          </section>
+          <section>
+            <p style="font-size: 1rem">
+              http://localhost:4200/first-page/my-awesome-value?some-key="12345"
+            </p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1,10|12,14">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;h1&gt;The path parameter is {{ pathParam }}&lt;/h1&gt;
+                  `,
+                })
+                export class FirstSubComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.pathParam = this.activatedRoute.snapshot.params['some-param'];
+                    this.queryParam = this.activateRoute.snapshot.queryParams['some-key']
+                    console.log(this.pathParam) // "my-awesome-value"
+                    console.log(this.queryParam) // "12345"
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              params e queryParams in uno snapshot sono semplici oggetti
+            </aside>
+          </section>
+          <section>
+            <p style="font-size: 1rem">
+              http://localhost:4200/first-page/my-awesome-value?some-key="12345"
+            </p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|10-15">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `,
+                })
+                export class AppComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.activatedRoute.params.subscribe(console.log) 
+                    // ... { some-param: 'my-awesome-value'} ...
+                    this.activatedRoute.queryParams.subscribe(console.log) 
+                    // ... { some-key: '12345' } ...
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              su activatedRoute non snapshot sono observable
+            </aside>
+          </section>
+          <section>
+            <p>static data</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5-8">
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    component: FirstComponent
+                    data: {
+                      hello: 'World!',
+                      importantNumber: 123456
+                    }
+                  },
+                ];
+              </code>
+            </pre>
+            <aside class="notes">valori annessi alle rotte stesse</aside>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1,10|11,13|12,14">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;h1&gt;Static data!!&lt;/h1&gt;
+                  `,
+                })
+                export class FirstSubComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.data1 = this.activatedRoute.snapshot.data['hello'];
+                    this.data2 = this.activateRoute.snapshot.data['importantNumber']
+                    console.log(this.data1) // "World!"
+                    console.log(this.data2) // 123456
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|10-15">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `,
+                })
+                export class AppComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.activatedRoute.data.subscribe(console.log) 
+                    // ... { hello: 'World!', importantNumber: 123456 } ...
+                    
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>dynamic data</h3>
+            <h4>resolvers</h4>
+            <p class="fragment">http://localhost:4200/user/:id/details</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|2|3|3-5">
+                export function userDetailsResolver
+                (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+                Observable&lt;UserDetails&gt; | Promise&lt;UserDetails&gt; | UserDetails {
+                  const userService = inject(UserService);
+                  return userService.getUserDetailsById(route.params.id);
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|10-15">
+                import { userDetailsResolver } from './somewhere';
+                const routes: Routes = [
+                  { 
+                    path: 'user/:id', 
+                    children: [
+                      {
+                        path: 'details',
+                        component: UserDetailsComponent,
+                        resolve: {
+                          userDetails: userDetailsResolver
+                        }
+                      }
+                    ]
+                  },
+                ];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <div class="r-stack">
+              <p>ng g r user-details</p>
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100|4|5|7-11">
+                  import { Resolve } from '@angular/router';
+  
+                  @Injectable({ providedIn: 'root' })
+                  export class UserDetailsResolver implements Resolve&lt;UserDetails&gt; {
+                    constructor(private userService: UserService) {}
+                    
+                    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+                    Observable&lt;UserDetails&gt; | Promise&lt;UserDetails&gt; | UserDetails 
+                    {
+                      return this.userService.getUserDetails(route.snapshot.id);
+                    }
+                  }
+                </code>
+              </pre>
+              <h1 class="fragment">DEPRECATED!</h1>
+            </div>
+          </section>
+          <section>
+            <div class="r-stack">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100|9-11">
+                  import { UserDetailsResolver } from './somewhere';
+                  const routes: Routes = [
+                    { 
+                      path: 'user/:id', 
+                      children: [
+                        {
+                          path: 'details',
+                          component: UserDetailsComponent,
+                          resolve: {
+                            userDetails: UserDetailsResolver
+                          }
+                        }
+                      ]
+                    },
+                  ];
+                </code>
+              </pre>
+              <h1 class="fragment">DEPRECATED!</h1>
+            </div>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1,10|11,12">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;h1&gt;Static data!!&lt;/h1&gt;
+                  `,
+                })
+                export class UserDetailsComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.userDetails = this.activatedRoute.snapshot.data['userDetails'];
+                    console.log(this.userDetails) // { name: 'Mario', ... }
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|10-15">
+                import { ActivatedRoute } from '@angular/router';
+
+                @Component({
+                  template: `
+                    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+                  `,
+                })
+                export class AppComponent {
+
+                  constructor(private activatedRoute: ActivatedRoute) {
+                    this.activatedRoute.data.subscribe(console.log) 
+                    // ... { userDetails: { name: 'Mario', ... } ...
+                    
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>recap - come ottenere dati dalla navigazione?</h3>
+            <ul>
+              <li>path params</li>
+              <li>query params</li>
+              <li>static data (<i>data</i>)</li>
+              <li>dynamic data (<i>resolvers</i>)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>modificare la navigazione in corso</h2>
+            <h3>guards</h3>
+          </section>
+
+          <section>
+            <p>canActivate</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|2|3|4-7">
+                export function userHasLoggedIn
+                (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+                Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree
+                {
+                  const sessionService = inject(SessionService);
+                  return sessionService.userHasLoggedIn(next.params.id);
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6-8">
+                import { userHasLoggedIn } from './somewhere';
+                const routes: Routes = [
+                  { 
+                    path: 'user/:id', 
+                    component: UserComponent,
+                    canActivate: [
+                      userHasLoggedIn
+                    ]
+                  },
+                ];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <div class="r-stack">
+              <p>ng g g has-logged-in</p>
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100|4|6|7-12">
+                  import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+                
+                  @Injectable({ providedIn: 'root' })
+                  export class HasLoggedeInGuard implements CanActivate {
+                    constructor(private sessionService: SessionService) {}
+                    canActivate(
+                      next: ActivatedRouteSnapshot,
+                      state: RouterStateSnapshot): 
+                        Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree 
+                      {
+                        return this.sessionService.userHasLoggedIn(next.params.id);
+                      }
+                  }
+                </code>
+              </pre>
+              <h1 class="fragment">DEPRECATED!</h1>
+            </div>
+          </section>
+          <section>
+            <div class="r-stack">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100">
+                  import { UserHasLoggedInGuard } from './somewhere';
+                  const routes: Routes = [
+                    { 
+                      path: 'user/:id',
+                      component: UserDetailsComponent,
+                      canActivate: [
+                        UserHasLoggedInGuard
+                      ]
+                      
+                    },
+                  ];
+                </code>
+              </pre>
+              <h1 class="fragment">DEPRECATED!</h1>
+            </div>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|3|7-13|5,10">
+                export function userHasLoggedIn
+                (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+                Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree
+                {
+                  const router = inject(Router);
+                  const sessionService = inject(SessionService);
+                  return sessionService.userHasLoggedIn(next.params.id).pipe(
+                    map(hasLoggedIn => {
+                      if (!hasLoggedIn) {
+                        return this.router.createUrlTree(['/login'])
+                      } else return true;
+                    })
+                  );
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>canActivateChild</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|9-11|16-18|23-25">
+                import { userHasLoggedIn } from './somewhere';
+                const routes: Routes = [
+                  { 
+                    path: 'user/:id', 
+                    children: [
+                      {
+                        path: 'details',
+                        component: UserDetailsComponent,
+                        canActivate: [
+                          userHasLoggedIn
+                        ]
+                      },
+                      {
+                        path: 'details',
+                        component: UserSettingsComponent,
+                        canActivate: [
+                          userHasLoggedIn
+                        ]
+                      },
+                      {
+                        path: 'profile',
+                        component: UserProfileComponent,
+                        canActivate: [
+                          userHasLoggedIn
+                        ]
+                      }
+                    ]
+                  },
+                ];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5-7">
+                import { userHasLoggedIn } from './somewhere';
+                const routes: Routes = [
+                  { 
+                    path: 'user/:id', 
+                    canActivateChild: [
+                      userHasLoggedIn
+                    ]
+                    children: [
+                      {
+                        path: 'details',
+                        component: UserDetailsComponent,
+                      },
+                      {
+                        path: 'details',
+                        component: UserSettingsComponent,
+                      },
+                      {
+                        path: 'profile',
+                        component: UserProfileComponent,
+                      }
+                    ]
+                  },
+                ];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>canDeactivate</p>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|29-39">
+                import { Validators, FormControl, FormGroup } from '@angular/forms'
+                @Component({
+                  selector: 'subscription-form',
+                  template: `
+                      &lt;form [formGroup]="myForm" (ngSubmit)="submitCf()"&gt;
+                        &lt;div formGroupName="user"&gt;
+                          &lt;input formControlName="name"&gt;
+                          &lt;input formControlName="surname"&gt;
+                          &lt;select formControlName="gender"&gt;
+                            &lt;option value="M"&gt;Male&lt;/option&gt;
+                            &lt;option value="F"&gt;Female&lt;/option&gt;
+                            &lt;option value="O"&gt;Other&lt;/option&gt;
+                          &lt;/select&gt;
+                        &lt;/div&gt;
+                        &lt;div formGroupName="address"&gt;
+                          &lt;input formControlName="city"&gt;
+                          &lt;input formControlName="street" type="number"&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                          type="submit"
+                          [disabled]="myForm.invalid"
+                        &gt;
+                          Submit
+                        &lt;/button&gt;
+                      &lt;/form&gt;
+                  `,
+                })
+                export class SubscriptionFormComponent {
+                  myForm = new FormGroup({
+                    user: new FormGroup({
+                      name: new FormControl('', [Validators.required, Validators.minLength(3)])
+                      surname: new FormControl('', [Validators.required, Validators.minLength(3)])
+                      gender: new FormControl(null)
+                    }),
+                    address: new FormGroup({
+                      city: new FormControl('')
+                      street: new FormControl(0)
+                    })
+                  })
+                  submitCf() {
+                    console.log(this.myForm.value) 
+                    /* { 
+                      user: {
+                        name: '',
+                        surname: '',
+                        gender: null,
+                      },
+                      address: {
+                        city: '',
+                        street: 0
+                      }
+                    } */
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|1,6">
+                import { hasCompletedForm } from './somewhere';
+                const routes: Routes = [
+                  { 
+                    path: 'subscription', 
+                    component: SubscriptionFormComponent,
+                    canDeactivate: [hasCompletedForm]
+                  },
+                ];
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|2-5|6|7-9">
+                export function hasCompletedForm
+                (component: SubscriptionFormComponent, 
+                currentRoute: ActivatedRouteSnapshot, 
+                currentState: RouterStateSnapshot, 
+                nextState: RouterStateSnapshot): 
+                Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree
+                {
+                  return !component.myForm.dirty;
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|2-5|6|7-14">
+                export function hasCompletedForm
+                (component: SubscriptionFormComponent, 
+                currentRoute: ActivatedRouteSnapshot, 
+                currentState: RouterStateSnapshot, 
+                nextState: RouterStateSnapshot): 
+                Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree
+                {
+                  if (component.myForm.dirty) {
+                    return this.alertService
+                      .askForConfirmation('sei sicuro di uscire?')
+                      .afterClosed()
+                  } else return true;
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>modificare la navigazione</h3>
+            <ul>
+              <li>canActivate</li>
+              <li>canActivateChild</li>
+              <li>canDeactivate</li>
+              <li style="opacity: 0.5">canMatch</li>
+            </ul>
+          </section>
+          <section>
+            <h2>suddividere l'applicazione - lazy loading</h2> 
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|4-16">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    children: [
+                      {
+                        path: 'first-sub-page'
+                        component: FirstSubComponent
+                      },
+                      {
+                        path: 'second-sub-page'
+                        component: SecondSubComponent
+                      },
+                    ]
+                  },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="18|1-100|3-12|14-18|16|15">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  {
+                    path: 'first-sub-page'
+                    component: FirstSubComponent
+                  },
+                  {
+                    path: 'second-sub-page'
+                    component: SecondSubComponent
+                  },
+                ];
+
+                @NgModule({
+                  declarations: [FirstSubComponent, SecondSubComponent]
+                  imports: [RouterModule.forChild(routes)]
+                })
+                export class FirstPageModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="18|1-100|4-8">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    loadChildren: () => import('./path/to/first-page.module').
+                      then(m => m.FirstPageModule)
+                  },
+                  { path: 'second-page', component: SecondComponent },
+                  { path: '**', component: PageNotFoundComponent },
+                  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
+                ];
+
+                @NgModule({
+                  imports: [RouterModule.forRoot(routes)],
+                  exports: [RouterModule]
+                })
+                export class AppRoutingModule { }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>lazy loading components (only standalone, v14+)</h3>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|9-14">
+                import { Routes, RouterModule } from '@angular/router';
+
+                const routes: Routes = [
+                  { 
+                    path: 'first-page', 
+                    loadChildren: () => import('./path/to/first-page.module').
+                      then(m => m.FirstPageModule)
+                  },
+                  { path: 
+                    'second-page', 
+                    loadComponent: 
+                      () => import('./path/to/standalone/component')
+                        .then(c => c.SecondComponent)
+                  },
+                ];
+
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>canMatch</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|8,14">
+                import { userHasPermissions } from './somewhere';
+
+                const routes: Routes = [
+                  { 
+                    path: 'admin', 
+                    loadChildren: () => import('./path/to/admin.module').
+                      then(m => m.AdminModule),
+                    canMatch: [userHasPermissions]
+                  },
+                  { path: 'second-page', 
+                    loadComponent: 
+                      () => import('./path/to/standalone/component')
+                        .then(c => c.SecondComponent),
+                      canMatch: [userHasPermissions]
+                  },
+                ];
+
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|2|3|4-100">
+                export function userHasPermissions
+                  (route: Route, segments: UrlSegment[]): 
+                  Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean | UrlTree&gt; | boolean | UrlTree
+                  {
+                    const loggedUserService = inject(LoggedUserService);
+                    return loggedUserService.isAdmin();
+                  }
+              </code>
+            </pre>
           </section>
         </section>
 
