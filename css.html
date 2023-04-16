@@ -293,6 +293,30 @@
               specificità
             </aside>
           </section>
+          <section>
+            <h2>attribute selector</h2>
+            <div class="three-screen-example">
+              <pre class="language-css">
+                <code data-trim data-css-src>
+                  a[target] {
+                    color: red;
+                  }
+                </code>
+              </pre>
+              <pre class="language-xml">
+                <code data-trim data-html-src>
+                  <a>Anchor</a>
+                  <a target="_blank">Anchor with target set</a>
+                </code>
+              </pre>
+              <div class="browser-frame">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <iframe data-html-sink></iframe>
+              </div>
+            </div>
+          </section>
           <section class="fragmented">
             <div class="three-screen-example">
               <pre class="language-css">
