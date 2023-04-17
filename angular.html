@@ -4106,7 +4106,7 @@
             </ul>
           </section>
           <section>
-            <h2>suddividere l'applicazione - lazy loading</h2> 
+            <h2>suddividere l'applicazione - lazy loading</h2>
           </section>
           <section>
             <pre class="language-javascript">
@@ -4250,8 +4250,350 @@
           </section>
         </section>
 
-        <section data-visibility="hidden">
+        <section>
           <section><h2>template</h2></section>
+          <section>
+            <h3>
+              <a
+                href="https://angular.io/guide/content-projection"
+                target="_blank"
+                >content projection</a
+              >
+            </h3>
+          </section>
+          <section>
+            <p>single-slot content projection</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|5">
+                @Component({
+                  selector: 'centered-layout',
+                  template: `
+                    &lt;div style="display: flex; justify-content: 'center'"&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/div&gt;
+                  `,
+                })
+                export class CenteredLayoutComponent {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>multi-slot content projection</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|4,15|5-8|9-11|12-14">
+                @Component({
+                  selector: 'page-layout',
+                  template: `
+                  &lt;div class="grid"&gt;
+                    &lt;nav&gt;
+                      &lt;ng-content select="[navLogo]"&gt;&lt;/ng-content&gt;
+                      &lt;ng-content select="[navItems]"&gt;&lt;/ng-content&gt;
+                    &lt;/nav&gt;
+                    &lt;aside&gt;
+                      &lt;ng-content select="[sideContent]"&gt;&lt;/ng-content&gt;
+                    &lt;/aside&gt;
+                    &lt;main&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/main&gt;
+                  &lt;/div&gt;
+                  `,
+                })
+                export class PageLayoutComponent {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="19|4,16|5-10|11-13|14-15">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;page-layout&gt;
+                      &lt;img src="..." navLogo&gt;
+                      &lt;div navItems&gt;
+                        &lt;a routerLink="/home"&gt;Home&lt;/a&gt;
+                        &lt;a routerLink="/about us"&gt;About us&lt;/a&gt;
+                        &lt;a routerLink="/contacts"&gt;Contacts&lt;/a&gt;
+                      &lt;/div&gt;
+                      &lt;form sideContent&gt;
+                        ...
+                      &lt;/form&gt;
+                      &lt;h1&gt;Page title&lt;/h1&gt;
+                      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+                    &lt;/page-layout&gt;
+                  `,
+                })
+                export class SomePageComponent {} 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h3>Accedere agli elementi del contenuto del componente</h3>
+            <p>@ContentChild / @ContentChildren</p>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="9,2|11-13">
+                @Component({
+                  selector: 'some-awesome-component',
+                  template: `
+                    &lt;h1&gt;
+                      I do awesome stuff!
+                    &lt;/h1&gt;
+                  `,
+                })
+                export class SomeAwesomeComponent {
+
+                  doAwesomeStuff() {
+                    console.log('Wow!')
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|4,6|5">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;page-layout&gt;
+                      &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;/page-layout&gt;
+                  `,
+                })
+                export class SomePageComponent {} 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="18|19|21-24|26-28|18">
+                @Component({
+                  selector: 'page-layout',
+                  template: `
+                  &lt;div class="grid"&gt;
+                    &lt;nav&gt;
+                      &lt;ng-content select="[navLogo]"&gt;&lt;/ng-content&gt;
+                      &lt;ng-content select="[navItems]"&gt;&lt;/ng-content&gt;
+                    &lt;/nav&gt;
+                    &lt;aside&gt;
+                      &lt;ng-content select="[sideContent]"&gt;&lt;/ng-content&gt;
+                    &lt;/aside&gt;
+                    &lt;main&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/main&gt;
+                  &lt;/div&gt;
+                  `,
+                })
+                export class PageLayoutComponent implements OnInit, AfterContentInit {
+                  @ContentChild(SomeAwesomeComponent) someAwesomeCompoent!: SomeAwesomeComponent;
+
+                  ngOnInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() 
+                    // Error! try to access 'doAwesomeStuff' of undefined
+                  }
+
+                  ngAfterContentInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() // 'Wow!'
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="19|4,6|5">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;page-layout&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                    &lt;/page-layout&gt;
+                  `,
+                })
+                export class SomePageComponent {} 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="19">
+                @Component({
+                  selector: 'page-layout',
+                  template: `
+                  &lt;div class="grid"&gt;
+                    &lt;nav&gt;
+                      &lt;ng-content select="[navLogo]"&gt;&lt;/ng-content&gt;
+                      &lt;ng-content select="[navItems]"&gt;&lt;/ng-content&gt;
+                    &lt;/nav&gt;
+                    &lt;aside&gt;
+                      &lt;ng-content select="[sideContent]"&gt;&lt;/ng-content&gt;
+                    &lt;/aside&gt;
+                    &lt;main&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/main&gt;
+                  &lt;/div&gt;
+                  `,
+                })
+                export class PageLayoutComponent implements OnInit, AfterContentInit {
+                  @ContentChild('thisIsAReference') someAwesomeCompoent!: SomeAwesomeComponent;
+
+                  ngOnInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() 
+                    // Error! try to access 'doAwesomeStuff' of undefined
+                  }
+
+                  ngAfterContentInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() // 'Wow!'
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="4-10">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;page-layout&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                      &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                    &lt;/page-layout&gt;
+                  `,
+                })
+                export class SomePageComponent {} 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="19-20|22-25">
+                @Component({
+                  selector: 'page-layout',
+                  template: `
+                  &lt;div class="grid"&gt;
+                    &lt;nav&gt;
+                      &lt;ng-content select="[navLogo]"&gt;&lt;/ng-content&gt;
+                      &lt;ng-content select="[navItems]"&gt;&lt;/ng-content&gt;
+                    &lt;/nav&gt;
+                    &lt;aside&gt;
+                      &lt;ng-content select="[sideContent]"&gt;&lt;/ng-content&gt;
+                    &lt;/aside&gt;
+                    &lt;main&gt;
+                      &lt;ng-content&gt;&lt;/ng-content&gt;
+                    &lt;/main&gt;
+                  &lt;/div&gt;
+                  `,
+                })
+                export class PageLayoutComponent implements AfterContentInit {
+                  @ContentChildren('thisIsAReference') 
+                  someAwesomeCompoents!: QueryList&lt;SomeAwesomeComponent&gt;;
+
+                  ngAfterContentInit() {
+                    this.someAwesomeComponents.last.doAwesomeStuff() // 'Wow!'
+                    const compArr = this.someAwesomeComponents.toArray()
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          
+          <section>
+            <h3>Accedere agli elementi nel template</h3>
+            <p>@ViewChild / @ViewChildren</p>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-6|8|10-13|15-17|7">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                  `,
+                })
+                export class SomePageComponent implements OnInit, AfterViewInit {
+                  @ViewChild(SomeAwesomeComponent) someAwesomeComponent!: SomeAwesomeComponent;
+
+                  ngOnInit() {
+                    this.someAwesomeComponent.doAwesomeStuff()
+                    // Error! try to access 'doAwesomeStuff' of undefined
+                  }
+
+                  ngAfterViewInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() // Wow!
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-6|8|15-17">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;some-awesome-component #thisIsAReference&gt;&lt;/some-awesome-component&gt;
+                  `,
+                })
+                export class SomePageComponent implements OnInit, AfterViewInit {
+                  @ViewChild('thisIsAReference') someAwesomeComponent!: SomeAwesomeComponent;
+
+                  ngOnInit() {
+                    this.someAwesomeComponent.doAwesomeStuff()
+                    // Error! try to access 'doAwesomeStuff' of undefined
+                  }
+
+                  ngAfterViewInit() {
+                    this.someAwesomeComponent.doAwesomeStuff() // Wow!
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-12|14-15|17-20">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                    &lt;some-awesome-component&gt;&lt;/some-awesome-component&gt;
+                  `,
+                })
+                export class SomePageComponent implements OnInit, AfterViewInit {
+                  @ViewChildren(SomeAwesomeComponent) 
+                  someAwesomeComponent!: QueryList&lt;SomeAwesomeComponent&gt;
+
+                  ngAfterViewInit() {
+                    this.someAwesomeComponent.first.doAwesomeStuff() // Wow!
+                    const compArr = this.someAwesomeComponent.toArray()
+                  }
+
+                } 
+              </code>
+            </pre>
+          </section>
+          
           <section>
             <img
               width="400"
@@ -4259,27 +4601,149 @@
               alt=""
             />
           </section>
-          <section><h2>content</h2></section>
+
+          <section><h2>accedere agli elementi nel DOM</h2></section>
+
           <section>
-            <p>ngAfterContentInit - ngAfterContentChecked</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;h1&gt;My Title&lt;/h1&gt;
+                    &lt;p&gt;A paragraph...&lt;/p&gt;
+                  `,
+                })
+                export class SomePageComponent{ } 
+              </code>
+            </pre>
           </section>
+
           <section>
-            <p>ContentChild - ContentChildren</p>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;h1 #pageTitle&gt;My Title&lt;/h1&gt;
+                    &lt;p #paragraph&gt;A paragraph...&lt;/p&gt;
+                  `,
+                })
+                export class SomePageComponent implements AfterViewInit {
+                  @ViewChild('pageTitle') pageTitle: ElementRef&lt;HtmlHeadingElement&gt;
+                  @ViewChild('paragraph') paragraph: ElementRef&lt;HtmlParagraphElement&gt;
+
+                  ngAfterViewInit() {
+                    console.log(this.pageTitle) 
+                    // { nativeElement: { textContent, innerHtml, children... etc. } }
+                    this.paragraph.nativeElement.style.color = 'red';
+                  }
+                } 
+              </code>
+            </pre>
           </section>
-          <section><h2>view</h2></section>
+
           <section>
-            <p>ngAfterViewInit - ngAfterViewChecked</p>
+            <h2><a href="https://angular.io/api/core/ElementRef" target="_blank">Element Ref</a></h2>
           </section>
-          <section>
-            <p>ViewChild - ViewChildren</p>
-          </section>
+
           <section>
             <h2>template ref</h2>
           </section>
           <section>
             <p>la verità sulle direttive strutturali</p>
           </section>
-          <section></section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;some-awesome-component *ngIf="someCondition"&gt;&lt;/some-awesome-component&gt;
+                  `,
+                })
+                export class SomePageComponent { } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                @Component({
+                  selector: 'some-page',
+                  template: `
+                    &lt;ng-template [ngIf]="someCondition"&gt;
+                      &lt;some-awesome-component *ngIf="someCondition"&gt;
+                    &lt;/ng-template&gt;
+                  `,
+                })
+                export class SomePageComponent { } 
+              </code>
+            </pre>
+          </section>
+          
+        </section>
+
+        <section data-visibility="hidden">
+          <section>
+            <h2>dietro le quinte</h2>
+          </section>
+          <section>
+            <h2>non si interagisce col dom in modo diretto</h2>
+            <h2>views - view containers</h2>
+          </section>
+          <section>
+            <h2>i componenti sono detti host views</h2>
+          </section>
+          <section>
+            <h2>template refs -> embedded views</h2>
+          </section>
+          <section>
+            <h2>change detection</h2>
+          </section>
+          <section>
+            <h2>expression changed after it has been checked</h2>
+          </section>
+          <section>
+            <h2>zone js</h2>
+          </section>
+        </section>
+
+        <section>
+          <h2>
+            <a href="https://angular.io/guide/workspace-config" target="_blank"
+              >Angular workspace configuration</a
+            >
+          </h2>
+        </section>
+
+        <section>
+          <section><h2>Cosa abbiamo omesso</h2></section>
+          <section>
+            <h3>RXJS</h3>
+            <ul>
+              <li><a href="https://www.learnrxjs.io/" target="_blank">un mare di operators</li>
+              <li><a href="https://medium.com/@jshvarts/read-marble-diagrams-like-a-pro-3d72934d3ef5" target="_blank">
+                Come leggere un marble diagram
+              </li>
+              <li><a href="https://rxjs.dev/guide/subject" target="_blank">subjects</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <ul>
+              <li>
+                <a href="https://youtu.be/f8sA-i6gkGQ" target="_blank"
+                  >strategie di ottimizzazione / profiling</a
+                >
+              </li>
+              <li>custom schematics</li>
+              <li>Testing</li>
+              <li>Animations</li>
+              <li>Progressive Web Apps</li>
+              <li>Server Side Rendering</li>
+            </ul>
+          </section>
         </section>
 
         <section data-visibility="hidden">
@@ -4363,12 +4827,31 @@
               </li>
             </ul>
           </section>
+          <section>
+            <h3>Dietro le quinte</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=3IqtmUscE_U&t=150s&ab_channel=ng-conf"
+                  target="_blank"
+                  >Brian Ford - Zones - NG-Conf 2014</a
+                >
+              </li>
+              <li>
+                <a 
+                  href="https://www.youtube.com/watch?v=uQqp1z7FpJY&ab_channel=AngularConnect" 
+                  target="_blank"
+                  >The differences between ElementRef, TemplateRef, ViewContainerRef | Ashnita Bali & Marcin Ryzycki
+                </a>
+              </li>
+            </ul>
+          </section>
         </section>
-        <section data-visibility="hidden">
-          <section><h1>Esercizi</h1></section>
-          <section>Create an angular app</section>
-          <section>Lista della spesa</section>
-          <section>Tabella di utenti CRUD</section>
+        <section>
+          <section>
+            <h1>Esercizi</h1>
+            <h2>Creare un social network</h2>
+          </section>
         </section>
       </div>
     </div>
