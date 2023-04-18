@@ -4673,7 +4673,7 @@
                   selector: 'some-page',
                   template: `
                     &lt;ng-template [ngIf]="someCondition"&gt;
-                      &lt;some-awesome-component *ngIf="someCondition"&gt;
+                      &lt;some-awesome-component&gt;
                     &lt;/ng-template&gt;
                   `,
                 })
@@ -4684,28 +4684,591 @@
           
         </section>
 
-        <section data-visibility="hidden">
+        <section>
           <section>
-            <h2>dietro le quinte</h2>
+            <h1>Angular - under the hood</h1>
+            <h3 class="fragment">attenzione! API di basso livello</h3>
+            <aside class="notes">no alto livello, no macrostruttura app, no funzionamenti base...solo roba di basso livello</aside>
+          </section>
+          <section><h3>Ivy</h3></section>
+          <section>
+            <h3>non si può interagire col dom in modo diretto</h3>
+            <ul>
+              <li class="fragment">Prevenzione XSS</li>
+              <li class="fragment">Platform dependence</li>
+            </ul>
           </section>
           <section>
-            <h2>non si interagisce col dom in modo diretto</h2>
-            <h2>views - view containers</h2>
+            <h3>Leggere/Modificare proprietà attributi degli elementi</h3>
+            <pre class="language-js">
+              <code data-trim data-line-numbers>
+                classList.add();
+                el.setAttribute();
+                el.addEventListener('click', ...)
+              </code>
+            </pre>
+            <ul>
+              <li class="fragment">
+                Versione dichiarativa: Data Binding / Event Binding
+              </li>
+              <li class="fragment">
+                <a href="https://angular.io/api/core/Renderer2" target="_blank">Versione imperativa: Renderer</a>
+              </li>
+            </ul>
           </section>
           <section>
-            <h2>i componenti sono detti host views</h2>
+            <pre class="language-js">
+              <code data-trim data-line-numbers="1-100|5">
+                @Component({ template: 
+                  '
+                    &lt;p&gt;Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                    Ad nobis iste dolores alias, consequuntur provident exercitationem, 
+                    &lt;span highlight&gt;quis amet veniam repellendus ratione&lt;/span&gt; 
+                    voluptas dicta ipsa voluptatum ex rerum magnam quod deleniti.&lt;/p&gt;
+                  ' 
+                })
+                export class AppComponent { }
+              </code>
+            </pre>
           </section>
           <section>
-            <h2>template refs -> embedded views</h2>
+            <div class="r-stack">
+              <pre class="language-js">
+                <code data-trim data-line-numbers="1-100|4|5">
+                  @Directive({ selector: '[highlight]' })
+                  export class HighlightDirective {
+                    
+                    constructor(private elementRef: ElementRef) {
+                      elementRef.nativeElement.style.backgroundColor = 'yellow';
+                    }
+                  }
+                </code>
+              </pre>
+              <h1 class="fragment">NO!</h1>
+            </div>
           </section>
+          <section>
+            <pre class="language-js">
+              <code data-trim data-line-numbers="1-100|4-7|6|8-9">
+                @Directive({ selector: '[highlight]' })
+                export class HighlightDirective {
+                  
+                  constructor(
+                    private elementRef: ElementRef, 
+                    private renderer2: Renderer2
+                  ) {
+                    renderer2.setStyle(elementRef.nativeElement, 'backgroundColor', 'yellow')
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">cos'è questo renderer? Astrazione</aside>
+          </section>
+          <section>
+            <p>NgClass - NgStyle</p>
+          </section>
+          <section>
+            <h3>Leggere/Modificare la struttura del DOM</h3>
+            <img width="500" src="https://miro.medium.com/v2/resize:fit:1400/1*KenS9UunhuYwGD3xeoiXYw.png">
+          </section>
+          <section>
+            <div class="diagram-flow">
+              <div>
+                Metadati
+                <p style="font-size: 1rem;">informazioni nei decorator es. templates, classi</p>
+              </div>
+              <div>
+                Compiler
+              </div>
+              <div>
+                View
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2 style="display:flex; align-items: center; justify-content: center;">view <img style="margin-left:1rem" width="50" src="/img/tv-retro.png"></h2>
+            <p class="fragment">
+              Gruppo di elementi che Angular può creare, distruggere o, più in generale, 
+              modificare in base ai dati e alle logiche definite nel componente e ne può controllare i cambiamenti (change detection)
+            </p>
+            <ul class="fragment">
+              <li>component -> host view</li>
+              <li>ng-template -> embedded view</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Cosa contiene una view</h3>
+            <ul>
+              <li>istanza del componente (new SomeComponent())</li>
+              <li>metadati: dati dei decorator es. template, querys, selector etc. </li>
+              <li>lista di nodi del dom</li>
+              <li>lista degli ultimi valori dei bindings</li>
+              <li>stato: primo controllo | da controllare | distrutto</li>
+            </ul>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;h1 *ngIf="showTitle"&gt;My title&lt;/h1&gt;
+                    &lt;p [class.is-red]="someOtherLogic"&gt;My paragraph&lt;/p&gt;
+                    &lt;another-component&gt;&lt;/another-component&gt;
+                  `,
+                })
+                export class SomePageComponent {
+                  showTitle = true;
+                  someOtherLogic = false;
+                } 
+              </code>
+            </pre>
+          </section>
+          <section data-auto-animate >
+            <div class="two-screen-example">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100">
+                  @Component({
+                    selector: 'a-component',
+                    template: `
+                      &lt;ng-template [ngIf]="showTitle"&gt;
+                        &lt;h1&gt;My title&lt;/h1&gt;
+                      &lt;/ng-template&gt;
+                      &lt;p [class.is-red]="someOtherLogic"&gt;Lorem ipsum...&lt;/p&gt;
+                      &lt;another-component&gt;&lt;/another-component&gt;
+                    `,
+                  })
+                  export class SomePageComponent {
+                    showTitle = true;
+                    someOtherLogic = false;
+                  } 
+                </code>
+              </pre>
+            </div>
+          </section>
+          <section data-auto-animate >
+            <div class="two-screen-example">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="1-100">
+                  @Component({
+                    selector: 'a-component',
+                    template: `
+                      &lt;ng-template [ngIf]="showTitle"&gt;
+                        &lt;h1&gt;My title&lt;/h1&gt;
+                      &lt;/ng-template&gt;
+                      &lt;p [class.is-red]="someOtherLogic"&gt;Lorem ipsum...&lt;/p&gt;
+                      &lt;another-component&gt;&lt;/another-component&gt;
+                    `,
+                  })
+                  export class SomePageComponent {
+                    showTitle = true;
+                    someOtherLogic = false;
+                  } 
+                </code>
+              </pre>
+              <div class="ng-view" data-view-label="a-component host view">
+                <div class="ng-view" data-view-label="embedded view">
+                  <p>h1 element (My title)</p>
+                </div>
+                <p>paragraph element (Lorem ipsum...)</p>
+                <div class="ng-view" data-view-label="another-component host view">
+                  <p>altri elementi</p>
+                  <p>altre view</p>
+                  <p>...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <div class="two-screen-example">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="12,4-6">
+                  @Component({
+                    selector: 'a-component',
+                    template: `
+                      &lt;ng-template [ngIf]="showTitle"&gt;
+                        &lt;h1&gt;My title&lt;/h1&gt;
+                      &lt;/ng-template&gt;
+                      &lt;p [class.is-red]="someOtherLogic"&gt;Lorem ipsum...&lt;/p&gt;
+                      &lt;another-component&gt;&lt;/another-component&gt;
+                    `,
+                  })
+                  export class SomePageComponent {
+                    showTitle = false;
+                    someOtherLogic = false;
+                  } 
+                </code>
+              </pre>
+              <div class="ng-view" data-view-label="a-component host view">
+                
+                <p>paragraph element (Lorem ipsum...)</p>
+                <div class="ng-view" data-view-label="another-component host view">
+                  <p>altri elementi</p>
+                  <p>altre view</p>
+                  <p>...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <div class="two-screen-example">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="12,4-6">
+                  @Component({
+                    selector: 'a-component',
+                    template: `
+                      &lt;ng-template [ngIf]="showTitle"&gt;
+                        &lt;h1&gt;My title&lt;/h1&gt;
+                      &lt;/ng-template&gt;
+                      &lt;p [class.is-red]="someOtherLogic"&gt;Lorem ipsum...&lt;/p&gt;
+                      &lt;another-component&gt;&lt;/another-component&gt;
+                    `,
+                  })
+                  export class SomePageComponent {
+                    showTitle = true;
+                    someOtherLogic = false;
+                  } 
+                </code>
+              </pre>
+              <div class="ng-view" data-view-label="a-component host view">
+                <div class="ng-view" data-view-label="embedded view">
+                  <p>h1 element (My title)</p>
+                </div>
+                <p>paragraph element (Lorem ipsum...)</p>
+                <div class="ng-view" data-view-label="another-component host view">
+                  <p>altri elementi</p>
+                  <p>altre view</p>
+                  <p>...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <div class="two-screen-example">
+              <pre class="language-javascript">
+                <code data-trim data-line-numbers="13,7">
+                  @Component({
+                    selector: 'a-component',
+                    template: `
+                      &lt;ng-template [ngIf]="showTitle"&gt;
+                        &lt;h1&gt;My title&lt;/h1&gt;
+                      &lt;/ng-template&gt;
+                      &lt;p [class.is-red]="someOtherLogic"&gt;Lorem ipsum...&lt;/p&gt;
+                      &lt;another-component&gt;&lt;/another-component&gt;
+                    `,
+                  })
+                  export class SomePageComponent {
+                    showTitle = true;
+                    someOtherLogic = true;
+                  } 
+                </code>
+              </pre>
+              <div class="ng-view" data-view-label="a-component host view">
+                <div class="ng-view" data-view-label="embedded view">
+                  <p>h1 element (My title)</p>
+                </div>
+                <p style="color: red;">paragraph element (Lorem ipsum...)</p>
+                <div class="ng-view" data-view-label="another-component host view">
+                  <p>altri elementi</p>
+                  <p>altre view</p>
+                  <p>...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="ng-view" data-view-label="app host view">
+              <div class="ng-view" data-view-label="component-a host view">
+                <div class="ng-view" data-view-label="embedded view">
+                  <div class="ng-view" data-view-label="component-b host view">
+                    <p>...</p>
+                  </div>  
+                </div>
+                <div class="ng-view" style="margin-top: 1rem" data-view-label="component-c host view">
+                  <p>altri elementi</p>
+                  <p>altre view</p>
+                  <p>...</p>
+                </div>
+                <p>...</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <p><a href="https://angular.io/api/core/ViewRef">ViewRef</a></p>
+            <p><a href="https://angular.io/api/core/EmbeddedViewRef">EmbeddedViewRef</a></p>
+            <aside class="notes">in sostanza una view è un gruppo di elementi e le loro logiche di visualizzazione. 
+              Le proprietà degli elementi di una view può cambiare (es. attributi), ma la struttura in termini di numero di elementi etc. no</aside>
+          </section>
+          
+          <section>
+            <h2 style="display:flex; align-items: center; justify-content: center;">
+              view container 
+                <div class="view-container">
+                  <img width="30" src="/img/tv-retro.png"> 
+                  <img width="30" src="/img/tv-retro.png"> 
+                  <img width="30" src="/img/tv-retro.png">
+                  <img width="30" src="/img/tv-retro.png">
+                </div>
+            </h2>
+            <p class="fragment">
+              contiene host views (componenti) e embedded views (ng-template) 
+              andando a formare una gerarchia di views e 
+              permette la manipolazione di questa gerarchia 
+            </p>
+            <p class="fragment">ogni elemento può essere un container di view</p>
+          </section>
+          <section>
+            <p><a href="https://angular.io/api/core/ViewContainerRef" target="_blank">ViewContainerRef</a></p>
+          </section>
+          <section>
+            <h3>creare una host view (componente)</h3>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100">
+                import { SomeOtherComponent } from 'somewhere';
+
+                @Component({
+                  selector: 'a-component',
+                  template: ``,
+                })
+                export class SomeComponent {
+                  constructor(private vcr: ViewContainerRef) {
+                    this.vcr.createComponent(SomeOtherComponent)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|6,10|1-100">
+                import { SomeOtherComponent } from 'somewhere';
+
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;h1 #ref&gt;I can be a view container&lt;/h1&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  @ViewChild('ref', { read: ViewContainerRef }) unusualContainer;
+                  
+                  ngAfterViewInit() {
+                    this.unusualContainer.createComponent(SomeOtherComponent)
+                  }
+                } 
+              </code>
+            </pre>
+            <aside class="notes">il componente viene creato come sibling nel dom</aside>
+          </section>
+          <section>
+            <h3>creare una embedded view (ng-template)</h3>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|4,10|12-16">
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;ng-template #ref&gt;
+                      I'm hidden until they create me
+                    &lt;/ng-template&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  @ViewChild('ref', { read: TemplateRef }) tRef: TemplateRef;
+                  
+                  constructor(private vcr: ViewContainerRef) { }
+
+                  ngAfterViewInit() {
+                    this.vcr.createEmbeddedView(this.tRef)
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>embedded view context</h3>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="18-23|4-10">
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;ng-template 
+                      #ref 
+                      let-someVariable="some"
+                      let-someImplicitVariable
+                    &gt;
+                      {{ someVariable }} {{ someImplicitVariable }}
+                    &lt;/ng-template&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  @ViewChild('ref', { read: TemplateRef }) tRef: TemplateRef;
+                  
+                  constructor(private vcr: ViewContainerRef) { }
+
+                  ngAfterViewInit() {
+                    this.vcr.createEmbeddedView(
+                      this.tRef, 
+                      { some: 'Data!', implicit$: 'whatever!'}
+                    )
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;div *ngIf="something$ | async as whatever"&gt;
+                      {{ whatever }}
+                    &lt;/div&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  something$ = this.someService.getSomething();
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;ng-template [ngIf]="something$ | async" let-whatever&gt;
+                      &lt;div&gt;{{ whatever }}&lt;/div&gt;
+                    &lt;/ng-template&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  something$ = this.someService.getSomething();
+                } 
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>
+              <a href="https://angular.io/guide/structural-directives#creating-a-structural-directive" target="_blank">
+                creating a structural directive
+              </a>
+            </h2>
+          </section>
+
+          <section>
+            <h2><a href="https://github.com/angular/angular/tree/main/packages/common/src/directives">Common module directives</a></h2>
+          </section>
+
           <section>
             <h2>change detection</h2>
+            <p class="fragment">ricalcolo delle views sulla base dei cambiamenti dei bindings, confrontando i vecchi valori con i nuovi</p>
+            <p class="fragment">Si basa sullo stato della view (primo controllo | da controllare | distrutto)</p>
+            <p class="fragment">Ogni view ha un change detector</p>
           </section>
+
           <section>
-            <h2>expression changed after it has been checked</h2>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12,14-17">
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;h1&gt;
+                      {{ someText }}
+                    &lt;/h1&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  someText = 'Hello';
+
+                  constructor(private cdr: ChangeDetectorRef) { }
+
+                  ngAfterViewInit() {
+                    // just in case
+                    this.cdr.detectChanges()
+                  }
+                } 
+              </code>
+            </pre>
           </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1-100|12-14">
+                @Component({
+                  selector: 'a-component',
+                  template: `
+                    &lt;h1&gt;
+                      {{ someText }}
+                    &lt;/h1&gt;
+                  `,
+                })
+                export class SomeComponent {
+                  someText = 'Hello';
+
+                  constructor(private cdr: ChangeDetectorRef) {
+                    this.cdr.detach()
+                  }
+                } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <img
+              width="400"
+              src="https://codecraft.tv/courses/angular/components/lifecycle-hooks/images/lifecycle-hooks.png"
+              alt=""
+            />
+            <aside class="notes">ngDoCheck serve per eseguire logiche</aside>
+          </section>
+
+          <section>
+            <h2>chi chiama la change detection?</h2>
+          </section>
+
           <section>
             <h2>zone js</h2>
+            <p class="fragment">Libreria che amplia le funzionalità native del browser in modo da tracciare gli eventi asincroni</p>
+          </section>
+
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers="1|3|4-8">
+                const originalSetTimeout = setTimeout;
+
+                window.setTimeout = function(cb, timer) {
+                  setTimeout(() => {
+                    trackStart();
+                    cb();
+                    trackEnd();
+                  }, timer)
+                }
+              </code>
+            </pre>
+            <aside class="notes">monkeypatching</aside>
+          </section>
+          <section>
+            <ul>
+              <li>addEventListener</li>
+              <li>setTimeout</li>
+              <li>setInterval</li>
+              <li>fetch</li>
+              <li>rAF</li>
+              <li>etc...</li>
+            </ul>
+          </section>
+          <section>
+            <pre class="language-javascript">
+              <code data-trim data-line-numbers>
+                ngZone.onMicrotaskEmpty.subscribe(() => application.tick())
+              </code>
+            </pre>
+            <aside class="notes">potreste trovare setTimeout a caso nell'app</aside>
+          </section>
+          <section>
+            <h2><a href="https://indepth.dev/" target="_blank">in depth</a></h2>
           </section>
         </section>
 
@@ -4727,11 +5290,15 @@
                 Come leggere un marble diagram
               </li>
               <li><a href="https://rxjs.dev/guide/subject" target="_blank">subjects</a></li>
+              <li><a href="https://ngrx.io/" target="_blank">NgRx</a></li>
             </ul>
           </section>
 
           <section>
             <ul>
+              <li>
+                change detection strategies
+              </li>
               <li>
                 <a href="https://youtu.be/f8sA-i6gkGQ" target="_blank"
                   >strategie di ottimizzazione / profiling</a
@@ -4776,7 +5343,7 @@
                   >André Staltz: How rxjs works</a
                 >
               </li>
-              <li hidden>
+              <li>
                 <a
                   href="https://www.youtube.com/watch?v=3LKMwkuK0ZE&ab_channel=AngularConnect"
                   target="_blank"
@@ -4784,12 +5351,27 @@
                   RxJS 5 Thinking Reactively | Ben Lesh
                 </a>
               </li>
-              <li hidden>
+              <li>
+                <a href="https://www.youtube.com/watch?v=Z76QlSpYcck&t=518s&ab_channel=ng-conf" target="_blank">
+                  Data Composition with RxJS | Deborah Kurata
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=-4cwkHNguXE&t=369s&ab_channel=ng-conf" target="_blank">
+                  Thinking Reactively: Most Difficult | Mike Pearson
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://www.youtube.com/watch?v=KOOT7BArVHQ&ab_channel=AngularConnect"
                   target="_blank"
                 >
                   RxJS In-Depth – Ben Lesh
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=XKfhGntZROQ&t=3142s&ab_channel=ng-conf">
+                  RxJS Advanced Patterns – Operate Heavily Dynamic UI’s | Michael Hladky
                 </a>
               </li>
             </ul>
@@ -4838,10 +5420,26 @@
                 >
               </li>
               <li>
+                <a href="https://www.youtube.com/watch?v=TRfDXG98_Qg&ab_channel=ng-conf">
+                  Can you imagine a future without zones? | Maxim Koretskyi
+                </a>
+              </li>
+              <li>
                 <a 
-                  href="https://www.youtube.com/watch?v=uQqp1z7FpJY&ab_channel=AngularConnect" 
+                  href="https://www.youtube.com/watch?v=qWmqiYDrnDc&ab_channel=ngVikings" 
                   target="_blank"
-                  >The differences between ElementRef, TemplateRef, ViewContainerRef | Ashnita Bali & Marcin Ryzycki
+                  >
+                  Can't Touch This! What not to do to the DOM by Max NgWizard
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=vz9cNCkaPsY&ab_channel=ng-conf" target="_blank">
+                  Implementing advanced DOM manipulation scenarios - Maxim NgWizard Koretskyi
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=WizqXZjztss&ab_channel=AngularAir" target="_blank">
+                  ngAir 138 - Change Detection with Maxim Koretskyi
                 </a>
               </li>
             </ul>

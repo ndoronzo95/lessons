@@ -2116,6 +2116,58 @@ $vertical-gap: 20%;
 	}
 }
 
+.ng-view {
+	border: 3px solid white;
+	padding: 1.2rem;
+	position: relative;
+
+	&::before {
+		content: attr(data-view-label);
+		position: absolute;
+		font-size: .8rem;
+		top: 0;
+		left: 0;
+	}
+}
+
+.view-container{ 
+	border: 3px solid white;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+	padding: 1rem;
+	margin: 1rem;
+	img {
+		margin: 0 !important;
+	}
+}
+
+.diagram-flow {
+	display: flex;
+	justify-content: center;
+	> div {
+		border: 1px solid white;
+		width: 200px;
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		position: relative;
+
+		&:not(:last-of-type) {
+			margin-right: 3rem;
+			
+			&::after {
+				content: '\2192';
+				font-size: 2rem;
+				position: absolute;
+				right: -2rem;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+	}
+}
+
 /*********************************************
  * PRINT STYLES
  *********************************************/
